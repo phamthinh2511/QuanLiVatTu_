@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="PageNavigation.View.VatTu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:PageNavigation.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" 
+             d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+
+    <UserControl.DataContext>
+        <vm:VatTuVM/>
+    </UserControl.DataContext>
+    
+    <Grid>
+
+        <Border CornerRadius="0,20, 20, 0">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/icons8-construction-materials-64.png"
+                            Stretch="None"/>
+            </Border.Background>
+        </Border>
+
+        <TextBlock Text="{Binding TinhTrangVatTu}"
+                   Foreground="#F25E68"
+                   FontSize="12"
+                   HorizontalAlignment="Left"
+                   FontFamily="Century Gothic"
+                   Margin="276, 300, 0, 0"/>
+    </Grid>
+</UserControl>

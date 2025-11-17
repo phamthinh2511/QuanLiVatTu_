@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:PageNavigation.ViewModel"
+                    xmlns:view="clr-namespace:PageNavigation.View"
+                    >
+
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:VatTuVM}">
+        <view:VatTu/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:KhachHangVM}">
+        <view:KhachHang/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NguoiDungHeThongVM}">
+        <view:NguoiDungHeThong/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PhieuNhapKhoVM}">
+        <view:PhieuNhapKho/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PhieuXuatKhoVM}">
+        <view:PhieuXuatKho/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingsVM}">
+        <view:Settings/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:QuaTrinhVanChuyenVM}">
+        <view:QuaTrinhVanChuyen/>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,180 @@
+﻿<Window x:Class="PageNavigation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:PageNavigation.ViewModel"
+        xmlns:Menu="clr-namespace:PageNavigation.Utilities"
+        mc:Ignorable="d"
+        Title="Quản lý vật tư" 
+        Height="600" 
+        Width="950"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        >
+
+    <Window.DataContext>
+        <vm:NavigationVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Window Border -->
+        <Border Background="#212529"
+                CornerRadius="20" Grid.ColumnSpan="2"
+                />
+
+        <Grid Grid.ColumnSpan="2">
+            <!--Base Grid-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="622"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Navigation Panel-->
+
+            <Grid HorizontalAlignment="Left"
+                  Width="228">
+
+                <Border Background="#272B2F"
+                        CornerRadius="20, 0, 0, 20"/>
+                <StackPanel Height="400"
+                            Width="228">
+
+                    <!--// Home //-->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding HomeCommand}">
+
+                        <Grid>
+
+                            <Image Source="Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Home"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                    <!-- VatTu -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding VatTuCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/img_product.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Vật Tư"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!-- KhachHang -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding KhachHangCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/img_customer.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Khách Hàng"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!-- PhieuNhapKho -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding PhieuNhapKhoCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/img_order.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Nhập Kho"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                    <!-- PhieuNhapKho -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding PhieuXuatKhoCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/img_transaction.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Xuất Kho"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+
+                    <!-- QuaTrinhVanChuyen -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding VanChuyenCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/icons8-truck-64 (1).png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Vận Chuyển"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!-- Setting -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding SettingsCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Images/img_setting.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Cài Đặt"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}"/>
+            </Grid>
+
+        </Grid>
+        <Button x:Name="CloseApp"
+                Style="{StaticResource ExitApp}"
+                Click="CloseApp_Click" Grid.ColumnSpan="2"/>
+
+    </Grid>
+</Window>
