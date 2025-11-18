@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 namespace PageNavigation.Utilities
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propName = null)
