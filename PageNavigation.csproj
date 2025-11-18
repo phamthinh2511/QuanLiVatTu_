@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\background.png" />
     <None Remove="Images\Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style %281%29.png" />
     <None Remove="Images\customer_page.png" />
     <None Remove="Images\home_page.png" />
@@ -30,6 +31,7 @@
     <None Remove="Images\img_setting.png" />
     <None Remove="Images\img_shipment.png" />
     <None Remove="Images\img_transaction.png" />
+    <None Remove="Images\logo_icon.png" />
     <None Remove="Images\order_page.png" />
     <None Remove="Images\product_page.png" />
     <None Remove="Images\setting_page.png" />
