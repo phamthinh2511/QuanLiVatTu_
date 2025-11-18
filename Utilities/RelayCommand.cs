@@ -27,5 +27,11 @@ namespace PageNavigation.Utilities
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object parameter) => _execute(parameter);
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
+
     }
 }

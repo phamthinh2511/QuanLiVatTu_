@@ -1,0 +1,121 @@
+﻿<Window x:Class="PageNavigation.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PageNavigation"
+        xmlns:vm="clr-namespace:PageNavigation.ViewModel"
+        mc:Ignorable="d"    
+        Title="Đăng nhập"
+        Height="600" 
+        Width="950"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Window.DataContext>
+        <vm:LoginVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/background.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        
+        <Border Width="380"
+            Background="White"
+            CornerRadius="10"
+            BorderBrush="#e0e0e0"
+            BorderThickness="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <StackPanel Orientation="Vertical" Margin="40">
+
+
+                <Image Source="/Images/logo_icon.png" 
+                   Width="100" 
+                   Height="100"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   Margin="0,0,0,0"
+                   />
+
+
+                <TextBlock Text="ĐĂNG NHẬP"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+                <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image 
+                           Source="/Images/icon_account.png"        
+                           Width="20"
+                           Height="20"
+                           HorizontalAlignment="Center"/>
+
+                        <TextBox Grid.Column="1"
+                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
+                             FontSize="14"
+                             Foreground="Gray"
+                             BorderThickness="0"
+                             VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image 
+                           Source="/Images/icon_password.png"        
+                           Width="20"
+                           Height="20"
+                           HorizontalAlignment="Center"/>
+
+                        <PasswordBox Grid.Column="1"
+                 x:Name="MyPasswordBox"
+                 PasswordChanged="MyPasswordBox_PasswordChanged"
+                 FontSize="14"
+                 BorderThickness="0"
+                 VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="Red"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"
+                       TextWrapping="Wrap"/>
+                <Button Content="ĐĂNG NHẬP"
+                    
+                    Command="{Binding LoginCommand}"
+                    IsDefault="True"
+                    Background="#34c759"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    FontSize="14"
+                    BorderThickness="0"
+                    Margin="0,0,0,20"
+                    Padding="12">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

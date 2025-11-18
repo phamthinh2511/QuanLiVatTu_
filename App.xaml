@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PageNavigation"
-             xmlns:Menu="clr-namespace:PageNavigation.Utilities"
-             StartupUri="MainWindow.xaml">
+             StartupUri="LoginView.xaml"
+             ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         
         <ResourceDictionary>
