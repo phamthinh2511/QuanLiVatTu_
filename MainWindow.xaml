@@ -20,161 +20,381 @@
     </Window.DataContext>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <!-- Window Border -->
-        <Border Background="#212529"
-                CornerRadius="20" Grid.ColumnSpan="2"
-                />
+        <Grid Background="Black">
 
-        <Grid Grid.ColumnSpan="2">
-            <!--Base Grid-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228"/>
-                <ColumnDefinition Width="622"/>
-            </Grid.ColumnDefinitions>
-
-            <!--Navigation Panel-->
-
-            <Grid HorizontalAlignment="Left"
-                  Width="228">
-
-                <Border Background="#272B2F"
-                        CornerRadius="20, 0, 0, 20"/>
-                <StackPanel Height="400"
-                            Width="228">
-
-                    <!--// Home //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding HomeCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_home.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Home"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-                    <!-- VatTu -->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding VatTuCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_product.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Vật Tư"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!-- KhachHang -->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding KhachHangCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_customer.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Khách Hàng"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!-- PhieuNhapKho -->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding PhieuNhapKhoCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_order.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Nhập Kho"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-                    <!-- PhieuNhapKho -->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding PhieuXuatKhoCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_transaction.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Xuất Kho"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-
-                    <!-- QuaTrinhVanChuyen -->
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding VanChuyenCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/icons8-truck-64 (1).png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Vận Chuyển"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!-- Setting -->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding SettingsCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_setting.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Cài Đặt"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                </StackPanel>
-            </Grid>
-
-            <Grid Grid.Column="1">
+            <Grid x:Name="contentuser" PreviewMouseLeftButtonDown="contentuser_PreviewMouseLeftButtonDown">
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}"/>
             </Grid>
 
-        </Grid>
-        <Button x:Name="CloseApp"
-                Style="{StaticResource ExitApp}"
-                Click="CloseApp_Click" Grid.ColumnSpan="2"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
+                <Button Name="closebutton"
+                        Style="{StaticResource ExitApp}"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Height="40"
+                        Width="40"
+                        BorderThickness="0"
+                        Click="closebutton_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/shutdown_mo.png"/>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+            
+            <Grid x:Name="navigation_panel"
+                  HorizontalAlignment="Left"
+                  Width="65"
+                  Background="#2E333A">
+
+                <StackPanel x:Name="stack_panel">
+
+                    <Grid Height="90">
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="73, -20, 0, 0"
+                                   Text="M E N U"
+                                   Foreground="White"
+                                   FontSize="22"
+                                   Background="Transparent"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource Font_Style}">
+
+                            <TextBlock.Effect>
+
+                                <DropShadowEffect BlurRadius="10"
+                                                  ShadowDepth="1"
+                                                  Direction="-90"
+                                                  Color="White"/>
+                            </TextBlock.Effect>
+                            
+                        </TextBlock>
+
+                        <ToggleButton x:Name="togglebutton"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18, -20, 0, 0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource ToggleButton_Style}" Unchecked="togglebutton_Unchecked" Checked="togglebutton_Checked">
+                            <ToggleButton.Background>
+                                <ImageBrush ImageSource="/Images/MENU.png"
+                                        Stretch="Uniform"/>
+                            </ToggleButton.Background>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStackPanel">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="navigation_panel"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.3">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStackPanel">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="navigation_panel"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                        
+                        
+                    </Grid>
+                    
+                    <!--ListViewMenu-->
+
+                    <ListView x:Name="listview"
+                              SelectionMode="Single"
+                              Background="Transparent"
+                              Foreground="Transparent"
+                              BorderThickness="0"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        <!--Home-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15" 
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding HomeCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_home.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Home"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_Home"
+                                         Content="Home"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--VatTu-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding VatTuCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_product.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Vật Tư"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_VatTu"
+                                         Content="Vật Tư"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--KhachHang-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding KhachHangCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_customer.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Khách Hàng"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_KhachHang"
+                                         Content="Khách Hàng"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--NhapKho-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding PhieuNhapKhoCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_order.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Nhập Kho"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_NhapKho"
+                                         Content="Nhập Kho"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--XuatKho-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding PhieuXuatKhoCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_transaction.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Xuất Kho"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_XuatKho"
+                                         Content="Xuất Kho"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--VanChuyen-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding VanChuyenCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_shipment.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Vấn Chuyển"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_VanChuyen"
+                                         Content="Vận Chuyển"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Setting-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding SettingsCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/img_setting.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Settings"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_Setting"
+                                         Content="Settings"
+                                         Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border x:Name="border"
+                            Height="50"
+                            BorderBrush="#2E333A"
+                            BorderThickness="0"
+                            Background="#2E333A"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+
+                                                <Grid>
+                                                    <!-- Thêm indicator bên trái từ template RadioButton gốc -->
+                                                    <Border x:Name="Indicator"
+                                    Height="35"
+                                    Width="4"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="#FFFFFF"
+                                    Visibility="Collapsed"
+                                    CornerRadius="2" />
+
+                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                </Grid>
+
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="#404D5B"/>
+                                                    <Setter Property="BorderBrush"
+                                    TargetName="border"
+                                    Value="#404D5B"/>
+                                                    <Setter Property="Visibility"
+                                    TargetName="Indicator"
+                                    Value="Visible"/>
+                                                </MultiTrigger>
+
+                                             
+                                                <EventTrigger RoutedEvent="Border.MouseEnter"
+                                      SourceName="border">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    From="#2E333A"
+                                                    To="#404D5B"
+                                                    Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+                                                <EventTrigger RoutedEvent="Border.MouseLeave"
+                                      SourceName="border">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    From="#404D5B"
+                                                    To="#2E333A"
+                                                    Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" TargetName="border" Value="#404D5B"/>
+                                                    <Setter Property="BorderBrush" TargetName="border" Value="#404D5B"/>
+                                                    <Setter Property="Visibility"
+                                    TargetName="Indicator"
+                                    Value="Visible"/>
+                                                </Trigger>
+
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    
+                    
+                </StackPanel>
+                
+            </Grid>
+            
+        </Grid>
     </Grid>
 </Window>

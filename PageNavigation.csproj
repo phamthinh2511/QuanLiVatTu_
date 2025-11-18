@@ -30,6 +30,8 @@
     <None Remove="Images\img_setting.png" />
     <None Remove="Images\img_shipment.png" />
     <None Remove="Images\img_transaction.png" />
+    <None Remove="Images\MENU.png" />
+    <None Remove="Images\MENU_MOUSEON.png" />
     <None Remove="Images\order_page.png" />
     <None Remove="Images\product_page.png" />
     <None Remove="Images\setting_page.png" />
@@ -63,6 +65,8 @@
     <Resource Include="Images\img_setting.png" />
     <Resource Include="Images\img_shipment.png" />
     <Resource Include="Images\img_transaction.png" />
+    <Resource Include="Images\MENU.png" />
+    <Resource Include="Images\MENU_MOUSEON.png" />
     <Resource Include="Images\order_page.png" />
     <Resource Include="Images\product_page.png" />
     <Resource Include="Images\setting_page.png" />
