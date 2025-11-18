@@ -306,27 +306,26 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListViewItem}">
                                             <Border x:Name="border"
-                            Height="50"
-                            BorderBrush="#2E333A"
-                            BorderThickness="0"
-                            Background="#2E333A"
-                            Padding="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="True">
+                                                    Height="50"
+                                                    BorderBrush="#2E333A"
+                                                    BorderThickness="0"
+                                                    Background="#2E333A"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
 
                                                 <Grid>
-                                                    <!-- Thêm indicator bên trái từ template RadioButton gốc -->
                                                     <Border x:Name="Indicator"
-                                    Height="35"
-                                    Width="4"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Background="#FFFFFF"
-                                    Visibility="Collapsed"
-                                    CornerRadius="2" />
+                                                            Height="35"
+                                                            Width="4"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Center"
+                                                            Background="#FFFFFF"
+                                                            Visibility="Collapsed"
+                                                            CornerRadius="2" />
 
                                                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                                 </Grid>
 
                                             </Border>
@@ -335,21 +334,31 @@
                                                 <MultiTrigger>
                                                     <MultiTrigger.Conditions>
                                                         <Condition Property="IsMouseOver" Value="True"/>
+                                                        <Condition Property="IsSelected" Value="False"/>
                                                     </MultiTrigger.Conditions>
                                                     <Setter Property="Background"
-                                    TargetName="border"
-                                    Value="#404D5B"/>
+                                                            TargetName="border"
+                                                            Value="#404D5B"/>
                                                     <Setter Property="BorderBrush"
-                                    TargetName="border"
-                                    Value="#404D5B"/>
+                                                            TargetName="border"
+                                                            Value="#404D5B"/>
                                                     <Setter Property="Visibility"
-                                    TargetName="Indicator"
-                                    Value="Visible"/>
+                                                            TargetName="Indicator"
+                                                            Value="Visible"/>
                                                 </MultiTrigger>
 
-                                             
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                        <Condition Property="IsSelected" Value="False"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background"
+                                                            TargetName="border"
+                                                            Value="#404D5B"/>
+                                                </MultiTrigger>
+
                                                 <EventTrigger RoutedEvent="Border.MouseEnter"
-                                      SourceName="border">
+                                                              SourceName="border">
                                                     <BeginStoryboard>
                                                         <Storyboard>
                                                             <ColorAnimation Storyboard.TargetName="border"
@@ -362,7 +371,7 @@
                                                 </EventTrigger>
 
                                                 <EventTrigger RoutedEvent="Border.MouseLeave"
-                                      SourceName="border">
+                                                              SourceName="border">
                                                     <BeginStoryboard>
                                                         <Storyboard>
                                                             <ColorAnimation Storyboard.TargetName="border"
@@ -373,13 +382,10 @@
                                                         </Storyboard>
                                                     </BeginStoryboard>
                                                 </EventTrigger>
-
                                                 <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Background" TargetName="border" Value="#404D5B"/>
-                                                    <Setter Property="BorderBrush" TargetName="border" Value="#404D5B"/>
-                                                    <Setter Property="Visibility"
-                                    TargetName="Indicator"
-                                    Value="Visible"/>
+                                                    <Setter Property="Background" TargetName="border" Value="#5A6C7D"/>
+                                                    <Setter Property="BorderBrush" TargetName="border" Value="#5A6C7D"/>
+                                                    <Setter Property="Visibility" TargetName="Indicator" Value="Visible"/>
                                                 </Trigger>
 
                                             </ControlTemplate.Triggers>
