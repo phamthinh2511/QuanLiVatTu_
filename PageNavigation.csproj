@@ -24,6 +24,8 @@
     <None Remove="Images\icons8-truck-64.png" />
     <None Remove="Images\icons8-user-50.png" />
     <None Remove="Images\icons8-warehouse-50.png" />
+    <None Remove="Images\icon_account.png" />
+    <None Remove="Images\icon_password.png" />
     <None Remove="Images\img_customer.png" />
     <None Remove="Images\img_home.png" />
     <None Remove="Images\img_order.png" />
@@ -44,6 +46,7 @@
   <ItemGroup>
     <Resource Include="Fonts\Rubik.ttf" />
     <Resource Include="Fonts\RubikMedium.ttf" />
+    <Resource Include="Images\background.png" />
     <Resource Include="Images\Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style (1).png" />
     <Resource Include="Images\customer_page.png" />
     <Resource Include="Images\home_page.png" />
@@ -58,6 +61,8 @@
     <Resource Include="Images\icons8-truck-64.png" />
     <Resource Include="Images\icons8-user-50.png" />
     <Resource Include="Images\icons8-warehouse-50.png" />
+    <Resource Include="Images\icon_account.png" />
+    <Resource Include="Images\icon_password.png" />
     <Resource Include="Images\img_customer.png" />
     <Resource Include="Images\img_home.png" />
     <Resource Include="Images\img_order.png" />
@@ -65,6 +70,7 @@
     <Resource Include="Images\img_setting.png" />
     <Resource Include="Images\img_shipment.png" />
     <Resource Include="Images\img_transaction.png" />
+    <Resource Include="Images\logo_icon.png" />
     <Resource Include="Images\order_page.png" />
     <Resource Include="Images\product_page.png" />
     <Resource Include="Images\setting_page.png" />

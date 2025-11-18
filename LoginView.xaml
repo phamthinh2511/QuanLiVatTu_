@@ -18,7 +18,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/background.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Images/background.png" Stretch="UniformToFill"/>
         </Grid.Background>
         
         <Border Width="380"
