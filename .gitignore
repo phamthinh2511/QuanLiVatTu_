@@ -1,0 +1,11 @@
+# Thư mục build của C#
+[Bb]in/
+[Oo]bj/
+
+# File tạm của Visual Studio
+*.vs
+.vs/
+
+# File user-specific
+*.suo
+*.user
