@@ -10,9 +10,9 @@ namespace PageNavigation.ViewModel
 {
     class NavigationVM : ViewModelBase
     {
-        private object _currentView;
+        private object? _currentView;
 
-        public object CurrentView
+        public object? CurrentView
         {
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }

@@ -9,7 +9,7 @@
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="Margin"
-                Value="0,5,0,0" />
+                Value="-5,5,0,0" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -124,7 +124,7 @@
         <Setter Property="VerticalAlignment"
                 Value="Top" />
         <Setter Property="Margin"
-                Value="0,15,15,0" />
+                Value="0, 5, 0, 0" />
 
         <Setter Property="Template">
 

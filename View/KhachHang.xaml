@@ -25,7 +25,7 @@
                    FontSize="12"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   FontFamily="/Fonts/#RubikMedium"
+                   Style="{StaticResource Font_Style}"
                    Margin="70,138,0,0" />
 
         <TextBlock Text="{Binding CustomerID}"
