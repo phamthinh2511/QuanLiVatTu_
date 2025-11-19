@@ -57,5 +57,10 @@ namespace PageNavigation
             }
         }
 
+        private void closebutton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
