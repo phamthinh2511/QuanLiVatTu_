@@ -2,18 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="BtnStyle"
-           TargetType="RadioButton">
+           TargetType="Button">
 
         <Setter Property="HorizontalAlignment"
                 Value="Center" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
-        <Setter Property="Margin"
-                Value="-5,5,0,0" />
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
+                <ControlTemplate TargetType="Button">
 
                     <Border x:Name="border"
                             Height="50"
@@ -22,7 +20,7 @@
 
                         <Border.Background>
                             <SolidColorBrush x:Name="BorderBackground"
-                                             Color="#272B2F" />
+                                             Color="#2d3135" />
                         </Border.Background>
 
                         <Grid>
@@ -30,7 +28,7 @@
                             <Border x:Name="Indicator"
                                     Height="35"
                                     Width="4"
-                                    HorizontalAlignment="Left"
+                                    HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Background="#FFFFFF"
                                     Visibility="Collapsed"
@@ -60,7 +58,7 @@
                                 <Storyboard>
                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
                                                     Storyboard.TargetProperty="Color"
-                                                    From="#272B2F"
+                                                    From="#2d3135"
                                                     To="#3E434A"
                                                     Duration="0:0:0.3" />
                                 </Storyboard>
@@ -76,14 +74,14 @@
                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
                                                     Storyboard.TargetProperty="Color"
                                                     From="#3E434A"
-                                                    To="#272B2F"
+                                                    To="#2d3135"
                                                     Duration="0:0:0.3" />
                                 </Storyboard>
                             </BeginStoryboard>
 
                         </EventTrigger>
 
-                        <Trigger Property="IsChecked"
+                        <Trigger Property="IsPressed"
                                  Value="True">
 
                             <Setter Property="Background"

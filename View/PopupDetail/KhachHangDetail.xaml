@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PageNavigation.View.PopupDetail"
         xmlns:vm="clr-namespace:PageNavigation.ViewModel"
         mc:Ignorable="d"
-        Title="KhachHangDetail" Height="405" Width="640"
+        Title="KhachHangDetail" Height="485" Width="640"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -14,21 +14,25 @@
 
 
     <Grid Background="#212529">
-        <!--KhungMA-->
 
+        <!--NutEXIT-->
         <Grid Height="60"
               Width="60"
               VerticalAlignment="Top"
               HorizontalAlignment="Left"
-              Background="#5A6C7D"
+              Background="Transparent"
               Margin="560, 20, 0, 0">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
             <Button Style="{StaticResource ExitApp}"
                 Width="60"
                 Height="60"
                 Click="Button_Click">
             </Button>
         </Grid>
-
+        <!--KhungMA-->
         <Grid Height="60"
               Width="520"
               VerticalAlignment="Top"
@@ -55,7 +59,7 @@
                    VerticalAlignment="Top"
                    Margin="0,30,0,0"
                    FontFamily="/Fonts/#Fz Rubik Med"/>
-
+        <!--KhungTenKhangHang-->
         <TextBlock Text="Tên Khách Hàng:"                       
                    FontSize="20"
                    HorizontalAlignment="Left"
@@ -63,10 +67,10 @@
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
                    Margin="30,95,0,0"/>
-        <!--KhungTenKhangHang-->
+
         <Grid Height="60"
               Width="400"
-              Margin="20, 125, 220, 215">
+              Margin="20, 120, 220, 305">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -89,7 +93,7 @@
         <!--KhungSoDienThoai -->
         <Grid Height="60"
               Width="400"
-              Margin="20, 225, 220, 115">
+              Margin="20, 220, 220, 205">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -116,12 +120,12 @@
                    VerticalAlignment="Top"
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
-                   Margin="30,200,0,0"/>
+                   Margin="30,195,0,0"/>
 
         <!--KhungDiaChi-->
         <Grid Height="60"
               Width="600"
-              Margin="20, 325, 20, 20">
+              Margin="20, 320, 20, 105">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -148,12 +152,12 @@
                    VerticalAlignment="Top"
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
-                   Margin="30,300,0,0"/>
+                   Margin="30,295,0,0"/>
 
         <!--KhungGioiTinh-->
         <Grid Height="60"
               Width="180"
-              Margin="440, 225, 20, 120">
+              Margin="440, 220, 20, 205">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -183,12 +187,12 @@
                    VerticalAlignment="Top"
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
-                   Margin="450,200,0,0"/>
+                   Margin="450,195,0,0"/>
 
         <!--KhungNgaySinh-->
         <Grid Height="60"
               Width="180"
-              Margin="440, 125, 20, 220">
+              Margin="440, 120, 20, 305">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -217,7 +221,40 @@
                    VerticalAlignment="Top"
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
-                   Margin="450,100,0,0"/>
+                   Margin="450,95,0,0"/>
+
+        <!--NutLuu-->
+
+        <Grid Height="60"
+              Width="60"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              Background="Transparent"
+              Margin="560, 400, 0, 0">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <Button
+                    FontSize="40"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="/Fonts/#Fz Rubik Med"
+                    Style="{StaticResource BtnStyle}"
+                    Width="60"
+                    Height="60"
+                    Click="Button_Click">
+                <Image Source="/Images/SaveButton.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="40"
+                       Height="40" Margin="10,10,0,0"/>
+            </Button>
+        </Grid>
+
+        <!--NutHuy-->
+
 
     </Grid>
 </Window>

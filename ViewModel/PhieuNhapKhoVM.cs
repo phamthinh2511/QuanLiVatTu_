@@ -11,6 +11,8 @@ namespace PageNavigation.ViewModel
     {
         private readonly PageModel _pageModel;
 
+
+
         public DateOnly HienThiNhapDonHang
         {
             get { return _pageModel.OrderDate; }
