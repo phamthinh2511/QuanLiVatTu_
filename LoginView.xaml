@@ -9,7 +9,11 @@
         Title="Đăng nhập"
         Height="600" 
         Width="950"
-        WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent">
 
 
     <Window.DataContext>
@@ -17,9 +21,26 @@
     </Window.DataContext>
 
     <Grid>
+        
+        
+        
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/background.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Images/Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style (1).png" Stretch="UniformToFill"/>
         </Grid.Background>
+        
+        <Button Name="closebutton"
+                Style="{StaticResource ExitApp}"
+                Grid.Column="1"
+                Grid.Row="1"
+                Height="40"
+                Width="40"
+                Margin="20,30,30,20"
+                BorderThickness="0"
+                Click="closebutton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/shutdown_mo.png"/>
+            </Button.Background>
+        </Button>
         
         <Border Width="380"
             Background="White"
