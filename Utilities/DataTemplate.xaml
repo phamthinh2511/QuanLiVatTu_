@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:PageNavigation.ViewModel"
                     xmlns:view="clr-namespace:PageNavigation.View"
+                    xmlns:vp="clr-namespace:PageNavigation.View.PopupDetail"
                     >
 
     <DataTemplate DataType="{x:Type vm:HomeVM}">
@@ -15,6 +16,7 @@
     <DataTemplate DataType="{x:Type vm:KhachHangVM}">
         <view:KhachHang/>
     </DataTemplate>
+
 
     <DataTemplate DataType="{x:Type vm:NguoiDungHeThongVM}">
         <view:NguoiDungHeThong/>

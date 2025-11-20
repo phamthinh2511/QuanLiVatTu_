@@ -24,5 +24,6 @@ namespace PageNavigation.View
         {
             InitializeComponent();
         }
+
     }
 }

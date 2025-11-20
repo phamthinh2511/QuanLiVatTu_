@@ -20,6 +20,9 @@
     <Compile Update="View\PhieuXuatKho.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\PopupDetail\KhachHangDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\QuaTrinhVanChuyen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

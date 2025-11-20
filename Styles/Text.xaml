@@ -5,17 +5,17 @@
            TargetType="TextBlock">
 
         <Setter Property="FontFamily"
-                Value="Fonts/Rubik.ttf #Rubik"/>
+                Value="/Fonts/#Fz Rubik Med"/>
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="HorizontalAlignment"
                 Value="Left" />
         <Setter Property="Foreground"
-                Value="#DBDBDB" />
+                Value="Transparent" />
         <Setter Property="FontSize"
-                Value="18" />
+                Value="40" />
         <Setter Property="Margin"
-                Value="25,0,0,0" />
+                Value="15,0,0,0" />
 
     </Style>
 

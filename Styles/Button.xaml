@@ -123,8 +123,7 @@
                 Value="Right" />
         <Setter Property="VerticalAlignment"
                 Value="Top" />
-        <Setter Property="Margin"
-                Value="0, 5, 0, 0" />
+
 
         <Setter Property="Template">
 

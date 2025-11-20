@@ -14,6 +14,9 @@ namespace PageNavigation.Model
         public decimal TransactionValue { get; set; }
         public TimeOnly Ship_Delivery { get; set; }
         public bool LocationStatus { get; set; }
-
+        public string FullName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public string Gender { get; set; }
     }
 }

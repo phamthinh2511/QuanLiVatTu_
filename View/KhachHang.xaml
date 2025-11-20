@@ -5,37 +5,213 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="622"
+             d:DesignHeight="800" d:DesignWidth="1000"
              Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
         <vm:KhachHangVM />
     </UserControl.DataContext>
+    
+    <!-- Khong phai no bi loi ma la t chay thu tren day -->
+    
+    <Grid Background="#212529">
+        <!--KhungMA-->
 
-    <Grid Margin="15">
+        <Button Style="{StaticResource ExitApp}"
+                Width="60"
+                Height="60"
+                Margin="20">
+            
+        </Button>
+        
+        <Grid Height="60"
+              Width="520"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              Background="Transparent"
+              Margin="20, 20, 0, 0">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <TextBlock Text="Khách Hàng :"
+                       Foreground="#ffff"
+                       Style="{StaticResource Text_Style}">
 
-        <Border CornerRadius="0,20,20,0">
-            <Border.Background>
-                <ImageBrush ImageSource="/Images/customer_page.png"
-                            Stretch="None" />
-            </Border.Background>
-        </Border>
+            </TextBlock>
+        </Grid>
 
-        <TextBlock Text="Customer ID  :"
-                   Foreground="#DBDBDB"
-                   FontSize="12"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Style="{StaticResource Font_Style}"
-                   Margin="70,138,0,0" />
+
 
         <TextBlock Text="{Binding CustomerID}"
                    Foreground="#CED565"
-                   FontSize="12"
+                   FontSize="40"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,30,0,0"
+                   FontFamily="/Fonts/#Fz Rubik Med"/>
+
+        <TextBlock Text="Tên Khách Hàng:"                       
+                   FontSize="20"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   FontFamily="/Fonts/#Rubik Medium"
-                   Margin="160,138,0,0" />
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="30,95,0,0"/>
+        <!--KhungTenKhangHang-->
+        <Grid Height="60"
+              Width="400"
+              Margin="20, 125, 220, 215">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <TextBox Text="{Binding CustomerName}"
+                     Style="{StaticResource TextBoxStyle}"
+                     Foreground="#CED565"
+                     Background="Transparent"
+                     Width="400"
+                     Height="60"
+                     FontSize="30"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med">
 
+            </TextBox>
+        </Grid>
+        <!--KhungSoDienThoai -->
+        <Grid Height="60"
+              Width="400"
+              Margin="20, 225, 220, 115">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <TextBox Text="{Binding CustomerContact}"
+                     Style="{StaticResource TextBoxStyle}"
+                     Foreground="#CED565"
+                     Background="Transparent"
+                     Width="400"
+                     Height="60"
+                     FontSize="30"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med">
+
+            </TextBox>
+        </Grid>
+
+        <TextBlock Text="Số Điện Thoại:"                       
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="30,200,0,0"/>
+
+        <!--KhungDiaChi-->
+        <Grid Height="60"
+              Width="600"
+              Margin="20, 325, 20, 20">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <TextBox Text="{Binding CustomerAddress}"
+                     Style="{StaticResource TextBoxStyle}"
+                     Foreground="#CED565"
+                     Background="Transparent"
+                     Width="600"
+                     Height="60"
+                     FontSize="30"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med">
+
+            </TextBox>
+        </Grid>
+
+        <TextBlock Text="Địa Chỉ:"                       
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="30,300,0,0"/>
+
+        <!--KhungGioiTinh-->
+        <Grid Height="60"
+              Width="180"
+              Margin="440, 225, 20, 120">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <ComboBox SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
+                      Style="{StaticResource ComboBoxStyle}"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      Width="180"
+                      Height="60"
+                      FontSize="30"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      FontFamily="/Fonts/#Fz Rubik Med">
+
+                <ComboBoxItem>Nam</ComboBoxItem>
+                <ComboBoxItem>Nữ</ComboBoxItem>
+
+            </ComboBox>
+        </Grid>
+
+        <TextBlock Text="Giới Tính:"                       
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="450,200,0,0"/>
+
+        <!--KhungNgaySinh-->
+        <Grid Height="60"
+              Width="180"
+              Margin="440, 125, 20, 220">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <ComboBox Style="{StaticResource ComboBoxStyle}"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      Width="180"
+                      Height="60"
+                      FontSize="30"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      FontFamily="/Fonts/#Fz Rubik Med">
+
+                <ComboBoxItem>Nam</ComboBoxItem>
+                <ComboBoxItem>Nữ</ComboBoxItem>
+
+            </ComboBox>
+        </Grid>
+
+        <TextBlock Text="Ngày Sinh:"                       
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="450,100,0,0"/>
 
     </Grid>
 </UserControl>

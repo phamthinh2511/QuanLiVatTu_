@@ -7,13 +7,12 @@
         xmlns:Menu="clr-namespace:PageNavigation.Utilities"
         mc:Ignorable="d"
         Title="Quản lý vật tư" 
-        Height="600" 
-        Width="950"
+        Height="800" 
+        Width="1065"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="Transparent"
-        >
+        Background="Transparent">
 
     <Window.DataContext>
         <vm:NavigationVM/>
@@ -21,8 +20,10 @@
 
     <Grid>
         <Grid Background="Black">
-
-            <Grid x:Name="contentuser" PreviewMouseLeftButtonDown="contentuser_PreviewMouseLeftButtonDown">
+            
+            <Grid Margin="65, 0, 0, 0" 
+                  x:Name="contentuser" 
+                  PreviewMouseLeftButtonDown="contentuser_PreviewMouseLeftButtonDown">
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}"/>
             </Grid>
