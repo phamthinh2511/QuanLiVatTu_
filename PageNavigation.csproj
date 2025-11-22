@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="Images\background.png" />
+    <None Remove="Images\CancelButton.png" />
     <None Remove="Images\Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style %281%29.png" />
     <None Remove="Images\customer_page.png" />
     <None Remove="Images\home_page.png" />
@@ -45,6 +46,7 @@
     <None Remove="Images\MENU_MOUSEON.png" />
     <None Remove="Images\order_page.png" />
     <None Remove="Images\product_page.png" />
+    <None Remove="Images\SaveButton.png" />
     <None Remove="Images\setting_page.png" />
     <None Remove="Images\shipment_page.png" />
     <None Remove="Images\shutdown_def.png" />
@@ -60,6 +62,7 @@
     <Resource Include="Fonts\Rubik.ttf" />
     <Resource Include="Fonts\RubikMedium.ttf" />
     <Resource Include="Images\background.png" />
+    <Resource Include="Images\CancelButton.png" />
     <Resource Include="Images\Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style (1).png" />
     <Resource Include="Images\customer_page.png" />
     <Resource Include="Images\home_page.png" />
@@ -94,6 +97,7 @@
     <Resource Include="Images\MENU_MOUSEON.png" />
     <Resource Include="Images\order_page.png" />
     <Resource Include="Images\product_page.png" />
+    <Resource Include="Images\SaveButton.png" />
     <Resource Include="Images\setting_page.png" />
     <Resource Include="Images\shipment_page.png" />
     <Resource Include="Images\shutdown_def.png" />

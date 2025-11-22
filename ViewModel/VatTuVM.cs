@@ -10,16 +10,67 @@ namespace PageNavigation.ViewModel
     class VatTuVM : Utilities.ViewModelBase
     {
         private readonly PageModel _pageModel;
-        public string TinhTrangVatTu
+
+        private int _productID;
+
+        public int ProductID
         {
-            get { return _pageModel.ProductStatus; }
-            set { _pageModel.ProductStatus = value; OnPropertyChanged(); }
+            get { return _productID; }
+            set { _productID = value; OnPropertyChanged(); }
         }
+
+        private string _productStatus;
+        public string ProductStatus
+        {
+            get { return _productStatus; }
+            set { _productStatus = value; OnPropertyChanged(); }
+        }
+
+        private int _productTypeID;
+
+        public int ProductTypeID
+        {
+            get { return _productTypeID; }
+            set { _productTypeID = value; OnPropertyChanged(); }
+        }
+
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        private string _unit;
+
+        public string Unit
+        {
+            get { return _unit; }
+            set { _unit = value; }
+        }
+
+        private string _origin;
+
+        public string Origin
+        {
+            get { return _origin; }
+            set { _origin = value; }
+        }
+
+        private string _providerID;
+
+        public string ProviderID
+        {
+            get { return _providerID; }
+            set { _providerID = value; }
+        }
+
 
         public VatTuVM()
         {
             _pageModel = new PageModel();
-            TinhTrangVatTu = "Hết Hàng";
+            _productStatus = "Hết Hàng";
         }
     }
 }
