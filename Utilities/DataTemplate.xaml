@@ -8,34 +8,33 @@
     <DataTemplate DataType="{x:Type vm:HomeVM}">
         <view:Home/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type vm:NhanVienVM}">
+        <view:NhanVien/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:LoaiVatTuVM}">
+        <view:LoaiVatTu/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:VatTuVM}">
         <view:VatTu/>
     </DataTemplate>
-    
     <DataTemplate DataType="{x:Type vm:KhachHangVM}">
         <view:KhachHang/>
     </DataTemplate>
-
-
-    <DataTemplate DataType="{x:Type vm:NguoiDungHeThongVM}">
-        <view:NguoiDungHeThong/>
+    <DataTemplate DataType="{x:Type vm:HoaDonVM}">
+        <view:HoaDon/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PhieuThuTienVM}">
+        <view:PhieuThuTien/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TraCuuVM}">
+        <view:TraCuu/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BaoCaoVM}">
+        <view:BaoCao/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PhieuNhapKhoVM}">
-        <view:PhieuNhapKho/>
-    </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PhieuXuatKhoVM}">
-        <view:PhieuXuatKho/>
-    </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:SettingsVM}">
-        <view:Settings/>
-    </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:QuaTrinhVanChuyenVM}">
-        <view:QuaTrinhVanChuyen/>
-    </DataTemplate>
 
 </ResourceDictionary>
