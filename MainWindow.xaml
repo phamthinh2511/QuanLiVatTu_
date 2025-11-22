@@ -163,6 +163,52 @@
                                          Style="{StaticResource tt_Style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>
+                        <!--Nhan Vien-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding NhanVienCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="/Images/icons8-staff-96.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Nhân Viên"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_NhanVien"
+                                        Content="Nhân Viên"
+                                        Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Loai Vat Tu-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0, 0, 0, 15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                              Command="{Binding LoaiVatTuCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                         Width="230">
+                                <Image Source="/Images/icons8-material-ui-96.png"
+                                       Stretch="Uniform"
+                                       Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Loại vật Tư"
+                                           Margin="25, 0, 0, 0"
+                                           Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_LoaiVatTu"
+                                        Content="Loại Vật Tư"
+                                        Style="{StaticResource tt_Style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
                         <!--VatTu-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0, 0, 0, 15"
@@ -209,98 +255,100 @@
                                          Style="{StaticResource tt_Style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>
-                        <!--NhapKho-->
+                        <!--Hoa Don-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0, 0, 0, 15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <ListViewItem.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" 
-                                              Command="{Binding PhieuNhapKhoCommand}"/>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding HoaDonCommand}" />
                             </ListViewItem.InputBindings>
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
                                 <Image Source="/Images/img_order.png"
                                        Stretch="Uniform"
                                        Margin="5, 0, 0, 0"/>
-                                <TextBlock Text="Nhập Kho"
+                                <TextBlock Text="Hóa Đơn"
                                            Margin="25, 0, 0, 0"
                                            Style="{StaticResource Font_Style}"/>
                             </StackPanel>
                             <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_NhapKho"
-                                         Content="Nhập Kho"
+                                <ToolTip x:Name="tt_HoaDon"
+                                         Content="Hóa Đơn"
                                          Style="{StaticResource tt_Style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>
-                        <!--XuatKho-->
+                        <!--Phieu Thu Tien-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0, 0, 0, 15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <ListViewItem.InputBindings>
                                 <MouseBinding MouseAction="LeftClick" 
-                                              Command="{Binding PhieuXuatKhoCommand}"/>
+                                              Command="{Binding PhieuThuTienCommand}"/>
                             </ListViewItem.InputBindings>
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
                                 <Image Source="/Images/img_transaction.png"
                                        Stretch="Uniform"
                                        Margin="5, 0, 0, 0"/>
-                                <TextBlock Text="Xuất Kho"
+                                <TextBlock Text="Phiếu Thu Tiền"
                                            Margin="25, 0, 0, 0"
                                            Style="{StaticResource Font_Style}"/>
                             </StackPanel>
                             <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_XuatKho"
-                                         Content="Xuất Kho"
+                                <ToolTip x:Name="tt_PhieuThuTien"
+                                         Content="Phiếu Thu Tiền"
                                          Style="{StaticResource tt_Style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>
-                        <!--VanChuyen-->
+                        <!--TraCuu-->
+                        <ListViewItem HorizontalAlignment="Left"
+                             Margin="0, 0, 0, 15"
+                             MouseEnter="ListViewItem_MouseEnter">
+                            <ListViewItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                     Command="{Binding TraCuuCommand}"/>
+                            </ListViewItem.InputBindings>
+                            <StackPanel Orientation="Horizontal"
+                                Width="230">
+                                <Image Source="/Images/icons8-search-100 (1).png"
+                                        Stretch="Uniform"
+                                        Margin="5, 0, 0, 0"/>
+                                <TextBlock Text="Tra Cứu"
+                                            Margin="25, 0, 0, 0"
+                                            Style="{StaticResource Font_Style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_TraCuu"
+                                         Content="Tra Cứu"
+                                         Style="{StaticResource tt_Style}"/> 
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Báocáo-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0, 0, 0, 15"
                                       MouseEnter="ListViewItem_MouseEnter">
+                            
                             <ListViewItem.InputBindings>
                                 <MouseBinding MouseAction="LeftClick" 
-                                              Command="{Binding VanChuyenCommand}"/>
+                                              Command="{Binding BaoCaoCommand}"/>
                             </ListViewItem.InputBindings>
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Image Source="/Images/img_shipment.png"
+                                <Image Source="/Images/icons8-report-100.png"
                                        Stretch="Uniform"
                                        Margin="5, 0, 0, 0"/>
-                                <TextBlock Text="Vấn Chuyển"
+                                <TextBlock Text="Báo Cáo"
                                            Margin="25, 0, 0, 0"
                                            Style="{StaticResource Font_Style}"/>
                             </StackPanel>
                             <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_VanChuyen"
-                                         Content="Vận Chuyển"
+                                <ToolTip x:Name="tt_BaoCao"
+                                         Content="Báo Cáo"
                                          Style="{StaticResource tt_Style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>
-                        <!--Setting-->
-                        <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0, 0, 0, 15"
-                                      MouseEnter="ListViewItem_MouseEnter">
-                            <ListViewItem.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" 
-                                              Command="{Binding SettingsCommand}"/>
-                            </ListViewItem.InputBindings>
-                            <StackPanel Orientation="Horizontal"
-                                        Width="230">
-                                <Image Source="/Images/img_setting.png"
-                                       Stretch="Uniform"
-                                       Margin="5, 0, 0, 0"/>
-                                <TextBlock Text="Settings"
-                                           Margin="25, 0, 0, 0"
-                                           Style="{StaticResource Font_Style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_Setting"
-                                         Content="Settings"
-                                         Style="{StaticResource tt_Style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+                        
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Template">

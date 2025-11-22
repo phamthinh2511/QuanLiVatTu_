@@ -26,22 +26,26 @@ namespace PageNavigation
             if(togglebutton.IsChecked == true)
             {
                 tt_Home.Visibility = Visibility.Collapsed;
+                tt_NhanVien.Visibility = Visibility.Collapsed;
+                tt_LoaiVatTu.Visibility = Visibility.Collapsed;
                 tt_VatTu.Visibility = Visibility.Collapsed;
                 tt_KhachHang.Visibility = Visibility.Collapsed;
-                tt_NhapKho.Visibility = Visibility.Collapsed;
-                tt_XuatKho.Visibility = Visibility.Collapsed;
-                tt_VanChuyen.Visibility = Visibility.Collapsed;
-                tt_Setting.Visibility = Visibility.Collapsed;
+                tt_HoaDon.Visibility = Visibility.Collapsed;
+                tt_PhieuThuTien.Visibility = Visibility.Collapsed;
+                tt_BaoCao.Visibility = Visibility.Collapsed;
+                tt_TraCuu.Visibility = Visibility.Collapsed;
             }
             else
             {
                 tt_Home.Visibility = Visibility.Visible;
+                tt_NhanVien.Visibility = Visibility.Visible;
+                tt_LoaiVatTu.Visibility = Visibility.Visible;
                 tt_VatTu.Visibility = Visibility.Visible;
                 tt_KhachHang.Visibility = Visibility.Visible;
-                tt_NhapKho.Visibility = Visibility.Visible;
-                tt_XuatKho.Visibility = Visibility.Visible;
-                tt_VanChuyen.Visibility = Visibility.Visible;
-                tt_Setting.Visibility = Visibility.Visible;
+                tt_HoaDon.Visibility = Visibility.Visible;
+                tt_PhieuThuTien.Visibility = Visibility.Visible;
+                tt_BaoCao.Visibility = Visibility.Visible;
+                tt_TraCuu.Visibility = Visibility.Visible;
             }
         }
 

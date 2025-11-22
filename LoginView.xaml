@@ -8,7 +8,7 @@
         mc:Ignorable="d"    
         Title="Đăng nhập"
         Height="600" 
-        Width="950"
+        Width="900"
         ResizeMode="NoResize"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
@@ -21,6 +21,10 @@
     </Window.DataContext>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         
         
         
@@ -41,19 +45,42 @@
                 <ImageBrush ImageSource="/Images/shutdown_mo.png"/>
             </Button.Background>
         </Button>
+        <StackPanel Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="PHẦN MỀM QUẢN "
+                   FontSize="48"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   TextAlignment="Center"
+                   Margin="20, 0, 0, 0"/>
+            <TextBlock Text="LÝ VẬT TƯ"
+       FontSize="48"
+       FontWeight="Bold"
+       Foreground="White"
+       TextAlignment="Center"
+       Margin="20, 0, 0, 0"/>
+            <TextBlock Text="Ứng dụng quản lý – Theo dõi – Báo cáo vật tư"
+                   FontSize="20"
+                   Foreground="#e0e0e0"
+                   TextAlignment="Center"/>
+            
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            
         
         <Border Width="380"
             Background="White"
             CornerRadius="10"
             BorderBrush="#e0e0e0"
             BorderThickness="1"
+            Margin="40, 90, 40, 40"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
 
-            <StackPanel Orientation="Vertical" Margin="40">
+                <StackPanel Orientation="Vertical" Margin="40">
 
-
-                <Image Source="/Images/logo_icon.png" 
+                    <Image Source="/Images/logo_icon.png" 
                    Width="100" 
                    Height="100"
                    RenderOptions.BitmapScalingMode="HighQuality"
@@ -104,7 +131,7 @@
                            HorizontalAlignment="Center"/>
 
                         <PasswordBox Grid.Column="1"
-                 x:Name="MyPasswordBox"
+                                     x:Name="MyPasswordBox"
                  PasswordChanged="MyPasswordBox_PasswordChanged"
                  FontSize="14"
                  BorderThickness="0"
@@ -128,7 +155,7 @@
                     FontSize="14"
                     BorderThickness="0"
                     Margin="0,0,0,20"
-                    Padding="12">
+                    Padding="12" Click="Button_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -138,5 +165,6 @@
 
             </StackPanel>
         </Border>
+     </StackPanel>
     </Grid>
 </Window>

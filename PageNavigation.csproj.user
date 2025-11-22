@@ -5,28 +5,31 @@
     <Compile Update="LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\BaoCao.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HoaDon.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Home.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\KhachHang.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\NguoiDungHeThong.xaml.cs">
+    <Compile Update="View\LoaiVatTu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\PhieuNhapKho.xaml.cs">
+    <Compile Update="View\NhanVien.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\PhieuXuatKho.xaml.cs">
+    <Compile Update="View\PhieuThuTien.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\PopupDetail\KhachHangDetail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\QuaTrinhVanChuyen.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Settings.xaml.cs">
+    <Compile Update="View\TraCuu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\VatTu.xaml.cs">
