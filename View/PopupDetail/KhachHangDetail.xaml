@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PageNavigation.View.PopupDetail"
         xmlns:vm="clr-namespace:PageNavigation.ViewModel"
         mc:Ignorable="d"
-        Title="KhachHangDetail" Height="485" Width="640"
+        Title="KhachHangDetail" Height="400" Width="640"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -70,7 +70,7 @@
 
         <Grid Height="60"
               Width="400"
-              Margin="20, 120, 220, 305">
+              Margin="20, 120, 220, 220">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -92,8 +92,8 @@
         </Grid>
         <!--KhungSoDienThoai -->
         <Grid Height="60"
-              Width="400"
-              Margin="20, 220, 220, 205">
+              Width="360"
+              Margin="20, 220, 260, 120">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -102,7 +102,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Foreground="#CED565"
                      Background="Transparent"
-                     Width="400"
+                     Width="360"
                      Height="60"
                      FontSize="30"
                      HorizontalContentAlignment="Center"
@@ -124,8 +124,8 @@
 
         <!--KhungDiaChi-->
         <Grid Height="60"
-              Width="600"
-              Margin="20, 320, 20, 105">
+              Width="440"
+              Margin="20, 320, 180, 20">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -134,7 +134,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Foreground="#CED565"
                      Background="Transparent"
-                     Width="600"
+                     Width="440"
                      Height="60"
                      FontSize="30"
                      HorizontalContentAlignment="Center"
@@ -154,16 +154,50 @@
                    Style="{StaticResource Text_Style}"
                    Margin="30,295,0,0"/>
 
-        <!--KhungGioiTinh-->
+        <!--KhungNgaySinh-->
         <Grid Height="60"
-              Width="180"
-              Margin="440, 220, 20, 205">
+              Width="220"
+              Margin="400, 220, 20, 120">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
             </Border>
             <ComboBox SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
                       Style="{StaticResource ComboBoxStyle}"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      Width="220"
+                      Height="60"
+                      FontSize="30"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      FontFamily="/Fonts/#Fz Rubik Med">
+
+                <ComboBoxItem>Nam</ComboBoxItem>
+                <ComboBoxItem>Nữ</ComboBoxItem>
+
+            </ComboBox>
+        </Grid>
+
+        <TextBlock Text="Ngày Sinh:"                       
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="#0bcdff"
+                   Style="{StaticResource Text_Style}"
+                   Margin="410,195,0,0"/>
+
+        <!--KhungGioiTinh-->
+        <Grid Height="60"
+              Width="180"
+              Margin="440, 120, 20, 220">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <ComboBox Style="{StaticResource ComboBoxStyle}"
                       Foreground="#CED565"
                       Background="Transparent"
                       Width="180"
@@ -187,40 +221,6 @@
                    VerticalAlignment="Top"
                    Foreground="#0bcdff"
                    Style="{StaticResource Text_Style}"
-                   Margin="450,195,0,0"/>
-
-        <!--KhungNgaySinh-->
-        <Grid Height="60"
-              Width="180"
-              Margin="440, 120, 20, 305">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      Foreground="#CED565"
-                      Background="Transparent"
-                      Width="180"
-                      Height="60"
-                      FontSize="30"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      FontFamily="/Fonts/#Fz Rubik Med">
-
-                <ComboBoxItem>Nam</ComboBoxItem>
-                <ComboBoxItem>Nữ</ComboBoxItem>
-
-            </ComboBox>
-        </Grid>
-
-        <TextBlock Text="Ngày Sinh:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
                    Margin="450,95,0,0"/>
 
         <!--NutLuu-->
@@ -230,7 +230,7 @@
               VerticalAlignment="Top"
               HorizontalAlignment="Left"
               Background="Transparent"
-              Margin="560, 400, 0, 0">
+              Margin="560, 320, 0, 0">
             <Border Background="#2d3135"
                     CornerRadius="10"   
                     BorderThickness="0">
@@ -239,7 +239,6 @@
                     FontSize="40"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    FontFamily="/Fonts/#Fz Rubik Med"
                     Style="{StaticResource BtnStyle}"
                     Width="60"
                     Height="60"
@@ -249,12 +248,37 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Width="40"
-                       Height="40" Margin="10,10,0,0"/>
+                       Height="40" Margin="10,5,0,0"/>
             </Button>
         </Grid>
 
         <!--NutHuy-->
-
+        <Grid Height="60"
+              Width="60"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              Background="Transparent"
+              Margin="480, 320, 0, 0">
+            <Border Background="#2d3135"
+                    CornerRadius="10"   
+                    BorderThickness="0">
+            </Border>
+            <Button
+                    FontSize="40"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Style="{StaticResource BtnStyle}"
+                    Width="60"
+                    Height="60"
+                    Click="Button_Click">
+                <Image Source="/Images/SaveButton.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="40"
+                       Height="40" Margin="10,5,0,0"/>
+            </Button>
+        </Grid>
 
     </Grid>
 </Window>

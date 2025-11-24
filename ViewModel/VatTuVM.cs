@@ -19,11 +19,12 @@ namespace PageNavigation.ViewModel
             set { _productID = value; OnPropertyChanged(); }
         }
 
-        private string _productStatus;
-        public string ProductStatus
+        private string _productName;
+
+        public string ProductName
         {
-            get { return _productStatus; }
-            set { _productStatus = value; OnPropertyChanged(); }
+            get { return _productName; }
+            set { _productName = value; OnPropertyChanged(); }
         }
 
         private int _productTypeID;
@@ -39,15 +40,15 @@ namespace PageNavigation.ViewModel
         public string Description
         {
             get { return _description; }
-            set { _description = value; }
+            set { _description = value; OnPropertyChanged(); }
         }
 
-        private string _unit;
+        private string _countingUnitID;
 
-        public string Unit
+        public string CountingUnitID
         {
-            get { return _unit; }
-            set { _unit = value; }
+            get { return _countingUnitID; }
+            set { _countingUnitID = value; OnPropertyChanged(); }
         }
 
         private string _origin;
@@ -55,7 +56,7 @@ namespace PageNavigation.ViewModel
         public string Origin
         {
             get { return _origin; }
-            set { _origin = value; }
+            set { _origin = value; OnPropertyChanged(); }
         }
 
         private string _providerID;
@@ -63,14 +64,20 @@ namespace PageNavigation.ViewModel
         public string ProviderID
         {
             get { return _providerID; }
-            set { _providerID = value; }
+            set { _providerID = value; OnPropertyChanged(); }
+        }
+        private int _productStock;
+
+        public int ProductStock
+        {
+            get { return _productStock; }
+            set { _productStock = value; OnPropertyChanged(); }
         }
 
 
         public VatTuVM()
         {
             _pageModel = new PageModel();
-            _productStatus = "Hết Hàng";
         }
     }
 }
