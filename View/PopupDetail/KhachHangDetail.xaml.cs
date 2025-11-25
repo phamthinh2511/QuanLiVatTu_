@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PageNavigation.ViewModel;
 
 namespace PageNavigation.View.PopupDetail
 {
@@ -19,9 +20,10 @@ namespace PageNavigation.View.PopupDetail
     /// </summary>
     public partial class KhachHangDetail : Window
     {
-        public KhachHangDetail()
+        public KhachHangDetail(KhachHangVM customer)
         {
             InitializeComponent();
+            this.DataContext = customer;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

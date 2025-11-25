@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
-    class KhachHangVM : Utilities.ViewModelBase
+    public class KhachHangVM : Utilities.ViewModelBase
     {
-        private readonly PageModel _pageModel;
 
         private int _customerid;
         private string _customername;
@@ -50,10 +49,17 @@ namespace PageNavigation.ViewModel
             get { return _customergender; }
             set { _customergender = value; OnPropertyChanged(); }
         }
+        private DateOnly _customerBirth;
+
+        public DateOnly CustomerBirth
+        {
+            get { return _customerBirth; }
+            set { _customerBirth = value; OnPropertyChanged(); }
+        }
+
 
         public KhachHangVM()
         {
-            _pageModel = new PageModel();
             CustomerID = 1;
             GenderOptions = new ObservableCollection<string>
             {

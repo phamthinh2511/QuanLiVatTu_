@@ -31,7 +31,7 @@ namespace PageNavigation.ViewModel
         private void Home(object obj) => CurrentView = new HomeVM();
         private void NhanVien(object obj) => CurrentView = new NhanVienVM();
         private void LoaiVatTu(object obj) => CurrentView = new LoaiVatTuVM();
-        private void KhachHang(object obj) => CurrentView = new KhachHangVM();
+        private void KhachHang(object obj) => CurrentView = new DanhSachKhachHangVM();
         private void VatTu(object obj) => CurrentView = new VatTuVM();
         private void HoaDon(object obj) => CurrentView = new HoaDonVM();
         private void PhieuThuTien(object obj) => CurrentView = new PhieuThuTienVM();

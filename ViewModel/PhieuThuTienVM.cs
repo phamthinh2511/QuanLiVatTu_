@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
-    class PhieuThuTienVM
+    public class PhieuThuTienVM
     {
     }
 }

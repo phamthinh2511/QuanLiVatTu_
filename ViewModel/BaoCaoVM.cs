@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
-    internal class BaoCaoVM
+    public class BaoCaoVM
     {
     }
 }

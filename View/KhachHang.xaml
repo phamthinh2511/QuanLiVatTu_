@@ -8,210 +8,59 @@
              d:DesignHeight="800" d:DesignWidth="1000"
              Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
-        <vm:KhachHangVM />
+        <vm:DanhSachKhachHangVM/>
     </UserControl.DataContext>
-    
-    <!-- Khong phai no bi loi ma la t chay thu tren day -->
+
     
     <Grid Background="#212529">
-        <!--KhungMA-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="590"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
 
-        <Button Style="{StaticResource ExitApp}"
-                Width="60"
-                Height="60"
-                Margin="20">
-            
-        </Button>
-        
-        <Grid Height="60"
-              Width="520"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left"
-              Background="Transparent"
-              Margin="20, 20, 0, 0">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBlock Text="Khách Hàng :"
-                       Foreground="#ffff"
-                       Style="{StaticResource Text_Style}">
-
-            </TextBlock>
+        <Grid>
+            <TextBlock Style="{StaticResource Font_Style}"
+                       FontSize="50"
+                       Text="Khách Hàng"
+                       Margin="20, 0, 0, 0"/>
         </Grid>
 
+        <Grid Grid.Row="1">
+            <ListView x:Name="CustomerListView" 
+                      Grid.Row="1" 
+                      Margin="10" 
+                      ItemsSource="{Binding ListCustomers}"  
+                      MouseDoubleClick="CustomerListView_MouseDoubleClick">
 
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CustomerID}" Width="50"/>
+                        <GridViewColumn Header="Tên" DisplayMemberBinding="{Binding CustomerName}" Width="200"/>
+                        <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding CustomerContact}" Width="120"/>
+                        <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding CustomerGender}" Width="80"/>
+                        <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding CustomerBirth}" Width="180"/>
+                    </GridView>
+                </ListView.View>
 
-        <TextBlock Text="{Binding CustomerID}"
-                   Foreground="#CED565"
-                   FontSize="40"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Margin="0,30,0,0"
-                   FontFamily="/Fonts/#Fz Rubik Med"/>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Margin" Value="0,2"/>
+                        <Style.Triggers>
 
-        <TextBlock Text="Tên Khách Hàng:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,95,0,0"/>
-        <!--KhungTenKhangHang-->
-        <Grid Height="60"
-              Width="400"
-              Margin="20, 125, 220, 215">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerName}"
-                     Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="400"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med">
-
-            </TextBox>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </Grid>
-        <!--KhungSoDienThoai -->
-        <Grid Height="60"
-              Width="400"
-              Margin="20, 225, 220, 115">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerContact}"
-                     Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="400"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med">
-
-            </TextBox>
-        </Grid>
-
-        <TextBlock Text="Số Điện Thoại:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,200,0,0"/>
-
-        <!--KhungDiaChi-->
-        <Grid Height="60"
-              Width="600"
-              Margin="20, 325, 20, 20">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerAddress}"
-                     Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="600"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med">
-
-            </TextBox>
-        </Grid>
-
-        <TextBlock Text="Địa Chỉ:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,300,0,0"/>
-
-        <!--KhungGioiTinh-->
-        <Grid Height="60"
-              Width="180"
-              Margin="440, 225, 20, 120">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <ComboBox SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
-                      Style="{StaticResource ComboBoxStyle}"
-                      Foreground="#CED565"
-                      Background="Transparent"
-                      Width="180"
-                      Height="60"
-                      FontSize="30"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      FontFamily="/Fonts/#Fz Rubik Med">
-
-                <ComboBoxItem>Nam</ComboBoxItem>
-                <ComboBoxItem>Nữ</ComboBoxItem>
-
-            </ComboBox>
-        </Grid>
-
-        <TextBlock Text="Giới Tính:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="450,200,0,0"/>
-
-        <!--KhungNgaySinh-->
-        <Grid Height="60"
-              Width="180"
-              Margin="440, 125, 20, 220">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      Foreground="#CED565"
-                      Background="Transparent"
-                      Width="180"
-                      Height="60"
-                      FontSize="30"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      FontFamily="/Fonts/#Fz Rubik Med">
-
-                <ComboBoxItem>Nam</ComboBoxItem>
-                <ComboBoxItem>Nữ</ComboBoxItem>
-
-            </ComboBox>
-        </Grid>
-
-        <TextBlock Text="Ngày Sinh:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="450,100,0,0"/>
 
     </Grid>
 </UserControl>
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
-    class DonViTinhVM : Utilities.ViewModelBase
+    public class DonViTinhVM : Utilities.ViewModelBase
     {
 		private int _countingUnitID;
 

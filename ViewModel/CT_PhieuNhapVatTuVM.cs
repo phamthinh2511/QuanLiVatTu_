@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
-    class CT_PhieuNhapVatTuVM : Utilities.ViewModelBase
+    public class CT_PhieuNhapVatTuVM : Utilities.ViewModelBase
     {
 		private int _grnID;
 
@@ -29,6 +29,14 @@ namespace PageNavigation.ViewModel
 			get { return _productName; }
 			set { _productName = value; OnPropertyChanged(); }
 		}
+		private int _providerID;
+
+		public int ProviderID
+		{
+			get { return _providerID; }
+			set { _providerID = value; }
+		}
+
 		private int _quantity;
 
 		public int Quantity

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PageNavigation.View.PopupDetail;
+using PageNavigation.ViewModel;
 
 namespace PageNavigation.View
 {
@@ -25,5 +27,14 @@ namespace PageNavigation.View
             InitializeComponent();
         }
 
-    }
+        private void CustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedCustomer = CustomerListView.SelectedItem as KhachHangVM;
+            if (selectedCustomer != null)
+            {
+                KhachHangDetail detailWindow = new KhachHangDetail(selectedCustomer);
+                detailWindow.ShowDialog();
+            }
+        }
+    } 
 }

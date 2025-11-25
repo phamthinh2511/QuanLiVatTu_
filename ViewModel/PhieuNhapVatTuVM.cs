@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace PageNavigation.ViewModel
 {
-    class PhieuNhapVatTuVM : Utilities.ViewModelBase
+    public class PhieuNhapVatTuVM : Utilities.ViewModelBase
     {
 		public PhieuNhapVatTuVM()
 		{
@@ -42,12 +42,13 @@ namespace PageNavigation.ViewModel
 		{
 			GRNCost = ListDetail.Sum(item => item.TotalAmount);
 		}
-		public void AddDetail(int productID, string productName, decimal inputPrice)
+		public void AddDetail(int productID, string productName, int providerID, decimal inputPrice)
 		{
 			var newItem = new CT_PhieuNhapVatTuVM
 			{
 				ProductID = productID,
 				ProductName = productName,
+				ProviderID = providerID,
 				InputPrice = inputPrice,
 				Quantity = 1,
 				GRNID = this.GRNID

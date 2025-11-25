@@ -7,7 +7,7 @@ using PageNavigation.Model;
 
 namespace PageNavigation.ViewModel
 {
-    class NhanVienVM : Utilities.ViewModelBase
+    public class NhanVienVM : Utilities.ViewModelBase
     {
 		private int _staffID;
 

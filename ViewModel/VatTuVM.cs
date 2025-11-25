@@ -7,7 +7,7 @@ using PageNavigation.Model;
 
 namespace PageNavigation.ViewModel
 {
-    class VatTuVM : Utilities.ViewModelBase
+    public class VatTuVM : Utilities.ViewModelBase
     {
         private readonly PageModel _pageModel;
 

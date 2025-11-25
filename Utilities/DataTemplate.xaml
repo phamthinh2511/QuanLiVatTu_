@@ -17,7 +17,7 @@
     <DataTemplate DataType="{x:Type vm:VatTuVM}">
         <view:VatTu/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:KhachHangVM}">
+    <DataTemplate DataType="{x:Type vm:DanhSachKhachHangVM}">
         <view:KhachHang/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:HoaDonVM}">

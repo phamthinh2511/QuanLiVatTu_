@@ -9,8 +9,7 @@
         Title="KhachHangDetail" Height="400" Width="640"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        Style="{StaticResource Page_Style}">
+        WindowStyle="None">
 
 
     <Grid Background="#212529">
@@ -162,8 +161,8 @@
                     CornerRadius="10"   
                     BorderThickness="0">
             </Border>
-            <ComboBox SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
-                      Style="{StaticResource ComboBoxStyle}"
+            <TextBox  Text="{Binding CustomerBirth, Mode=TwoWay}"
+                      Style="{StaticResource TextBoxStyle}"
                       Foreground="#CED565"
                       Background="Transparent"
                       Width="220"
@@ -175,10 +174,7 @@
                       VerticalAlignment="Center"
                       FontFamily="/Fonts/#Fz Rubik Med">
 
-                <ComboBoxItem>Nam</ComboBoxItem>
-                <ComboBoxItem>Nữ</ComboBoxItem>
-
-            </ComboBox>
+            </TextBox>
         </Grid>
 
         <TextBlock Text="Ngày Sinh:"                       
@@ -198,6 +194,8 @@
                     BorderThickness="0">
             </Border>
             <ComboBox Style="{StaticResource ComboBoxStyle}"
+                      ItemsSource="{Binding GenderOptions}"
+                      SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
                       Foreground="#CED565"
                       Background="Transparent"
                       Width="180"
@@ -208,9 +206,6 @@
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       FontFamily="/Fonts/#Fz Rubik Med">
-
-                <ComboBoxItem>Nam</ComboBoxItem>
-                <ComboBoxItem>Nữ</ComboBoxItem>
 
             </ComboBox>
         </Grid>
