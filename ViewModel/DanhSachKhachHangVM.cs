@@ -20,6 +20,10 @@ namespace PageNavigation.ViewModel
             set { _listCustomers = value; OnPropertyChanged(); }
         }
 
+        public void AddCustomer(KhachHangVM newCustomer)
+        {
+            ListCustomers.Add(newCustomer);
+        }
         public DanhSachKhachHangVM()
         {
             _pageModel = new PageModel();
@@ -31,7 +35,7 @@ namespace PageNavigation.ViewModel
         {
             ListCustomers.Add(new KhachHangVM
             {
-                CustomerID = 101,
+                CustomerID = 1,
                 CustomerName = "Nguyễn Văn A",
                 CustomerContact = "0901234567",
                 CustomerAddress = "123 Đường Láng, Hà Nội",
@@ -41,7 +45,7 @@ namespace PageNavigation.ViewModel
 
             ListCustomers.Add(new KhachHangVM
             {
-                CustomerID = 102,
+                CustomerID = 2,
                 CustomerName = "Trần Thị B",
                 CustomerContact = "0912345678",
                 CustomerAddress = "456 Cầu Giấy, Hà Nội",
@@ -51,7 +55,7 @@ namespace PageNavigation.ViewModel
 
             ListCustomers.Add(new KhachHangVM
             {
-                CustomerID = 103,
+                CustomerID = 3,
                 CustomerName = "Lê Văn C",
                 CustomerContact = "0987654321",
                 CustomerAddress = "789 Kim Mã, Hà Nội",
@@ -60,7 +64,7 @@ namespace PageNavigation.ViewModel
             });
             ListCustomers.Add(new KhachHangVM
             {
-                CustomerID = 104,
+                CustomerID = 4,
                 CustomerName = "Trần Văn D",
                 CustomerContact = "0987631231",
                 CustomerAddress = "123 Trần Hưng Đạo, Quận 1, TP HCM",

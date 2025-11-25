@@ -20,10 +20,23 @@ namespace PageNavigation.View.PopupDetail
     /// </summary>
     public partial class KhachHangDetail : Window
     {
+        private KhachHangVM _originalCustomer;
+        private KhachHangVM _tempCustomer;
         public KhachHangDetail(KhachHangVM customer)
         {
             InitializeComponent();
-            this.DataContext = customer;
+            _originalCustomer = customer;
+            _tempCustomer = new KhachHangVM
+            {
+                CustomerID = customer.CustomerID,
+                CustomerName = customer.CustomerName,
+                CustomerContact = customer.CustomerContact,
+                CustomerAddress = customer.CustomerAddress,
+                CustomerGender = customer.CustomerGender,
+                CustomerBirth = customer.CustomerBirth,
+                GenderOptions = customer.GenderOptions
+            };
+            this.DataContext = _tempCustomer;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,5 +44,21 @@ namespace PageNavigation.View.PopupDetail
             this.Close();
         }
 
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            _originalCustomer.CustomerName = _tempCustomer.CustomerName;
+            _originalCustomer.CustomerContact = _tempCustomer.CustomerContact;
+            _originalCustomer.CustomerAddress = _tempCustomer.CustomerAddress;
+            _originalCustomer.CustomerGender = _tempCustomer.CustomerGender;
+            _originalCustomer.CustomerBirth = _tempCustomer.CustomerBirth;
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
     }
 }

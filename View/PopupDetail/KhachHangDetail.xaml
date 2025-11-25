@@ -237,7 +237,7 @@
                     Style="{StaticResource BtnStyle}"
                     Width="60"
                     Height="60"
-                    Click="Button_Click">
+                    Click="ButtonSave_Click">
                 <Image Source="/Images/SaveButton.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Left"
@@ -265,8 +265,8 @@
                     Style="{StaticResource BtnStyle}"
                     Width="60"
                     Height="60"
-                    Click="Button_Click">
-                <Image Source="/Images/SaveButton.png"
+                    Click="ButtonCancel_Click">
+                <Image Source="/Images/CancelButton.png"
                        Stretch="Uniform"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"

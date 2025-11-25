@@ -33,7 +33,63 @@ namespace PageNavigation.View
             if (selectedCustomer != null)
             {
                 KhachHangDetail detailWindow = new KhachHangDetail(selectedCustomer);
-                detailWindow.ShowDialog();
+                if (detailWindow.ShowDialog() == true)
+                {
+                    CustomerListView.Items.Refresh();
+                }
+            }
+        }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = this.DataContext as DanhSachKhachHangVM;
+            if (viewModel == null) return;
+            int newId = 1;
+
+            var existingIds = viewModel.ListCustomers
+                                .Select(c => c.CustomerID)
+                                .OrderBy(id => id)
+                                .ToList();
+            foreach (int id in existingIds)
+            {
+                if (id == newId)
+                {
+                    newId++;
+                }
+                else if (id > newId)
+                {
+                    break;
+                }
+            }
+            var newCustomer = new KhachHangVM();
+            newCustomer.CustomerID = newId;
+            newCustomer.CustomerBirth = DateOnly.FromDateTime(DateTime.Now);
+            newCustomer.CustomerGender = "Nam";
+            KhachHangDetail popup = new KhachHangDetail(newCustomer);
+            if (popup.ShowDialog() == true)
+            {
+                viewModel.AddCustomer(newCustomer);
+            }
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = this.DataContext as DanhSachKhachHangVM;
+            if (viewModel == null) return;
+            var selectedCustomer = CustomerListView.SelectedItem as KhachHangVM;
+            if (selectedCustomer == null)
+            {
+                MessageBox.Show("Vui lòng chọn một khách hàng để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var result = MessageBox.Show($"Bạn có chắc chắn muốn xóa khách hàng {selectedCustomer.CustomerName} (ID: {selectedCustomer.CustomerID})?",
+                                         "Xác nhận xóa",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                viewModel.ListCustomers.Remove(selectedCustomer);
             }
         }
     } 

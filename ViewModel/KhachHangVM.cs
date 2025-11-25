@@ -60,7 +60,6 @@ namespace PageNavigation.ViewModel
 
         public KhachHangVM()
         {
-            CustomerID = 1;
             GenderOptions = new ObservableCollection<string>
             {
                 "Nam",
