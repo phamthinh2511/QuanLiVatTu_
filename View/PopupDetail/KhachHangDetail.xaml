@@ -161,7 +161,7 @@
                     CornerRadius="10"   
                     BorderThickness="0">
             </Border>
-            <TextBox  Text="{Binding CustomerBirth, Mode=TwoWay}"
+            <TextBox  Text="{Binding CustomerBirth, StringFormat='dd/MM/yyyy', Mode=TwoWay}"
                       Style="{StaticResource TextBoxStyle}"
                       Foreground="#CED565"
                       Background="Transparent"

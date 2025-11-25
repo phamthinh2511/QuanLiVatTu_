@@ -27,38 +27,132 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListView x:Name="CustomerListView" 
-                      Grid.Row="1" 
-                      Margin="10" 
-                      ItemsSource="{Binding ListCustomers}"  
-                      MouseDoubleClick="CustomerListView_MouseDoubleClick">
 
+
+                <ListView x:Name="CustomerListView" 
+                  ItemsSource="{Binding ListCustomers}"
+                  MouseDoubleClick="CustomerListView_MouseDoubleClick"
+                  FontFamily="/Fonts/#Fz Rubik Med"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  Width="980"
+                  FontSize="30"
+                  Foreground="#CED565"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  AlternationCount="2">
                 <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CustomerID}" Width="50"/>
-                        <GridViewColumn Header="Tên" DisplayMemberBinding="{Binding CustomerName}" Width="200"/>
-                        <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding CustomerContact}" Width="120"/>
-                        <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding CustomerGender}" Width="80"/>
-                        <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding CustomerBirth}" Width="180"/>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
+
+                        <GridViewColumn Header="ID" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                            CornerRadius="10,0,0,10"
+                            Padding="10,0">
+                                        <TextBlock Text="{Binding CustomerID}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tên" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                            Padding="10,0">
+                                        <TextBlock Text="{Binding CustomerName}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="SĐT" Width="220">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                            Padding="10,0">
+                                        <TextBlock Text="{Binding CustomerContact}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Giới tính" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                            Padding="10,0">
+                                        <TextBlock Text="{Binding CustomerGender}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Ngày Sinh" Width="210">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                            CornerRadius="0,10,10,0"
+                            Padding="10,0">
+                                        <TextBlock Text="{Binding CustomerBirth, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
 
                 <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="White"/>
-                        <Setter Property="Margin" Value="0,2"/>
-                        <Style.Triggers>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Margin" Value="5,2,5,2"/>
+                            <Setter Property="Padding" Value="5"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
 
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="LightBlue"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="LightGreen"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border x:Name="Bd" 
+                                        CornerRadius="10" 
+                                        Background="{TemplateBinding Background}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}" 
+                                        Padding="{TemplateBinding Padding}">
+                                            <GridViewRowPresenter Content="{TemplateBinding Content}" 
+                                                          Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#17191a"/>
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#3E444A"/>
+                                </Trigger>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#50555b"/>
+                                    <Setter Property="Foreground" Value="#0bcdff"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#CED565"/>
+                                    <Setter Property="Foreground" Value="#2d3135"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
         </Grid>
 
     </Grid>

@@ -58,6 +58,15 @@ namespace PageNavigation.ViewModel
                 CustomerGender = "Khác",
                 CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
             });
+            ListCustomers.Add(new KhachHangVM
+            {
+                CustomerID = 104,
+                CustomerName = "Trần Văn D",
+                CustomerContact = "0987631231",
+                CustomerAddress = "123 Trần Hưng Đạo, Quận 1, TP HCM",
+                CustomerGender = "Nam",
+                CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
+            });
         }
     }
 }

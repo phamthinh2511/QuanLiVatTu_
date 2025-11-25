@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="/Styles/ToggleButtonTemplate.xaml"/>
                 <ResourceDictionary Source="/Styles/ToopTipStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/CustomListViewColumnHeader.xaml"/>
                 <ResourceDictionary Source="/Utilities/DataTemplate.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>

@@ -47,7 +47,7 @@ namespace PageNavigation.ViewModel
 			{ 
 				if (value > MaxStock)
 				{
-					// Tự mặc định giá trị về số tồn kho hiện tại
+					//nếu số lượng đặt hàng lớn hơn số lượng tồn kho, tự mặc định giá trị về số tồn kho hiện tại
 					_quantity = MaxStock;
 				}
 				else
