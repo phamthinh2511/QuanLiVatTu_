@@ -51,7 +51,7 @@ public partial class QuanLyVatTuContext : DbContext
 
             entity.ToTable("BAOCAOTON");
 
-            entity.HasOne(d => d.MaVatTuNavigation).WithMany(p => p.Baocaotons)
+            entity.HasOne(d => d.MaVatTuNavigation).WithMany(p => p.BaoCao)
                 .HasForeignKey(d => d.MaVatTu)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__BAOCAOTON__MaVat__619B8048");

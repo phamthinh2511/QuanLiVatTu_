@@ -17,7 +17,7 @@ public partial class VatTuM
 
     public int? SoLuongTon { get; set; }
 
-    public virtual ICollection<BaoCaoM> Baocaotons { get; set; } = new List<BaoCaoM>();
+    public virtual ICollection<BaoCaoM> BaoCao { get; set; } = new List<BaoCaoM>();
 
     public virtual ICollection<CT_HoaDonM> CT_HoaDon { get; set; } = new List<CT_HoaDonM>();
 
