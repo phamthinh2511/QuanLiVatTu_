@@ -9,9 +9,15 @@
         Title="KhachHangDetail" Height="400" Width="640"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="None"
+        Background="Transparent">
+    
 
-    <Grid Background="#212529">
+    <Grid Background="Transparent">
+        <Border CornerRadius="20"
+                BorderThickness="0"
+                Background="#010c1f"/>
+
 
         <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" Margin="560, 20, 0, 0">
             <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
