@@ -20,7 +20,10 @@
 
     <Grid>
         <Grid Background="Black">
-            
+            <Border CornerRadius="20"
+                    Background="#212529">
+                
+            </Border>
             <Grid Margin="65, 0, 0, 0" 
                   x:Name="contentuser" 
                   PreviewMouseLeftButtonDown="contentuser_PreviewMouseLeftButtonDown">

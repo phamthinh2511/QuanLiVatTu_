@@ -22,13 +22,28 @@ namespace PageNavigation.ViewModel
 
         public void AddCustomer(KhachHangVM newCustomer)
         {
-            ListCustomers.Add(newCustomer);
+            int index = 0;
+            while (index < ListCustomers.Count && ListCustomers[index].CustomerID < newCustomer.CustomerID)
+            {
+                index++;
+            }
+            ListCustomers.Insert(index, newCustomer);
+        }
+        public void SortList()
+        {
+            var sortedList = ListCustomers.OrderBy(x => x.CustomerID).ToList();
+            ListCustomers.Clear();
+            foreach (var item in sortedList)
+            {
+                ListCustomers.Add(item);
+            }
         }
         public DanhSachKhachHangVM()
         {
             _pageModel = new PageModel();
             ListCustomers = new ObservableCollection<KhachHangVM>();
             LoadData();
+            SortList();
         }
 
         private void LoadData()

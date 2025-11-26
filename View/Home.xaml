@@ -5,15 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="885">
-    <Grid>
+             d:DesignHeight="800" d:DesignWidth="1000"
+             Background="Transparent">
+    <Grid Background="#212529">
 
         <Border CornerRadius="0, 20, 20, 0">
 
-            <Border.Background>
-                <ImageBrush ImageSource="/Images/Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style (1).png"
-                            Stretch="None"/>
-            </Border.Background>
+            
             
         </Border>
 
