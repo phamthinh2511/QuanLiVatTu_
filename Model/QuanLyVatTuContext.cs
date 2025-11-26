@@ -15,33 +15,33 @@ public partial class QuanLyVatTuContext : DbContext
     {
     }
 
-    public virtual DbSet<BaoCaoM> Baocaotons { get; set; }
+    public virtual DbSet<BaoCaoM> BaoCao { get; set; }
 
-    public virtual DbSet<CT_HoaDonM> CtHds { get; set; }
+    public virtual DbSet<CT_HoaDonM> CT_HoaDon { get; set; }
 
-    public virtual DbSet<CT_PhieuNhapVatTuM> CtPnvts { get; set; }
+    public virtual DbSet<CT_PhieuNhapVatTuM> CT_PhieuNhapVatTu { get; set; }
 
-    public virtual DbSet<DonViTinhM> Donvitinhs { get; set; }
+    public virtual DbSet<DonViTinhM> DonViTinh { get; set; }
 
-    public virtual DbSet<HoaDonM> Hoadons { get; set; }
+    public virtual DbSet<HoaDonM> HoaDon { get; set; }
 
-    public virtual DbSet<KhachHangM> Khachhangs { get; set; }
+    public virtual DbSet<KhachHangM> KhachHang { get; set; }
 
-    public virtual DbSet<LoaiVatTuM> Loaivattus { get; set; }
+    public virtual DbSet<LoaiVatTuM> LoaiVatTu { get; set; }
 
-    public virtual DbSet<NhanVienM> Nhanviens { get; set; }
+    public virtual DbSet<NhanVienM> NhanVien { get; set; }
 
-    public virtual DbSet<PhieuNhapVatTuM> Phieunhapvattus { get; set; }
+    public virtual DbSet<PhieuNhapVatTuM> PhieuNhapVatTu { get; set; }
 
-    public virtual DbSet<PhieuThuTienM> Phieuthutiens { get; set; }
+    public virtual DbSet<PhieuThuTienM> PhieuThuTien { get; set; }
 
-    public virtual DbSet<Thamso> Thamsos { get; set; }
+    public virtual DbSet<Thamso> ThamSo { get; set; }
 
-    public virtual DbSet<VatTuM> Vattus { get; set; }
+    public virtual DbSet<VatTuM> VatTu { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
-        => optionsBuilder.UseSqlServer("Data Source=TIENIZDABEZT;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -84,7 +84,7 @@ namespace PageNavigation
                     {
                         using (var context = new PageNavigation.Model.QuanLyVatTuContext())
                         {
-                            var user = context.Nhanviens.FirstOrDefault(x => x.Username == inputUser && x.Password == inputPass);
+                            var user = context.NhanVien.FirstOrDefault(x => x.Username == inputUser && x.Password == inputPass);
 
                             if (user == null)
                             {

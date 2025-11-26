@@ -55,11 +55,11 @@ namespace PageNavigation.View.PopupDetail
                     if (CurrentCustomer.MaKhachHang == 0)
                     {
 
-                        context.Khachhangs.Add(CurrentCustomer);
+                        context.KhachHang.Add(CurrentCustomer);
                     }
                     else
                     {
-                        context.Khachhangs.Update(CurrentCustomer);
+                        context.KhachHang.Update(CurrentCustomer);
                     }
 
                     context.SaveChanges();

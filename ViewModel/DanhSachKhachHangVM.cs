@@ -37,7 +37,7 @@ namespace PageNavigation.ViewModel
 
                 using (var context = new QuanLyVatTuContext())
                 {
-                    var data = await context.Khachhangs.OrderByDescending(x => x.MaKhachHang).ToListAsync();
+                    var data = await context.KhachHang.OrderByDescending(x => x.MaKhachHang).ToListAsync();
                     ListCustomers = new ObservableCollection<KhachHangM>(data);
                 }
             }
@@ -60,7 +60,7 @@ namespace PageNavigation.ViewModel
             {
                 using (var context = new QuanLyVatTuContext())
                 {
-                    context.Khachhangs.Add(kh);
+                    context.KhachHang.Add(kh);
                     context.SaveChanges();
                 }
                 LoadDataAsync();
@@ -74,10 +74,10 @@ namespace PageNavigation.ViewModel
             {
                 using (var context = new QuanLyVatTuContext())
                 {
-                    var itemToDelete = context.Khachhangs.SingleOrDefault(x => x.MaKhachHang == kh.MaKhachHang);
+                    var itemToDelete = context.KhachHang.SingleOrDefault(x => x.MaKhachHang == kh.MaKhachHang);
                     if (itemToDelete != null)
                     {
-                        context.Khachhangs.Remove(itemToDelete);
+                        context.KhachHang.Remove(itemToDelete);
                         context.SaveChanges();
                     }
                 }
