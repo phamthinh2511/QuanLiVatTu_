@@ -11,267 +11,174 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
 
-
     <Grid Background="#212529">
 
-        <!--NutEXIT-->
-        <Grid Height="60"
-              Width="60"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left"
-              Background="Transparent"
-              Margin="560, 20, 0, 0">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <Button Style="{StaticResource ExitApp}"
-                Width="60"
-                Height="60"
-                Click="Button_Click">
-            </Button>
-        </Grid>
-        <!--KhungMA-->
-        <Grid Height="60"
-              Width="520"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left"
-              Background="Transparent"
-              Margin="20, 20, 0, 0">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBlock Text="Khách Hàng :"
-                       Foreground="#ffff"
-                       Style="{StaticResource Text_Style}">
-
-            </TextBlock>
+        <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" Margin="560, 20, 0, 0">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+            <Button Style="{StaticResource ExitApp}" Width="60" Height="60" Click="Button_Click"/>
         </Grid>
 
+        <Grid Height="60" Width="520" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" Margin="20, 20, 0, 0">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+            <TextBlock Text="Khách Hàng :" Foreground="#ffff" Style="{StaticResource Text_Style}"/>
+        </Grid>
 
+        <TextBlock Text="{Binding MaKhachHang}"
+                   Foreground="#CED565" FontSize="40"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Margin="0,30,0,0" FontFamily="/Fonts/#Fz Rubik Med"/>
 
-        <TextBlock Text="{Binding CustomerID}"
-                   Foreground="#CED565"
-                   FontSize="40"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Margin="0,30,0,0"
-                   FontFamily="/Fonts/#Fz Rubik Med"/>
-        <!--KhungTenKhangHang-->
-        <TextBlock Text="Tên Khách Hàng:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,95,0,0"/>
+        <TextBlock Text="Tên Khách Hàng:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#0bcdff" Style="{StaticResource Text_Style}" Margin="30,95,0,0"/>
 
-        <Grid Height="60"
-              Width="400"
-              Margin="20, 120, 220, 220">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerName}"
+        <Grid Height="60" Width="400" Margin="20, 120, 220, 220">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+            <TextBox x:Name="txtHoTen"
+                     TextChanged="Form_Changed"
+                     Text="{Binding HoVaTen, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="400"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med" >
-
-            </TextBox>
+                     Foreground="#CED565" Background="Transparent"
+                     Width="400" Height="60" FontSize="30"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med"/>
         </Grid>
-        <!--KhungSoDienThoai -->
-        <Grid Height="60"
-              Width="360"
-              Margin="20, 220, 260, 120">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerContact}"
+
+        <Grid Height="60" Width="360" Margin="20, 220, 260, 120">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+            <TextBox x:Name="txtSDT"
+                     TextChanged="Form_Changed"
+                     Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="360"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med">
-
-            </TextBox>
+                     Foreground="#CED565" Background="Transparent"
+                     Width="360" Height="60" FontSize="30"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med"/>
         </Grid>
 
-        <TextBlock Text="Số Điện Thoại:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,195,0,0"/>
+        <TextBlock Text="Số Điện Thoại:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#0bcdff" Style="{StaticResource Text_Style}" Margin="30,195,0,0"/>
 
-        <!--KhungDiaChi-->
-        <Grid Height="60"
-              Width="440"
-              Margin="20, 320, 180, 20">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox Text="{Binding CustomerAddress}"
+        <Grid Height="60" Width="440" Margin="20, 320, 180, 20">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+            <TextBox x:Name="txtDiaChi"
+                     TextChanged="Form_Changed"
+                     Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     Width="440"
-                     Height="60"
-                     FontSize="30"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontFamily="/Fonts/#Fz Rubik Med">
-
-            </TextBox>
+                     Foreground="#CED565" Background="Transparent"
+                     Width="440" Height="60" FontSize="30"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"
+                     FontFamily="/Fonts/#Fz Rubik Med"/>
         </Grid>
 
-        <TextBlock Text="Địa Chỉ:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="30,295,0,0"/>
+        <TextBlock Text="Địa Chỉ:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#0bcdff" Style="{StaticResource Text_Style}" Margin="30,295,0,0"/>
 
-        <!--KhungNgaySinh-->
-        <Grid Height="60"
-              Width="220"
-              Margin="400, 220, 20, 120">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <TextBox  Text="{Binding CustomerBirth, StringFormat='dd/MM/yyyy', Mode=TwoWay}"
-                      Style="{StaticResource TextBoxStyle}"
-                      Foreground="#CED565"
-                      Background="Transparent"
-                      Width="220"
-                      Height="60"
-                      FontSize="30"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+        <Grid Height="60" Width="220" Margin="400, 220, 20, 120">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+            <DatePicker xml:lang="vi-VN" 
+                SelectedDate="{Binding NgaySinhHienThi, UpdateSourceTrigger=PropertyChanged}"
+                BorderThickness="0"
+                Background="Transparent"
+                Foreground="#CED565"
+                Width="220" 
+                Height="60" 
+                FontSize="30"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                FontFamily="/Fonts/#Fz Rubik Med">
+
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                    <Grid>
+                                        <ScrollViewer x:Name="PART_ContentHost" 
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="Message" 
+                                           Text="dd/mm/yyyy" 
+                                           Foreground="#50555b" 
+                                           FontSize="20"
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Visibility="Collapsed"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="Text" Value="">
+                                            <Setter TargetName="Message" Property="Visibility" Value="Visible"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+        </Grid>
+
+        <TextBlock Text="Ngày Sinh:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#0bcdff" Style="{StaticResource Text_Style}" Margin="410,195,0,0"/>
+
+        <Grid Height="60" Width="180" Margin="440, 120, 20, 220">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+            <ComboBox x:Name="cbGioiTinh"
+                      SelectionChanged="Form_Changed"
+                      Style="{StaticResource ComboBoxStyle}"
+                      SelectedValue="{Binding GioiTinh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Content"
+                      Foreground="#CED565" Background="Transparent"
+                      Width="180" Height="60" FontSize="30"
+                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"
                       FontFamily="/Fonts/#Fz Rubik Med">
 
-            </TextBox>
-        </Grid>
-
-        <TextBlock Text="Ngày Sinh:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="410,195,0,0"/>
-
-        <!--KhungGioiTinh-->
-        <Grid Height="60"
-              Width="180"
-              Margin="440, 120, 20, 220">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding GenderOptions}"
-                      SelectedItem="{Binding CustomerGender, Mode=TwoWay}"
-                      Foreground="#CED565"
-                      Background="Transparent"
-                      Width="180"
-                      Height="60"
-                      FontSize="30"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      FontFamily="/Fonts/#Fz Rubik Med">
-
+                <ComboBoxItem Content="Nam"/>
+                <ComboBoxItem Content="Nữ"/>
+                <ComboBoxItem Content="Khác"/>
             </ComboBox>
         </Grid>
 
-        <TextBlock Text="Giới Tính:"                       
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Foreground="#0bcdff"
-                   Style="{StaticResource Text_Style}"
-                   Margin="450,95,0,0"/>
+        <TextBlock Text="Giới Tính:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#0bcdff" Style="{StaticResource Text_Style}" Margin="450,95,0,0"/>
 
-        <!--NutLuu-->
+        <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" Margin="560, 320, 0, 0">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
 
-        <Grid Height="60"
-              Width="60"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left"
-              Background="Transparent"
-              Margin="560, 320, 0, 0">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <Button
-                    FontSize="40"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Style="{StaticResource BtnStyle}"
-                    Width="60"
-                    Height="60"
+            <Button x:Name="btnSave" 
+                    IsEnabled="False" 
+                    FontSize="40" 
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    Width="60" Height="60" 
                     Click="ButtonSave_Click">
-                <Image Source="/Images/SaveButton.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Width="40"
-                       Height="40" Margin="10,5,0,0"/>
+
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource BtnStyle}">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Image Source="/Images/SaveButton.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" Margin="10,5,0,0"/>
             </Button>
         </Grid>
 
-        <!--NutHuy-->
-        <Grid Height="60"
-              Width="60"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left"
-              Background="Transparent"
-              Margin="480, 320, 0, 0">
-            <Border Background="#2d3135"
-                    CornerRadius="10"   
-                    BorderThickness="0">
-            </Border>
-            <Button
-                    FontSize="40"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Style="{StaticResource BtnStyle}"
-                    Width="60"
-                    Height="60"
-                    Click="ButtonCancel_Click">
-                <Image Source="/Images/CancelButton.png"
-                       Stretch="Uniform"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Width="40"
-                       Height="40" Margin="10,5,0,0"/>
+        <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" Margin="480, 320, 0, 0">
+            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+            <Button FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource BtnStyle}" Width="60" Height="60" Click="ButtonCancel_Click">
+                <Image Source="/Images/CancelButton.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" Margin="10,5,0,0"/>
             </Button>
         </Grid>
 

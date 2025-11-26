@@ -18,6 +18,16 @@ namespace PageNavigation.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
+        private HomeVM _homeVM;
+        private NhanVienVM _nhanVienVM;
+        private LoaiVatTuVM _loaiVatTuVM;
+        private DanhSachKhachHangVM _danhSachKhachHangVM;
+        private VatTuVM _vatTuVM;
+        private HoaDonVM _hoaDonVM;
+        private PhieuThuTienVM _phieuThuTienVM;
+        private TraCuuVM _traCuuVM;
+        private BaoCaoVM _baoCaoVM;
+
         public ICommand HomeCommand { get; set; }
         public ICommand NhanVienCommand { get; set; }
         public ICommand LoaiVatTuCommand { get; set; }
@@ -28,15 +38,17 @@ namespace PageNavigation.ViewModel
         public ICommand PhieuThuTienCommand { get; set; }
         public ICommand BaoCaoCommand { get; set; }
 
-        private void Home(object obj) => CurrentView = new HomeVM();
-        private void NhanVien(object obj) => CurrentView = new NhanVienVM();
-        private void LoaiVatTu(object obj) => CurrentView = new LoaiVatTuVM();
-        private void KhachHang(object obj) => CurrentView = new DanhSachKhachHangVM();
-        private void VatTu(object obj) => CurrentView = new VatTuVM();
-        private void HoaDon(object obj) => CurrentView = new HoaDonVM();
-        private void PhieuThuTien(object obj) => CurrentView = new PhieuThuTienVM();
-        private void TraCuu(object obj) => CurrentView = new TraCuuVM();
-        private void BaoCao(object obj) => CurrentView = new BaoCaoVM();
+        private void Home(object obj) => CurrentView = _homeVM;
+        private void NhanVien(object obj) => CurrentView = _nhanVienVM;
+        private void LoaiVatTu(object obj) => CurrentView = _loaiVatTuVM;
+
+        private void KhachHang(object obj) => CurrentView = _danhSachKhachHangVM;
+
+        private void VatTu(object obj) => CurrentView = _vatTuVM;
+        private void HoaDon(object obj) => CurrentView = _hoaDonVM;
+        private void PhieuThuTien(object obj) => CurrentView = _phieuThuTienVM;
+        private void TraCuu(object obj) => CurrentView = _traCuuVM;
+        private void BaoCao(object obj) => CurrentView = _baoCaoVM;
 
         public NavigationVM()
         {
@@ -50,7 +62,18 @@ namespace PageNavigation.ViewModel
             BaoCaoCommand = new RelayCommand(BaoCao);
             TraCuuCommand = new RelayCommand(TraCuu);
 
-            CurrentView = new HomeVM();
+
+            _homeVM = new HomeVM();
+            _nhanVienVM = new NhanVienVM();
+            _loaiVatTuVM = new LoaiVatTuVM();
+            _danhSachKhachHangVM = new DanhSachKhachHangVM();
+            _vatTuVM = new VatTuVM();
+            _hoaDonVM = new HoaDonVM();
+            _phieuThuTienVM = new PhieuThuTienVM();
+            _traCuuVM = new TraCuuVM();
+            _baoCaoVM = new BaoCaoVM();
+
+            CurrentView = _homeVM;
         }
     }
 }

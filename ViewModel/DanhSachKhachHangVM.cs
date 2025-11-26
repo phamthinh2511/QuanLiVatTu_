@@ -1,76 +1,89 @@
 ﻿using PageNavigation.Model;
-using PageNavigation.ViewModel;
-using System;
-using System.Collections.Generic;
+using PageNavigation.Utilities;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace PageNavigation.ViewModel
 {
-    public class DanhSachKhachHangVM : Utilities.ViewModelBase
+    public class DanhSachKhachHangVM : ViewModelBase
     {
-        private readonly PageModel _pageModel;
 
-        private ObservableCollection<KhachHangVM> _listCustomers;
-        public ObservableCollection<KhachHangVM> ListCustomers
+        private ObservableCollection<KhachHangM> _listCustomers;
+        public ObservableCollection<KhachHangM> ListCustomers
         {
             get { return _listCustomers; }
-            set { _listCustomers = value; OnPropertyChanged(); }
+            set
+            {
+                _listCustomers = value;
+                OnPropertyChanged();
+            }
         }
 
-        public void AddCustomer(KhachHangVM newCustomer)
+        private bool _isLoading;
+        public bool IsLoading
         {
-            ListCustomers.Add(newCustomer);
+            get { return _isLoading; }
+            set { _isLoading = value; OnPropertyChanged(); }
         }
+
+        public async void LoadDataAsync()
+        {
+            try
+            {
+                IsLoading = true;
+
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var data = await context.Khachhangs.OrderByDescending(x => x.MaKhachHang).ToListAsync();
+                    ListCustomers = new ObservableCollection<KhachHangM>(data);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
         public DanhSachKhachHangVM()
         {
-            _pageModel = new PageModel();
-            ListCustomers = new ObservableCollection<KhachHangVM>();
-            LoadData();
+            LoadDataAsync();
         }
 
-        private void LoadData()
+
+        public void AddCustomer(KhachHangM kh)
         {
-            ListCustomers.Add(new KhachHangVM
+            try
             {
-                CustomerID = 1,
-                CustomerName = "Nguyễn Văn A",
-                CustomerContact = "0901234567",
-                CustomerAddress = "123 Đường Láng, Hà Nội",
-                CustomerGender = "Nam",
-                CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
-            });
+                using (var context = new QuanLyVatTuContext())
+                {
+                    context.Khachhangs.Add(kh);
+                    context.SaveChanges();
+                }
+                LoadDataAsync();
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi thêm: " + ex.Message); }
+        }
 
-            ListCustomers.Add(new KhachHangVM
+        public void DeleteCustomer(KhachHangM kh)
+        {
+            try
             {
-                CustomerID = 2,
-                CustomerName = "Trần Thị B",
-                CustomerContact = "0912345678",
-                CustomerAddress = "456 Cầu Giấy, Hà Nội",
-                CustomerGender = "Nữ",
-                CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
-            });
-
-            ListCustomers.Add(new KhachHangVM
-            {
-                CustomerID = 3,
-                CustomerName = "Lê Văn C",
-                CustomerContact = "0987654321",
-                CustomerAddress = "789 Kim Mã, Hà Nội",
-                CustomerGender = "Khác",
-                CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
-            });
-            ListCustomers.Add(new KhachHangVM
-            {
-                CustomerID = 4,
-                CustomerName = "Trần Văn D",
-                CustomerContact = "0987631231",
-                CustomerAddress = "123 Trần Hưng Đạo, Quận 1, TP HCM",
-                CustomerGender = "Nam",
-                CustomerBirth = DateOnly.ParseExact("25/11/2006", "dd/MM/yyyy", null)
-            });
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var itemToDelete = context.Khachhangs.SingleOrDefault(x => x.MaKhachHang == kh.MaKhachHang);
+                    if (itemToDelete != null)
+                    {
+                        context.Khachhangs.Remove(itemToDelete);
+                        context.SaveChanges();
+                    }
+                }
+                LoadDataAsync(); // Gọi lại hàm này để cập nhật danh sách
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi xóa: " + ex.Message); }
         }
     }
 }
