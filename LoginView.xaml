@@ -7,14 +7,12 @@
         xmlns:vm="clr-namespace:PageNavigation.ViewModel"
         mc:Ignorable="d"    
         Title="Đăng nhập"
-        Height="600" 
-        Width="900"
+        Height="600" Width="900"
         ResizeMode="NoResize"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent">
-
 
     <Window.DataContext>
         <vm:LoginVM/>
@@ -25,146 +23,94 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
-        
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="/Images/Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style (1).png" Stretch="UniformToFill"/>
         </Grid.Background>
-        
-        <Button Name="closebutton"
-                Style="{StaticResource ExitApp}"
-                Grid.Column="1"
-                Grid.Row="1"
-                Height="40"
-                Width="40"
-                Margin="20,30,30,20"
-                BorderThickness="0"
-                Click="closebutton_Click">
+
+        <Button Name="closebutton" Style="{StaticResource ExitApp}" Grid.Column="1" Grid.Row="1" Height="40" Width="40" Margin="20,30,30,20" BorderThickness="0" Click="closebutton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Images/shutdown_mo.png"/>
             </Button.Background>
         </Button>
-        <StackPanel Grid.Column="0"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-            <TextBlock Text="PHẦN MỀM QUẢN "
-                   FontSize="48"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   TextAlignment="Center"
-                   Margin="20, 0, 0, 0"/>
-            <TextBlock Text="LÝ VẬT TƯ"
-       FontSize="48"
-       FontWeight="Bold"
-       Foreground="White"
-       TextAlignment="Center"
-       Margin="20, 0, 0, 0"/>
-            <TextBlock Text="Ứng dụng quản lý – Theo dõi – Báo cáo vật tư"
-                   FontSize="20"
-                   Foreground="#e0e0e0"
-                   TextAlignment="Center"/>
-            
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            
-        
-        <Border Width="380"
-            Background="White"
-            CornerRadius="10"
-            BorderBrush="#e0e0e0"
-            BorderThickness="1"
-            Margin="40, 90, 40, 40"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
 
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="PHẦN MỀM QUẢN " FontSize="48" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="20, 0, 0, 0"/>
+            <TextBlock Text="LÝ VẬT TƯ" FontSize="48" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="20, 0, 0, 0"/>
+            <TextBlock Text="Ứng dụng quản lý – Theo dõi – Báo cáo vật tư" FontSize="20" Foreground="#e0e0e0" TextAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Border Width="380" Background="White" CornerRadius="10" BorderBrush="#e0e0e0" BorderThickness="1" Margin="40, 90, 40, 40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="40">
 
-                    <Image Source="/Images/logo_icon.png" 
-                   Width="100" 
-                   Height="100"
-                   RenderOptions.BitmapScalingMode="HighQuality"
-                   Margin="0,0,0,0"
-                   />
+                    <Image Source="/Images/logo_icon.png" Width="100" Height="100" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,0,0"/>
+                    <TextBlock Text="ĐĂNG NHẬP" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
+                    <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/icon_account.png" Width="20" Height="20" HorizontalAlignment="Center"/>
 
-                <TextBlock Text="ĐĂNG NHẬP"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="Black"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,20"/>
+                            <TextBox x:Name="txtUser"
+                                     TextChanged="Form_Changed"
+                                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
+                                     Grid.Column="1" FontSize="14" Foreground="Gray" BorderThickness="0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
 
-                <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,20">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/icon_password.png" Width="20" Height="20" HorizontalAlignment="Center"/>
 
-                        <Image 
-                           Source="/Images/icon_account.png"        
-                           Width="20"
-                           Height="20"
-                           HorizontalAlignment="Center"/>
+                            <PasswordBox x:Name="MyPasswordBox"
+                                         PasswordChanged="MyPasswordBox_PasswordChanged"
+                                         Grid.Column="1" FontSize="14" BorderThickness="0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
 
-                        <TextBox Grid.Column="1"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
-                             FontSize="14"
-                             Foreground="Gray"
-                             BorderThickness="0"
-                             VerticalAlignment="Center"/>
-                    </Grid>
-                </Border>
+                    <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap"/>
 
-                <Border BorderBrush="#aaa" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Button x:Name="btnLogin"
+                            IsEnabled="False"
+                            Content="ĐĂNG NHẬP"
+                            Click="Button_Click"
+                            IsDefault="True"
+                            Background="#34c759" Foreground="White" FontWeight="Bold" FontSize="14" BorderThickness="0" Margin="0,0,0,20" Padding="12">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Opacity" Value="1"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
-                        <Image 
-                           Source="/Images/icon_password.png"        
-                           Width="20"
-                           Height="20"
-                           HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
 
-                        <PasswordBox Grid.Column="1"
-                                     x:Name="MyPasswordBox"
-                 PasswordChanged="MyPasswordBox_PasswordChanged"
-                 FontSize="14"
-                 BorderThickness="0"
-                 VerticalAlignment="Center"/>
-                    </Grid>
-                </Border>
-
-                <TextBlock Text="{Binding ErrorMessage}"
-                       Foreground="Red"
-                       FontWeight="SemiBold"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,10"
-                       TextWrapping="Wrap"/>
-                <Button Content="ĐĂNG NHẬP"
-                    
-                    Command="{Binding LoginCommand}"
-                    IsDefault="True"
-                    Background="#34c759"
-                    Foreground="White"
-                    FontWeight="Bold"
-                    FontSize="14"
-                    BorderThickness="0"
-                    Margin="0,0,0,20"
-                    Padding="12" Click="Button_Click">
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-
+        <Grid x:Name="LoadingOverlay" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed" Background="#CC000000">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" Width="80" Height="80" BorderThickness="0" Background="Transparent" Foreground="#34c759"/>
+                <TextBlock Text="Đang kết nối hệ thống..." Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,0"/>
             </StackPanel>
-        </Border>
-     </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>

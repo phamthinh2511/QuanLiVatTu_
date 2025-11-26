@@ -1,64 +1,81 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using PageNavigation.ViewModel;
+using PageNavigation.Model;
 
 namespace PageNavigation.View.PopupDetail
 {
-    /// <summary>
-    /// Interaction logic for KhachHangDetail.xaml
-    /// </summary>
     public partial class KhachHangDetail : Window
     {
-        private KhachHangVM _originalCustomer;
-        private KhachHangVM _tempCustomer;
-        public KhachHangDetail(KhachHangVM customer)
+        public KhachHangM CurrentCustomer { get; set; }
+
+        public KhachHangDetail(KhachHangM customerToEdit = null)
         {
             InitializeComponent();
-            _originalCustomer = customer;
-            _tempCustomer = new KhachHangVM
+
+            if (customerToEdit == null)
             {
-                CustomerID = customer.CustomerID,
-                CustomerName = customer.CustomerName,
-                CustomerContact = customer.CustomerContact,
-                CustomerAddress = customer.CustomerAddress,
-                CustomerGender = customer.CustomerGender,
-                CustomerBirth = customer.CustomerBirth,
-                GenderOptions = customer.GenderOptions
-            };
-            this.DataContext = _tempCustomer;
+
+                CurrentCustomer = new KhachHangM();
+                CurrentCustomer.NgaySinh = DateOnly.FromDateTime(DateTime.Now);
+            }
+            else
+            {
+                CurrentCustomer = customerToEdit;
+                if (btnSave != null) btnSave.IsEnabled = true;
+            }
+
+            this.DataContext = CurrentCustomer;
+            CheckValidate();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Form_Changed(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            CheckValidate();
+        }
+
+        private void CheckValidate()
+        {
+            if (txtHoTen == null || txtSDT == null || txtDiaChi == null || cbGioiTinh == null || btnSave == null)
+                return;
+
+            bool coTen = !string.IsNullOrWhiteSpace(txtHoTen.Text);
+            bool coSDT = !string.IsNullOrWhiteSpace(txtSDT.Text);
+
+
+            btnSave.IsEnabled = coTen && coSDT;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            _originalCustomer.CustomerName = _tempCustomer.CustomerName;
-            _originalCustomer.CustomerContact = _tempCustomer.CustomerContact;
-            _originalCustomer.CustomerAddress = _tempCustomer.CustomerAddress;
-            _originalCustomer.CustomerGender = _tempCustomer.CustomerGender;
-            _originalCustomer.CustomerBirth = _tempCustomer.CustomerBirth;
-            this.DialogResult = true;
-            this.Close();
+            try
+            {
+                using (var context = new QuanLyVatTuContext())
+                {
+                    if (CurrentCustomer.MaKhachHang == 0)
+                    {
+
+                        context.Khachhangs.Add(CurrentCustomer);
+                    }
+                    else
+                    {
+                        context.Khachhangs.Update(CurrentCustomer);
+                    }
+
+                    context.SaveChanges();
+                }
+
+                MessageBox.Show("Lưu thành công!");
+                this.DialogResult = true;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
         }
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
-        }
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e) { this.DialogResult = false; this.Close(); }
+        private void Button_Click(object sender, RoutedEventArgs e) { this.Close(); }
     }
 }
