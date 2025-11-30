@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Roboto-Italic-VariableFont_wdth,wght.ttf" />
     <None Remove="Images\background.png" />
     <None Remove="Images\CancelButton.png" />
     <None Remove="Images\Charity Gala Event Fundraiser Non-profit Website in Dark Green Beige Style %281%29.png" />
@@ -59,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.22">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -71,6 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\Roboto-Italic-VariableFont_wdth,wght.ttf" />
     <Resource Include="Fonts\Rubik.ttf" />
     <Resource Include="Fonts\RubikMedium.ttf" />
     <Resource Include="Images\background.png" />

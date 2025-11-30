@@ -5,21 +5,17 @@ using System.Linq;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
 
 namespace PageNavigation.ViewModel
 {
     public class DanhSachKhachHangVM : ViewModelBase
     {
-
         private ObservableCollection<KhachHangM> _listCustomers;
         public ObservableCollection<KhachHangM> ListCustomers
         {
             get { return _listCustomers; }
-            set
-            {
-                _listCustomers = value;
-                OnPropertyChanged();
-            }
+            set { _listCustomers = value; OnPropertyChanged(); }
         }
 
         private bool _isLoading;
@@ -34,18 +30,14 @@ namespace PageNavigation.ViewModel
             try
             {
                 IsLoading = true;
-
                 using (var context = new QuanLyVatTuContext())
                 {
                     var data = await context.KhachHang.OrderByDescending(x => x.MaKhachHang).ToListAsync();
                     ListCustomers = new ObservableCollection<KhachHangM>(data);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
-            finally
-            {
-                IsLoading = false;
-            }
+            catch (Exception ex) { MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message); }
+            finally { IsLoading = false; }
         }
 
         public DanhSachKhachHangVM()
@@ -53,37 +45,64 @@ namespace PageNavigation.ViewModel
             LoadDataAsync();
         }
 
-
-        public void AddCustomer(KhachHangM kh)
+        public async void AddCustomer(KhachHangM kh)
         {
             try
             {
                 using (var context = new QuanLyVatTuContext())
                 {
                     context.KhachHang.Add(kh);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
-                LoadDataAsync();
+
+                if (ListCustomers == null) ListCustomers = new ObservableCollection<KhachHangM>();
+                ListCustomers.Insert(0, kh);
+
+                MessageBox.Show("Thêm khách hàng thành công!");
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi thêm: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm: " + ex.Message);
+            }
         }
 
-        public void DeleteCustomer(KhachHangM kh)
+        public async void DeleteCustomer(KhachHangM kh)
         {
             try
             {
+                var result = MessageBox.Show($"Bạn có chắc muốn xóa khách hàng {kh.HoVaTen}?",
+                                             "Xác nhận xóa",
+                                             MessageBoxButton.YesNo,
+                                             MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.No) return;
+
                 using (var context = new QuanLyVatTuContext())
                 {
-                    var itemToDelete = context.KhachHang.SingleOrDefault(x => x.MaKhachHang == kh.MaKhachHang);
+                    var itemToDelete = await context.KhachHang
+                                            .SingleOrDefaultAsync(x => x.MaKhachHang == kh.MaKhachHang);
+
                     if (itemToDelete != null)
                     {
                         context.KhachHang.Remove(itemToDelete);
-                        context.SaveChanges();
+                        await context.SaveChangesAsync();
                     }
                 }
-                LoadDataAsync(); // Gọi lại hàm này để cập nhật danh sách
+                ListCustomers.Remove(kh);
+
+                MessageBox.Show("Xóa thành công!");
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi xóa: " + ex.Message); }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("DELETE statement conflicted"))
+                {
+                    MessageBox.Show("Không thể xóa khách hàng này vì họ đã có Hóa đơn hoặc Phiếu thu trong hệ thống!", "Cảnh báo ràng buộc dữ liệu");
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi xóa: " + ex.Message);
+                }
+            }
         }
     }
 }

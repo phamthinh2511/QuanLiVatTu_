@@ -1,83 +1,129 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using PageNavigation.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PageNavigation.ViewModel
 {
     public class CT_HoaDonVM : Utilities.ViewModelBase
     {
-		private int _billID;
+		private ObservableCollection<CT_HoaDonM> _billDetail;
 
-		public int BillID
+		public ObservableCollection<CT_HoaDonM> BillDetail
 		{
-			get { return _billID; }
-			set { _billID = value; OnPropertyChanged(); }
+			get { return _billDetail; }
+			set { _billDetail = value; OnPropertyChanged(); }
 		}
-		private int _productID;
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { _isLoading = value; OnPropertyChanged(); }
+        }
 
-		public int ProductID
-		{
-			get { return _productID; }
-			set { _productID = value; OnPropertyChanged(); }
-		}
-		private string _productName;
+        public async void LoadDataAsync()
+        {
+            try
+            {
+                IsLoading = true;
 
-		public string ProductName
-		{
-			get { return _productName; }
-			set { _productName = value; OnPropertyChanged(); }
-		}
-		private int _maxStock;
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var data = await context.CT_HoaDon
+                        .Include(x => x.MaVatTuNavigation)
+                        .Include(x => x.MaDonViTinhNavigation)
+                        .Include(x => x.MaHoaDonNavigation)
+                        .OrderByDescending(x => x.MaHoaDon)
+                        .ToListAsync();
 
-		public int MaxStock
-		{
-			get { return _maxStock; }
-			set { _maxStock = value; OnPropertyChanged(); }
-		}
-
-
-		private int _quantity;
-					
-		public int Quantity
-		{
-			get { return _quantity; }
-			set 
-			{ 
-				if (value > MaxStock)
-				{
-					//nếu số lượng đặt hàng lớn hơn số lượng tồn kho, tự mặc định giá trị về số tồn kho hiện tại
-					_quantity = MaxStock;
-				}
-				else
-				{
-                    _quantity = value;
+                    BillDetail = new ObservableCollection<CT_HoaDonM>(data);
                 }
-				OnPropertyChanged(); 
-				OnPropertyChanged(nameof(TotalAmount)); 
-			}
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
+            finally
+            {
+                IsLoading = false;
+            }
         }
-		private int _countingUnitID;
-
-		public int CountingUnitID
-		{
-			get { return _countingUnitID; }
-			set { _countingUnitID = value; OnPropertyChanged(); }
-		}
-		private decimal _outputPrice;
-
-		public decimal OutputPrice
-		{
-			get { return _outputPrice; }
-			set { _outputPrice = value; OnPropertyChanged(); OnPropertyChanged(nameof(TotalAmount)); }
+        public CT_HoaDonVM()
+        {
+            LoadDataAsync();
         }
-		private decimal _totalAmount;
 
-		public decimal TotalAmount
-		{
-			get { return Quantity * OutputPrice; }
-		}
+        public async void AddDetail(CT_HoaDonM detail)
+        {
+            if (detail.SoLuongBan <= 0) { MessageBox.Show("Số lượng phải > 0"); return; }
+            if (detail.MaVatTu == 0) { MessageBox.Show("Chưa chọn vật tư"); return; }
+            if (BillDetail.Any(x => x.MaVatTu == detail.MaVatTu)) { MessageBox.Show("Vật tư đã tồn tại"); return; }
+            try
+            {
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var vatTu = await context.VatTu.FindAsync(detail.MaVatTu);
 
-	}
+                    if (vatTu == null)
+                    {
+                        MessageBox.Show("Không tìm thấy vật tư trong hệ thống!");
+                        return;
+                    }
+                    int tonHienTai = vatTu.SoLuongTon ?? 0;
+                    if (tonHienTai < detail.SoLuongBan)
+                    {
+                        MessageBox.Show($"Không đủ hàng để bán! Tồn kho hiện tại: {tonHienTai}", "Cảnh báo hết hàng");
+                        return;
+                    }
+                    vatTu.SoLuongTon = tonHienTai - detail.SoLuongBan;
+                    if (detail.ThanhTien == null || detail.ThanhTien == 0)
+                        detail.ThanhTien = detail.SoLuongBan * detail.DonGiaBan;
+                    context.CT_HoaDon.Add(detail);
+                    await context.SaveChangesAsync();
+                    var dvt = await context.DonViTinh.FindAsync(detail.MaDonViTinh);
+                    detail.MaVatTuNavigation = vatTu;
+                    detail.MaDonViTinhNavigation = dvt;
+                }
+
+                BillDetail.Insert(0, detail);
+                MessageBox.Show("Bán hàng thành công! Tồn kho đã giảm.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm: " + ex.Message);
+            }
+        }
+
+        public async void DeleteDetail(CT_HoaDonM detail)
+        {
+            try
+            {
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var itemToDelete = await context.CT_HoaDon
+                        .SingleOrDefaultAsync(x => x.MaHoaDon == detail.MaHoaDon && x.MaVatTu == detail.MaVatTu);
+
+                    if (itemToDelete != null)
+                    {
+                        var vatTu = await context.VatTu.FindAsync(detail.MaVatTu);
+                        if (vatTu != null)
+                        {
+                            vatTu.SoLuongTon = (vatTu.SoLuongTon ?? 0) + itemToDelete.SoLuongBan;
+                        }
+
+                        context.CT_HoaDon.Remove(itemToDelete);
+                        await context.SaveChangesAsync();
+                    }
+                }
+                BillDetail.Remove(detail);
+                MessageBox.Show("Xóa thành công! Đã trả hàng về kho.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa: " + ex.Message);
+            }
+        }
+    }
 }

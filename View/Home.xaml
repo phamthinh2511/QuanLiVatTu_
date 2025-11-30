@@ -4,16 +4,164 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000"
-             Background="Transparent">
-    <Grid Background="#212529">
+             Background="White">
+    <UserControl.Resources>
+        <Style x:Key="UnderlineButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                      HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center" 
+                                      Margin="0,0,0,4"/>
+                            <Border x:Name="Underline" 
+                                    Height="2" 
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Stretch"
+                                    RenderTransformOrigin="0,0.5">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black"/>
+                                </Border.Background>
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="underlineScale" ScaleX="0" ScaleY="1"/>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border x:Name="Indicator" 
+                                    Height="2" 
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Stretch"
+                                    Visibility="Collapsed">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black"/>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
 
-        <Border CornerRadius="0, 20, 20, 0">
+                        <ControlTemplate.Triggers>
+                            <!-- Trigger khi được chọn -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Indicator"
+                                        Property="Visibility"
+                                        Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="Indicator"
+                                        Property="Visibility"
+                                        Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="underlineScale" 
+                                                             Storyboard.TargetProperty="ScaleX" 
+                                                             To="1" 
+                                                             Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
 
-            
-            
-        </Border>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="underlineScale" 
+                                                             Storyboard.TargetProperty="ScaleX" 
+                                                             To="0" 
+                                                             Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseIn"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="15,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </UserControl.Resources>
+    <Border BorderBrush="Transparent"
+            BorderThickness="0" 
+            CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="Tổng Quan"
+                         FontSize="60"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         Margin="20, 0, 0, 0"
+                         FontFamily="/Fonts/#Roboto">
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="20, 0, 0, 0" Height="40">
 
-    </Grid>
+                    <RadioButton Content="Doanh Thu" 
+                                 IsChecked="True" 
+                                 GroupName="NavMenu"
+                                 Style="{StaticResource UnderlineButtonStyle}"/>
+
+                    <RadioButton Content="Nhập Kho" 
+                                 GroupName="NavMenu"
+                                 Style="{StaticResource UnderlineButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" Background="White" Margin="0, 20, 0, 0">
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" 
+                                    DisableAnimations="False"
+                                    AnimationsSpeed="0:0:0.3">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding BarLabels}"/>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis LabelFormatter="{Binding Formatter}"/>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Calendar VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Margin="0, 0, 20, 0">
+                </Calendar>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

@@ -1,91 +1,97 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using PageNavigation.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PageNavigation.ViewModel 
 {
     public class HoaDonVM : Utilities.ViewModelBase
     {
-		public HoaDonVM()
-		{
-			ListDetail = new ObservableCollection<CT_HoaDonVM>();
-			BillDate = DateOnly.FromDateTime(DateTime.Now);
-		}
-		
-		private int _billID;
+		private ObservableCollection<HoaDonM> _billList;
 
-		public int BillID
+		public ObservableCollection<HoaDonM> BillList
 		{
-			get { return _billID; }
-			set { _billID = value; OnPropertyChanged(); }
+			get { return _billList; }
+			set { _billList = value; OnPropertyChanged(); }
 		}
-		private int _customerID;
-
-		public int CustomerID
-		{
-			get { return _customerID; }
-			set { _customerID = value; OnPropertyChanged(); }
-		}
-		private int _staffID;
-
-		public int StaffID
-		{
-			get { return _staffID; }
-			set { _staffID = value; OnPropertyChanged(); }
-		}
-		private DateOnly _billDate;
-
-		public DateOnly BillDate
-		{
-			get { return _billDate; }
-			set { _billDate = value; OnPropertyChanged(); }
-		}
-		private decimal _totalCost;
-
-		public decimal TotalCost
-		{
-			get { return _totalCost; }
-			set { _totalCost = value; OnPropertyChanged(); }
-		}
-        public ObservableCollection<CT_HoaDonVM> ListDetail{ get; set; }
-		public void UpdateTotalCost()
-		{
-			TotalCost = ListDetail.Sum(item => item.TotalAmount);
-		}
-        public void AddDetail(int productID, string productName, int stockQuantity, decimal outputPrice)
+        private bool _isLoading;
+        public bool IsLoading
         {
-			var existingItem = ListDetail.FirstOrDefault(x => x.ProductID == productID);
-			if (existingItem != null)
-			{
-				if (existingItem.Quantity + 1 <= existingItem.MaxStock)
-				{
-					existingItem.Quantity++;
-                }			
-			}
-			else
-			{
-				var newItem = new CT_HoaDonVM
-				{
-					ProductID = productID,
-					ProductName = productName,
-					OutputPrice = outputPrice,
-					MaxStock = stockQuantity,
-					Quantity = 1,
-					BillID = this.BillID
-				};
-                newItem.PropertyChanged += (sender, args) =>
+            get { return _isLoading; }
+            set { _isLoading = value; OnPropertyChanged(); }
+        }
+
+        public async void LoadDataAsync()
+        {
+            try
+            {
+                IsLoading = true;
+
+                using (var context = new QuanLyVatTuContext())
                 {
-                    if (args.PropertyName == nameof(CT_HoaDonVM.TotalAmount))
+                    var data = await context.HoaDon.OrderByDescending(x => x.MaHoaDon).ToListAsync();
+                    BillList = new ObservableCollection<HoaDonM>(data);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        public HoaDonVM()
+        {
+            LoadDataAsync();
+        }
+        public async void AddDetail(HoaDonM bill)
+        {
+            try
+            {
+                using (var context = new QuanLyVatTuContext())
+                {
+                    context.HoaDon.Add(bill);
+                    await context.SaveChangesAsync();
+                }
+                BillList.Insert(0, bill);
+                MessageBox.Show("Thêm thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm: " + ex.Message);
+            }
+        }
+        public async void DeleteBill(HoaDonM bill)
+        {
+            try
+            {
+                using (var context = new QuanLyVatTuContext())
+                {
+                    var itemToDelete = await context.HoaDon
+                        .Include(h => h.CT_HoaDon)
+                        .SingleOrDefaultAsync(x => x.MaHoaDon == bill.MaHoaDon);
+
+                    if (itemToDelete != null)
                     {
-                        UpdateTotalCost();
+                        if (itemToDelete.CT_HoaDon != null && itemToDelete.CT_HoaDon.Any())
+                        {
+                            context.CT_HoaDon.RemoveRange(itemToDelete.CT_HoaDon);
+                        }
+                        context.HoaDon.Remove(itemToDelete);
+                        await context.SaveChangesAsync();
                     }
-                };
-                ListDetail.Add(newItem);
-            } 
-            UpdateTotalCost();
+                }
+                BillList.Remove(bill);
+                MessageBox.Show("Xóa thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa: " + ex.InnerException?.Message ?? ex.Message);
+            }
         }
     }
 }
