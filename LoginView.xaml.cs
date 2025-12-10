@@ -1,4 +1,5 @@
-﻿using PageNavigation.ViewModel;
+﻿using PageNavigation.Utilities;
+using PageNavigation.ViewModel;
 using System;
 using System.Linq;
 using System.Threading;
@@ -33,7 +34,7 @@ namespace PageNavigation
             }
         }
 
-        private void CheckValidate(LoginVM vm = null)
+        private void CheckValidate(LoginVM? vm = null)
         {
             if (vm == null) vm = this.DataContext as LoginVM;
             if (vm == null || btnLogin == null) return;
@@ -64,7 +65,7 @@ namespace PageNavigation
             closebutton.IsEnabled = false;
             btnLogin.IsEnabled = false;
 
-            NavigationVM mainVM = null;
+            NavigationVM? mainVM = null;
             string errorMessage = "";
 
             // B. CHẠY NGẦM
@@ -72,31 +73,40 @@ namespace PageNavigation
             {
                 try
                 {
-                    // C. KIỂM TRA TÀI KHOẢN
 
-                    // Trường hợp 1: Admin mặc định (Vào thẳng)
-                    if (inputUser == "admin" && inputPass == "123")
+
+                    using (var context = new PageNavigation.Model.QuanLyVatTuContext())
                     {
-                        mainVM = new NavigationVM(); // Tải dữ liệu luôn
-                    }
-                    // Trường hợp 2: Nhân viên (Check SQL)
-                    else
-                    {
-                        using (var context = new PageNavigation.Model.QuanLyVatTuContext())
+                        var user = context.NhanVien.FirstOrDefault(x => x.Username == inputUser);
+
+                        if (user != null)
                         {
-                            var user = context.NhanVien.FirstOrDefault(x => x.Username == inputUser && x.Password == inputPass);
 
-                            if (user == null)
+                            bool dungPass = (user.Password == inputPass);
+
+                            bool dungTen = user.Username.Equals(inputUser, StringComparison.Ordinal);
+
+                            if (dungPass && dungTen)
                             {
-                                throw new Exception("Sai tên đăng nhập hoặc mật khẩu!");
+                                mainVM = new NavigationVM(); // Đúng hết -> Vào Main
+                            }
+                            else
+                            {
+                                throw new Exception("Sai tên đăng nhập hoặc mật khẩu !");
                             }
 
-                            // Đúng nhân viên -> Tải dữ liệu
-                            mainVM = new NavigationVM();
-                        }
-                    }
 
-                    // Ngủ xíu cho hiệu ứng đẹp
+
+                        }
+                        else
+                        {
+                            throw new Exception("Sai tên đăng nhập hoặc mật khẩu !");
+                        }
+
+
+                    }
+                    
+
                     Thread.Sleep(1000);
                 }
                 catch (Exception ex)
