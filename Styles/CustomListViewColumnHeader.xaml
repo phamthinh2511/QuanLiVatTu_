@@ -4,9 +4,9 @@
         <Setter Property="Background" Value="#384247"/>
         <Setter Property="Foreground" Value="#0bcdff"/>
         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Padding" Value="10,12"/>
 
         <Setter Property="Template">
