@@ -4,6 +4,7 @@
     <Style x:Key="Page_Style"
            TargetType="{x:Type UserControl}">
 
+        
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform X="0"

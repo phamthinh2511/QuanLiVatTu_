@@ -6,6 +6,9 @@
         xmlns:vm="clr-namespace:PageNavigation.ViewModel"
         xmlns:Menu="clr-namespace:PageNavigation.Utilities"
         mc:Ignorable="d"
+        xmlns:util="clr-namespace:PageNavigation.Utilities"
+        
+        util:WindowHelper.EnableDrag="True"
         Title="Quản lý vật tư" 
         Height="800"
         Width="1280"
@@ -87,7 +90,8 @@
         <vm:NavigationVM/>
     </Window.DataContext>
     <Border CornerRadius="20"
-            BorderThickness="0">
+            BorderThickness="0"
+            Background="Transparent">
         <Grid>
             <Grid Background="Black">
                 <Border CornerRadius="20"
