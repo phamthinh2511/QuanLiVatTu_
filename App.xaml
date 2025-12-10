@@ -5,6 +5,7 @@
              StartupUri="LoginView.xaml">
     <Application.Resources>
         
+		
         <ResourceDictionary>
             
             <ResourceDictionary.MergedDictionaries>

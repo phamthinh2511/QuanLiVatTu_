@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="800" d:DesignWidth="1215"
              Style="{StaticResource Page_Style}">
 
     <UserControl.Resources>
@@ -26,13 +26,13 @@
                        Margin="20, 0, 0, 0"/>
         </Grid>
 
-        <Grid Grid.Row="1" Width="980">
+        <Grid Grid.Row="1" Width="1215">
             <ListView x:Name="CustomerListView" 
                       ItemsSource="{Binding ListCustomers}"
                       FontFamily="/Fonts/#Fz Rubik Med"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Center"
-                      Width="980"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      Width="1215"
                       FontSize="25"
                       Foreground="#CED565"
                       Background="Transparent"
@@ -42,7 +42,7 @@
                       AlternationCount="2">
 
                 <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}"  >
 
                         <GridViewColumn Header="ID" Width="70">
                             <GridViewColumn.CellTemplate>
@@ -52,7 +52,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Họ và Tên" Width="220">
+                        <GridViewColumn Header="Họ và Tên" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding HoVaTen}" 
@@ -63,21 +63,10 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="SĐT" Width="160">
+                        <GridViewColumn Header="Ngày Sinh" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SoDienThoai}" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Địa Chỉ" Width="220">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DiaChi}" 
-                               TextTrimming="CharacterEllipsis" 
-                               ToolTip="{Binding DiaChi}"
-                               VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -90,10 +79,21 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Ngày Sinh" Width="170">
+                        <GridViewColumn Header="Địa Chỉ" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                    <TextBlock Text="{Binding DiaChi}" 
+                                   TextTrimming="CharacterEllipsis" 
+                                   ToolTip="{Binding DiaChi}"
+                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="SĐT" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SoDienThoai}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -105,9 +105,11 @@
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="5"/>
                         <Setter Property="Margin" Value="0,2,0,2"/>
-                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Padding" Value="5"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="Height" Value="40" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
