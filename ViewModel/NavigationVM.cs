@@ -75,5 +75,6 @@ namespace PageNavigation.ViewModel
 
             CurrentView = _homeVM;
         }
+
     }
 }
