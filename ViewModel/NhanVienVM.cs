@@ -1,109 +1,70 @@
-﻿using PageNavigation.Model;
-using PageNavigation.Utilities;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using System;
+using System.Text;
+using System.Threading.Tasks;
+using PageNavigation.Model;
 
 namespace PageNavigation.ViewModel
 {
-    public class NhanVienVM : ViewModelBase
+    public class NhanVienVM : Utilities.ViewModelBase
     {
-        // 1. Khai báo danh sách Nhân viên (Binding vào ListView bên XAML)
-        // Lưu ý: Class NhanVien phải khớp với tên class trong Model của bạn
-        private ObservableCollection<NhanVienM> _listEmployees;
-        public ObservableCollection<NhanVienM> ListEmployees
-        {
-            get { return _listEmployees; }
-            set
-            {
-                _listEmployees = value;
-                OnPropertyChanged();
-            }
-        }
+		private int _staffID;
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set { _isLoading = value; OnPropertyChanged(); }
-        }
+		public int StaffID
+		{
+			get { return _staffID; }
+			set { _staffID = value; OnPropertyChanged(); }
+		}
+		private string _staffName;
 
-        // Constructor
-        public NhanVienVM()
-        {
-            LoadDataAsync();
-        }
+		public string StaffName
+		{
+			get { return _staffName; }
+			set { _staffName = value; OnPropertyChanged(); }
+		}
+		private DateOnly _staffBirth;
 
-        // 2. Hàm tải dữ liệu từ CSDL
-        public async void LoadDataAsync()
-        {
-            try
-            {
-                IsLoading = true;
+		public DateOnly StaffBirth
+		{
+			get { return _staffBirth; }
+			set { _staffBirth = value; OnPropertyChanged(); }
+		}
+		private string _staffContact;
 
-                using (var context = new QuanLyVatTuContext())
-                {
-                    // Giả định bảng trong CSDL tên là NhanVien
-                    // Sắp xếp theo ID giảm dần để nhân viên mới nhất lên đầu
-                    var data = await context.Nhanviens.OrderByDescending(x => x.MaNhanVien).ToListAsync();
+		public string StaffContact
+		{
+			get { return _staffContact; }
+			set { _staffContact = value; OnPropertyChanged(); }
+		}
+		private string _staffPosition;
 
-                    ListEmployees = new ObservableCollection<NhanVienM>(data);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
+		public string StaffPosition
+		{
+			get { return _staffPosition; }
+			set { _staffPosition = value; OnPropertyChanged(); }
+		}
+		private string _staffUsername;
 
-        // 3. Hàm Thêm Nhân Viên
-        public void AddNhanVien(NhanVienM nv)
-        {
-            try
-            {
-                using (var context = new QuanLyVatTuContext())
-                {
-                    context.Nhanviens.Add(nv);
-                    context.SaveChanges();
-                }
-                // Tải lại dữ liệu sau khi thêm
-                LoadDataAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi thêm: " + ex.Message);
-            }
-        }
+		public string StaffUsername
+		{
+			get { return _staffUsername; }
+			set { _staffUsername = value; OnPropertyChanged(); }
+		}
+		private string _staffPassword;
 
-        // 4. Hàm Xóa Nhân Viên
-        public void DeleteNhanVien(NhanVienM nv)
-        {
-            try
-            {
-                using (var context = new QuanLyVatTuContext())
-                {
-                    // Tìm nhân viên trong DB dựa trên ID
-                    var itemToDelete = context.Nhanviens.SingleOrDefault(x => x.MaNhanVien == nv.MaNhanVien);
+		public string StaffPassword
+		{
+			get { return _staffPassword; }
+			set { _staffPassword = value; OnPropertyChanged(); }
+		}
+		private DateOnly _staffStarted;
 
-                    if (itemToDelete != null)
-                    {
-                        context.Nhanviens.Remove(itemToDelete);
-                        context.SaveChanges();
-                    }
-                }
-                // Tải lại dữ liệu sau khi xóa
-                LoadDataAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi xóa: " + ex.Message);
-            }
-        }
-    }
+		public DateOnly StaffStarted
+		{
+			get { return _staffStarted; }
+			set { _staffStarted = value; OnPropertyChanged(); }
+		}
+
+	}
 }

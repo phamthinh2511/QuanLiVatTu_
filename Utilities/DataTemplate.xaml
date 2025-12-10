@@ -8,7 +8,9 @@
     <DataTemplate DataType="{x:Type vm:HomeVM}">
         <view:Home/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type vm:NhanVienVM}">
+        <view:NhanVien/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:LoaiVatTuVM}">
         <view:LoaiVatTu/>
     </DataTemplate>
