@@ -10,6 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000"
              Background="#F5F5F5">
+    
     <Grid>
         <StackPanel Orientation="Horizontal">
             <UserControl:DashBoardButton HorizontalAlignment="Left"
@@ -34,9 +35,89 @@
         <Grid Width="450" Height="500" Margin="30"
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
-            <ListView>
-                
-            </ListView>
+            <Border CornerRadius="20" 
+                    Background="#FFFFFF" 
+                    BorderBrush="Transparent" 
+                    BorderThickness="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Border BorderBrush="LightGray"
+                                BorderThickness="0, 0, 0 ,1">
+                            <TextBlock Text="Vật Tư"
+                                       FontFamily="/Fonts/#Fz Rubik Mid"
+                                       FontWeight="Bold"
+                                       Foreground="DarkBlue"
+                                       FontSize="30"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="20, 0, 0, 0">
+
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Border BorderBrush="LightGray"
+                                BorderThickness="0, 0, 0 ,1">
+                            <ListView x:Name="lvSanPham" Margin="5" ItemsSource="{Binding ListProduct}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Images/product_page.png" 
+                                                   Width="50"
+                                                   Stretch="Uniform"/>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding TenSanPham}" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding GiaTien}" Foreground="Red"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Button BorderBrush="Transparent"
+                            HorizontalContentAlignment="Left">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="0, 0, 20, 20">
+                                        <ContentPresenter HorizontalAlignment="Left" 
+                                                      VerticalAlignment="Center" 
+                                                      Margin="20,0,0,0"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="DarkGray"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F5F5F5"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Content>
+                                <TextBlock x:Name="xem"
+                                       Text="Xem >"
+                                       FontSize="20"
+                                       FontFamily="/Fonts/#Fz Rubik Med"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 
