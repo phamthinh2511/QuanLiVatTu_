@@ -9,7 +9,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1215"
-             Background="#F5F5F5">
+             Background="#212529">
     
     <Grid>
         <StackPanel Orientation="Horizontal">
@@ -36,7 +36,7 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
             <Border CornerRadius="20" 
-                    Background="#FFFFFF" 
+                    Background="#1E1E1E" 
                     BorderBrush="Transparent" 
                     BorderThickness="0">
                 <Grid>
@@ -51,7 +51,7 @@
                             <TextBlock Text="Vật Tư"
                                        FontFamily="/Fonts/#Fz Rubik Mid"
                                        FontWeight="Bold"
-                                       Foreground="DarkBlue"
+                                       Foreground="Blue"
                                        FontSize="30"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
@@ -63,16 +63,65 @@
                     <Grid Grid.Row="1">
                         <Border BorderBrush="LightGray"
                                 BorderThickness="0, 0, 0 ,1">
-                            <ListView x:Name="lvSanPham" Margin="5" ItemsSource="{Binding ListProduct}">
+                            <ListView x:Name="lvSanPham" 
+                                      ItemsSource="{Binding ListProducts}"
+                                      Background="Transparent"
+                                      AlternationCount="2">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <Border x:Name="bd" 
+                                                            Background="#2D2D2D"
+                                                            BorderThickness="0"
+                                                            CornerRadius="0" >
+                                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                    </Border>
+
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                            <Setter TargetName="bd" Property="Background" Value="#17191a"/>
+                                                        </Trigger>
+                                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                            <Setter TargetName="bd" Property="Background" Value="#3E444A"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="#3D3D3D"/>
+                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                        </Trigger>
+
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="Black"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" Margin="5">
                                             <Image Source="/Images/product_page.png" 
-                                                   Width="50"
-                                                   Stretch="Uniform"/>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding TenSanPham}" FontWeight="Bold"/>
-                                                <TextBlock Text="{Binding GiaTien}" Foreground="Red"/>
+                                                   Width="50" Height="50"
+                                                   Stretch="Uniform"
+                                                   Margin="0,0,10,0"/>
+
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding TenVatTu}" 
+                                                           FontWeight="Bold"
+                                                           FontSize="14"/>
+
+                                                <TextBlock Text="{Binding SoLuongTon, StringFormat='Tồn kho: {0}'}" 
+                                                           Foreground="Red"
+                                                           Margin="0,5,0,0"/>
                                             </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
@@ -101,8 +150,8 @@
                                     <Setter Property="Foreground" Value="DarkGray"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#F5F5F5"/>
-                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Background" Value="#121212"/>
+                                            <Setter Property="Foreground" Value="#F5F5F5"/>
                                             <Setter Property="Cursor" Value="Hand"/>
                                         </Trigger>
                                     </Style.Triggers>

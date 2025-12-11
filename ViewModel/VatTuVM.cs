@@ -46,7 +46,7 @@ namespace PageNavigation.ViewModel
             LoadDataAsync();
         }
 
-        public async void AddCustomer(VatTuM vt)
+        public async void AddProduct(VatTuM vt)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace PageNavigation.ViewModel
             }
         }
 
-        public async void DeleteCustomer(VatTuM vt)
+        public async void DeleteProduct(VatTuM vt)
         {
             try
             {
