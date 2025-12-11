@@ -14,6 +14,18 @@
     <Compile Update="View\Home.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\BaoCaoDetail\ChiTiet.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\BaoCaoDetail\PopupChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\BaoCaoDetail\TongQuan.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HomeUserControl\DashBoardButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KhachHang.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,5 +1,4 @@
-﻿using PageNavigation.View.BaoCaoDetail;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PageNavigation.View
+namespace PageNavigation.View.BaoCaoDetail
 {
     /// <summary>
-    /// Interaction logic for BaoCao.xaml
+    /// Interaction logic for PopupChart.xaml
     /// </summary>
-    public partial class BaoCao : UserControl
+    public partial class PopupChart : Window
     {
-        public BaoCao()
+        public PopupChart()
         {
             InitializeComponent();
-            this.DataContext = new BaoCaoNavigation();
         }
     }
 }
