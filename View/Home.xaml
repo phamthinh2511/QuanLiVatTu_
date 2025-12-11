@@ -8,7 +8,7 @@
              xmlns:UserControl="clr-namespace:PageNavigation.View.HomeUserControl"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="800" d:DesignWidth="1215"
              Background="#F5F5F5">
     
     <Grid>
@@ -18,19 +18,19 @@
                                      x:Name="DoanhThuButton"
                                      Width="300"
                                      Height="150"
-                                     Margin="33, 70" Loaded="DoanhThuButton_Loaded"/>
+                                     Margin="52.5, 70" Loaded="DoanhThuButton_Loaded"/>
             <UserControl:DashBoardButton HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      x:Name="DonHangButton"
-                                     Width="250"
+                                     Width="300"
                                      Height="150"
-                                     Margin="33, 70" Loaded="DonHangButton_Loaded"/>
+                                     Margin="52.5, 70" Loaded="DonHangButton_Loaded"/>
             <UserControl:DashBoardButton HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      x:Name="DonHangChuaXuLiButton"
-                                     Width="250"
+                                     Width="300"
                                      Height="150"
-                                     Margin="33, 70" Loaded="DonHangChuaXuLiButton_Loaded"/>
+                                     Margin="52.5, 70" Loaded="DonHangChuaXuLiButton_Loaded"/>
         </StackPanel>
         <Grid Width="450" Height="500" Margin="30"
               HorizontalAlignment="Left"

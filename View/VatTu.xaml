@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600" 
-             d:DesignWidth="622"
+             d:DesignWidth="1215"
              Style="{StaticResource Page_Style}">
 
     <UserControl.DataContext>
