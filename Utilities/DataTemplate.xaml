@@ -23,6 +23,9 @@
     <DataTemplate DataType="{x:Type vm:HoaDonVM}">
         <view:HoaDon/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PhieuNhapVatTuVM}">
+        <view:PhieuNhapVatTu/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:PhieuThuTienVM}">
         <view:PhieuThuTien/>
     </DataTemplate>

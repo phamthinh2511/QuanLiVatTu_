@@ -65,6 +65,10 @@ namespace PageNavigation
                     if (vm.HoaDonCommand != null && vm.HoaDonCommand.CanExecute(null))
                         vm.HoaDonCommand.Execute(null);
                     break;
+                case "PhieuNhapVatTu":
+                    if (vm.PhieuNhapVatTuCommand != null && vm.PhieuNhapVatTuCommand.CanExecute(null))
+                        vm.PhieuNhapVatTuCommand.Execute(null);
+                    break;
                 case "PhieuThuTien":
                     if (vm.PhieuThuTienCommand != null && vm.PhieuThuTienCommand.CanExecute(null))
                         vm.PhieuThuTienCommand.Execute(null);

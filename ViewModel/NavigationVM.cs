@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PageNavigation.Utilities;
 using System.Windows.Input;
+using PageNavigation.Model;
 
 namespace PageNavigation.ViewModel
 {
@@ -24,6 +25,7 @@ namespace PageNavigation.ViewModel
         private DanhSachKhachHangVM _danhSachKhachHangVM;
         private VatTuVM _vatTuVM;
         private HoaDonVM _hoaDonVM;
+        private PhieuNhapVatTuVM _phieuNhapVatTuVM;
         private PhieuThuTienVM _phieuThuTienVM;
         private TraCuuVM _traCuuVM;
         private BaoCaoVM _baoCaoVM;
@@ -35,6 +37,7 @@ namespace PageNavigation.ViewModel
         public ICommand VatTuCommand { get; set; }
         public ICommand TraCuuCommand { get; set; }
         public ICommand HoaDonCommand { get; set; }
+        public ICommand PhieuNhapVatTuCommand { get; set; }
         public ICommand PhieuThuTienCommand { get; set; }
         public ICommand BaoCaoCommand { get; set; }
 
@@ -46,6 +49,7 @@ namespace PageNavigation.ViewModel
 
         private void VatTu(object obj) => CurrentView = _vatTuVM;
         private void HoaDon(object obj) => CurrentView = _hoaDonVM;
+        private void PhieuNhapVatTu(object obj) => CurrentView = _phieuNhapVatTuVM;
         private void PhieuThuTien(object obj) => CurrentView = _phieuThuTienVM;
         private void TraCuu(object obj) => CurrentView = _traCuuVM;
         private void BaoCao(object obj) => CurrentView = _baoCaoVM;
@@ -58,6 +62,7 @@ namespace PageNavigation.ViewModel
             KhachHangCommand = new RelayCommand(KhachHang);
             VatTuCommand = new RelayCommand(VatTu);
             HoaDonCommand = new RelayCommand(HoaDon);
+            PhieuNhapVatTuCommand = new RelayCommand(PhieuNhapVatTu);
             PhieuThuTienCommand = new RelayCommand(PhieuThuTien);
             BaoCaoCommand = new RelayCommand(BaoCao);
             TraCuuCommand = new RelayCommand(TraCuu);
@@ -69,6 +74,7 @@ namespace PageNavigation.ViewModel
             _danhSachKhachHangVM = new DanhSachKhachHangVM();
             _vatTuVM = new VatTuVM();
             _hoaDonVM = new HoaDonVM();
+            _phieuNhapVatTuVM = new PhieuNhapVatTuVM();
             _phieuThuTienVM = new PhieuThuTienVM();
             _traCuuVM = new TraCuuVM();
             _baoCaoVM = new BaoCaoVM();

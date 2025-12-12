@@ -280,13 +280,23 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
+                            <ListViewItem Tag="PhieuNhapVatTu">
+                                <StackPanel Orientation="Horizontal" Width="230">
+                                    <Image Source="/Images/icons8-to-do-list-96.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
+                                    <TextBlock Text="Phiếu Nhập Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip Content="Phiếu Nhập Vật tư" Style="{StaticResource tt_Style}"/>
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+
                             <ListViewItem Tag="PhieuThuTien">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_transaction.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Phiếu Thu" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
+                                    <TextBlock Text="Phiếu Thu Tiền" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
                                 </StackPanel>
                                 <ListViewItem.ToolTip>
-                                    <ToolTip Content="Phiếu Thu" Style="{StaticResource tt_Style}"/>
+                                    <ToolTip Content="Phiếu Thu Tiền" Style="{StaticResource tt_Style}"/>
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 

@@ -29,6 +29,7 @@
     <None Remove="Images\icons8-setting-64.png" />
     <None Remove="Images\icons8-staff-50.png" />
     <None Remove="Images\icons8-staff-96.png" />
+    <None Remove="Images\icons8-to-do-list-96.png" />
     <None Remove="Images\icons8-truck-64 %281%29.png" />
     <None Remove="Images\icons8-truck-64.png" />
     <None Remove="Images\icons8-user-50.png" />
@@ -94,6 +95,7 @@
     <Resource Include="Images\icons8-setting-64.png" />
     <Resource Include="Images\icons8-staff-50.png" />
     <Resource Include="Images\icons8-staff-96.png" />
+    <Resource Include="Images\icons8-to-do-list-96.png" />
     <Resource Include="Images\icons8-truck-64 (1).png" />
     <Resource Include="Images\icons8-truck-64.png" />
     <Resource Include="Images\icons8-user-50.png" />

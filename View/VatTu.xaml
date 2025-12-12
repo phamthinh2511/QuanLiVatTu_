@@ -5,28 +5,230 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="600" 
-             d:DesignWidth="622"
+             d:DesignHeight="800" d:DesignWidth="1215"
              Style="{StaticResource Page_Style}">
 
-    <UserControl.DataContext>
-        <vm:VatTuVM/>
-    </UserControl.DataContext>
-    
-    <Grid>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
 
-        <Border CornerRadius="0,20, 20, 0">
-            <Border.Background>
-                <ImageBrush ImageSource="/Images/icons8-construction-materials-64.png"
-                            Stretch="None"/>
-            </Border.Background>
-        </Border>
+    <Grid Background="#212529">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="590"/>
+            <RowDefinition Height="110"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding TinhTrangVatTu}"
-                   Foreground="#F25E68"
-                   FontSize="12"
-                   HorizontalAlignment="Left"
-                   FontFamily="Century Gothic"
-                   Margin="276, 300, 0, 0"/>
+        <Grid>
+            <TextBlock Style="{StaticResource Font_Style}"
+                       FontSize="50"
+                       Text="Vật Tư"
+                       Margin="20, 0, 0, 0"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Width="1215">
+            <ListView x:Name="VatTuListView" 
+                      ItemsSource="{Binding DanhSachVatTu}"
+                      FontFamily="/Fonts/#Fz Rubik Med"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      Width="1215"
+                      FontSize="25"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      AlternationCount="2">
+
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
+
+                        <GridViewColumn Header="Mã vật tư" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MaVatTu}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tên vật tư" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TenVatTu}" 
+                                               TextTrimming="CharacterEllipsis" 
+                                               ToolTip="{Binding TenVatTu}"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Loại vật tư" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MaLoaiNavigation.TenLoai}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Mô tả" Width="450">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MoTa}" 
+                                               TextTrimming="CharacterEllipsis" 
+                                               ToolTip="{Binding MoTa}"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="0,2,0,2"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                        <GridViewRowPresenter Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#17191a"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#3E444A"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#CED565"/>
+                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Button Click="ButtonCreate_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="250"/>
+                        <Setter Property="Height" Value="70"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="20"/>
+                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Content" Value="Tạo Mới"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
+                        <Setter Property="FontSize" Value="40"/>
+                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Click="ButtonEdit_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="250"/>
+                        <Setter Property="Height" Value="70"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="0,0,300,0"/>
+                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Content" Value="Xem/Sửa"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
+                        <Setter Property="FontSize" Value="40"/>
+                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Click="ButtonDelete_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="250"/>
+                        <Setter Property="Height" Value="70"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="0, 0, 580, 0"/>
+                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Content" Value="Xóa"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
+                        <Setter Property="FontSize" Value="40"/>
+                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+
     </Grid>
 </UserControl>
