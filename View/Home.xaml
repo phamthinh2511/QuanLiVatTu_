@@ -10,29 +10,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1215"
              Background="#212529">
-    
+
     <Grid>
         <StackPanel Orientation="Horizontal">
             <UserControl:DashBoardButton HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     x:Name="DoanhThuButton"
-                                     Width="300"
-                                     Height="150"
-                                     Margin="52.5, 70" Loaded="DoanhThuButton_Loaded"/>
-            <UserControl:DashBoardButton HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     x:Name="DonHangButton"
-                                     Width="300"
-                                     Height="150"
-                                     Margin="52.5, 70" Loaded="DonHangButton_Loaded"/>
-            <UserControl:DashBoardButton HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     x:Name="DonHangChuaXuLiButton"
-                                     Width="300"
-                                     Height="150"
-                                     Margin="52.5, 70" Loaded="DonHangChuaXuLiButton_Loaded"/>
+                                         VerticalAlignment="Top"
+                                         x:Name="DoanhThuButton"
+                                         Width="300"
+                                         Height="150"
+                                         Margin="55, 70" Loaded="DoanhThuButton_Loaded"/>
         </StackPanel>
-        <Grid Width="450" Height="500" Margin="30"
+        <Grid Width="330" Height="500" Margin="30"
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
             <Border CornerRadius="20" 
@@ -117,6 +105,7 @@
                                             <StackPanel VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding TenVatTu}" 
                                                            FontWeight="Bold"
+                                                           Foreground="Snow"
                                                            FontSize="14"/>
 
                                                 <TextBlock Text="{Binding SoLuongTon, StringFormat='Tồn kho: {0}'}" 
@@ -131,7 +120,8 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <Button BorderBrush="Transparent"
-                            HorizontalContentAlignment="Left">
+                                HorizontalContentAlignment="Left"
+                                Command="{Binding DataContext.VatTuCommand, RelativeSource={RelativeSource AncestorType=Window}}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}" 
@@ -167,6 +157,20 @@
                     </Grid>
                 </Grid>
             </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Height="700"
+              Width="770"
+              Margin="0,0,30,30">
+            <Border BorderThickness="0"
+                    CornerRadius="20"
+                    Background="Black">
+                <lvc:CartesianChart>
+
+                </lvc:CartesianChart>
+            </Border>
+
         </Grid>
     </Grid>
 
