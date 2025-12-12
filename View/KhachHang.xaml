@@ -252,7 +252,7 @@
                 </Button.Style>
             </Button>
         </Grid>
-
+        <!--
         <Grid Grid.Row="0" Grid.RowSpan="3" 
               Background="#AA000000" 
               Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}">
@@ -263,6 +263,7 @@
                 <TextBlock Text="Đang tải dữ liệu..." Foreground="White" FontSize="25" Margin="0,20,0,0" HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
+        -->
 
     </Grid>
 </UserControl>

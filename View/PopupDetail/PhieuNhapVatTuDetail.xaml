@@ -1,0 +1,122 @@
+﻿<Window x:Class="PageNavigation.View.PopupDetail.PhieuNhapVatTuDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="PhieuNhapVatTuDetail" Height="500" Width="660"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="Transparent">
+
+    <Grid Background="Transparent">
+        <Border CornerRadius="20" Background="#010c1f"/>
+
+        <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0">
+            <Border Background="#2d3135" CornerRadius="10"/>
+            <Button Style="{StaticResource ExitApp}" Width="60" Height="60" Click="Button_Close"/>
+        </Grid>
+
+        <Grid Height="60" Width="520" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0">
+            <Border Background="#2d3135" CornerRadius="10"/>
+            <TextBlock Text="Phiếu nhập vật tư:" Foreground="#fff" Style="{StaticResource Text_Style}"/>
+        </Grid>
+
+        <StackPanel Margin="20,100,20,100" Orientation="Vertical" VerticalAlignment="Top">
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+
+                <StackPanel Width="300">
+                    <TextBlock Text="Ngày nhập:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+                        <DatePicker SelectedDate="{Binding CurrentPhieuNhap.NgayNhapPhieu}"
+                                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                    Foreground="#CED565" Background="Transparent" BorderThickness="0" FontSize="20"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Width="300" Margin="20,0,0,0">
+                    <TextBlock Text="Nhân viên nhập:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+                        <ComboBox ItemsSource="{Binding DanhSachNhanVien}"
+                                  SelectedValue="{Binding CurrentChiTiet.MaNhanVien}"
+                                  SelectedValuePath="MaNhanVien"
+                                  DisplayMemberPath="HoTen"
+                                  Style="{StaticResource ComboBoxStyle}"
+                                  Foreground="#CED565" FontSize="20" Background="Transparent"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+
+                <StackPanel Width="300">
+                    <TextBlock Text="Tên vật tư:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+                        <ComboBox ItemsSource="{Binding DanhSachVatTu}"
+                                  SelectedValue="{Binding CurrentChiTiet.MaVatTu}"
+                                  SelectedValuePath="MaVatTu"
+                                  DisplayMemberPath="TenVatTu"
+                                  Style="{StaticResource ComboBoxStyle}"
+                                  Foreground="#CED565" FontSize="20" Background="Transparent"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Width="300" Margin="20,0,0,0">
+                    <TextBlock Text="Số lượng:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+                        <TextBox Text="{Binding CurrentChiTiet.SoLuong}"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Foreground="#CED565" Background="Transparent"
+                                 FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+
+                <StackPanel Width="300">
+                    <TextBlock Text="Đơn giá nhập:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+                        <TextBox Text="{Binding CurrentChiTiet.DonGiaNhap}"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Foreground="#CED565" Background="Transparent"
+                                 FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Width="300" Margin="20,0,0,0">
+                    <TextBlock Text="Đơn vị tính:" Foreground="#0bcdff" Style="{StaticResource Text_Style}" FontSize="18"/>
+                    <Border Height="50" Background="#2d3135" CornerRadius="10">
+
+                        <ComboBox 
+            ItemsSource="{Binding DanhSachDonViTinh}"
+            
+            SelectedValue="{Binding CurrentChiTiet.MaDonViTinh}"
+            SelectedValuePath="MaDonViTinh"
+            DisplayMemberPath="TenDonViTinh"
+            
+            Style="{StaticResource ComboBoxStyle}"
+            Foreground="#CED565" 
+            FontSize="20" 
+            Background="Transparent"/>
+
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+
+        <Grid Height="60" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20">
+            <Border Background="#2d3135" CornerRadius="10"/>
+            <Button x:Name="btnSave" FontSize="40" Width="60" Click="ButtonSave_Click" Style="{StaticResource BtnStyle}">
+                <Image Source="/Images/SaveButton.png" Width="40" Height="40" Margin="0,10,170,0"/>
+            </Button>
+        </Grid>
+
+        <Grid Height="60" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,100,20">
+            <Border Background="#2d3135" CornerRadius="10"/>
+            <Button FontSize="40" Width="60" Click="ButtonCancel_Click" Style="{StaticResource BtnStyle}">
+                <Image Source="/Images/CancelButton.png" Width="40" Height="40" Margin="0,0,170,0"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

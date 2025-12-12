@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PageNavigation.Model;
-using System;
-using System.Collections.Generic;
+using PageNavigation.Service;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,98 +10,205 @@ namespace PageNavigation.ViewModel
 {
     public class VatTuVM : Utilities.ViewModelBase
     {
-        private ObservableCollection<VatTuM> _listProducts;
-        public ObservableCollection<VatTuM> ListProducts
-        {
-            get { return _listProducts; }
-            set { _listProducts = value; OnPropertyChanged(); }
-        }
+        public LoaiVatTuVM LoaiVatTu { get; set; } = new LoaiVatTuVM();
 
-        private bool _isLoading;
-        public bool IsLoading
+        
+        // --------------------------------------------
+        // 1) Danh sách vật tư (ListView)
+        // --------------------------------------------
+        private ObservableCollection<VatTuM> _DanhSachVatTu;
+        public ObservableCollection<VatTuM> DanhSachVatTu
         {
-            get { return _isLoading; }
-            set { _isLoading = value; OnPropertyChanged(); }
-        }
-
-        public async void LoadDataAsync()
-        {
-            try
+            get => _DanhSachVatTu;
+            set
             {
-                IsLoading = true;
-                using (var context = new QuanLyVatTuContext())
-                {
-                    var data = await context.VatTu.OrderByDescending(x => x.MaVatTu).ToListAsync();
-                    ListProducts = new ObservableCollection<VatTuM>(data);
-                }
+                _DanhSachVatTu = value;
+                OnPropertyChanged();
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message); }
-            finally { IsLoading = false; }
         }
 
+        // --------------------------------------------
+        // 2) Vật tư đang chọn (ListView)
+        // --------------------------------------------
+        private VatTuM _SelectedVatTu;
+        public VatTuM SelectedVatTu
+        {
+            get => _SelectedVatTu;
+            set
+            {
+                _SelectedVatTu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // --------------------------------------------
+        // 3) Model vật tư trong Popup
+        // --------------------------------------------
+        private VatTuM _VatTu;
+        public VatTuM VatTu
+        {
+            get => _VatTu;
+            set
+            {
+                _VatTu = value;
+                OnPropertyChanged();
+                LoadLoaiVatTu();
+            }
+        }
+
+        // --------------------------------------------
+        // 4) Danh sách loại vật tư (ComboBox)
+        // --------------------------------------------
+        private ObservableCollection<LoaiVatTuM> _DanhSachLoaiVatTu;
+        public ObservableCollection<LoaiVatTuM> DanhSachLoaiVatTu
+        {
+            get => _DanhSachLoaiVatTu;
+            set
+            {
+                _DanhSachLoaiVatTu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // --------------------------------------------
+        // 5) Loại vật tư đang chọn (ComboBox)
+        // --------------------------------------------
+        private LoaiVatTuM _LoaiVatTuSelected;
+        public LoaiVatTuM LoaiVatTuSelected
+        {
+            get => _LoaiVatTuSelected;
+            set
+            {
+                _LoaiVatTuSelected = value;
+
+                if (VatTu != null && value != null)
+                    VatTu.MaLoai = value.MaLoai;
+
+                OnPropertyChanged();
+            }
+        }
+
+        // --------------------------------------------
+        // 6) Constructor
+        // --------------------------------------------
         public VatTuVM()
         {
+            VatTu = new VatTuM();
+            LoadLoaiVatTu();
             LoadDataAsync();
+
+            LoaiVatTuService.OnLoaiVatTuChanged += LoadLoaiVatTu;   // ComboBox auto update
         }
 
-        public async void AddProduct(VatTuM vt)
+        // --------------------------------------------
+        // 7) Load danh sách loại vật tư (ComboBox)
+        // --------------------------------------------
+        private void LoadLoaiVatTu()
         {
-            try
-            {
-                using (var context = new QuanLyVatTuContext())
-                {
-                    context.VatTu.Add(vt);
-                    await context.SaveChangesAsync();
-                }
+            var data = LoaiVatTuService.GetAll();
 
-                if (ListProducts == null) ListProducts = new ObservableCollection<VatTuM>();
-                ListProducts.Insert(0, vt);
+            DanhSachLoaiVatTu = new ObservableCollection<LoaiVatTuM>(data);
 
-                MessageBox.Show("Thêm vật tư thành công!");
-            }
-            catch (Exception ex)
+            if (VatTu != null)
             {
-                MessageBox.Show("Lỗi thêm: " + ex.Message);
+                LoaiVatTuSelected =
+                    DanhSachLoaiVatTu.FirstOrDefault(x => x.MaLoai == VatTu.MaLoai);
             }
         }
 
-        public async void DeleteProduct(VatTuM vt)
+        // --------------------------------------------
+        // 8) Load danh sách vật tư (ListView)
+        // --------------------------------------------
+        public async Task LoadDataAsync()
         {
             try
             {
-                var result = MessageBox.Show($"Bạn có chắc muốn xóa vật tư {vt.TenVatTu}?",
-                                             "Xác nhận xóa",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.No) return;
-
-                using (var context = new QuanLyVatTuContext())
+                using (var db = new QuanLyVatTuContext())
                 {
-                    var itemToDelete = await context.VatTu
-                                            .SingleOrDefaultAsync(x => x.MaVatTu == vt.MaVatTu);
+                    // 2. Lấy dữ liệu mới nhất từ SQL (nhớ Include để lấy cả tên Loại)
+                    var data = await db.VatTu
+                                       .Include(x => x.MaLoaiNavigation) // Nếu bạn muốn hiện tên Loại
+                                       .ToListAsync();
 
-                    if (itemToDelete != null)
-                    {
-                        context.VatTu.Remove(itemToDelete);
-                        await context.SaveChangesAsync();
-                    }
+                    // 3. Cập nhật vào ObservableCollection
+                    // Cách an toàn nhất: Tạo mới collection và gán lại
+                    DanhSachVatTu = new ObservableCollection<VatTuM>(data);
+
+                    // 4. Báo cho giao diện biết là "Danh sách đã thay đổi rồi, vẽ lại đi!"
+                    OnPropertyChanged(nameof(DanhSachVatTu));
                 }
-                ListProducts.Remove(vt);
-
-                MessageBox.Show("Xóa thành công!");
             }
             catch (Exception ex)
             {
-                if (ex.InnerException != null && ex.InnerException.Message.Contains("DELETE statement conflicted"))
-                {
-                    MessageBox.Show("Không thể xóa vật tư này vì đã có trong Hóa đơn hoặc Phiếu thu trong hệ thống!", "Cảnh báo ràng buộc dữ liệu");
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi xóa: " + ex.Message);
-                }
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
             }
+        }
+
+        // --------------------------------------------
+        // 9) Lưu vật tư
+        // --------------------------------------------
+        public bool SaveVatTu()
+        {
+            if (!Validate())
+                return false;
+
+            var result = VatTuService.Save(VatTu);
+
+            if (result)
+                LoadDataAsync(); // reload ListView
+
+            return result;
+        }
+
+        // --------------------------------------------
+        // 10) Validate
+        // --------------------------------------------
+        private bool Validate()
+        {
+            if (VatTu == null) return false;
+            if (string.IsNullOrWhiteSpace(VatTu.TenVatTu)) return false;
+            if (LoaiVatTuSelected == null) return false;
+
+            return true;
+        }
+
+        // --------------------------------------------
+        // 11) Reset form khi tạo mới
+        // --------------------------------------------
+        public void ResetForm()
+        {
+            VatTu = new VatTuM();
+
+            if (DanhSachLoaiVatTu?.Count > 0)
+                LoaiVatTuSelected = DanhSachLoaiVatTu.FirstOrDefault();
+        }
+
+        // --------------------------------------------
+        // 12) Load khi sửa
+        // --------------------------------------------
+        public void LoadVatTu(VatTuM vt)
+        {
+            if (vt == null) return;
+
+            VatTu = vt;
+
+            LoaiVatTuSelected =
+                DanhSachLoaiVatTu.FirstOrDefault(x => x.MaLoai == vt.MaLoai);
+        }
+
+        // --------------------------------------------
+        // 13) Xóa vật tư
+        // --------------------------------------------
+        public bool DeleteVatTu(VatTuM vt)
+        {
+            if (vt == null) return false;
+
+            var result = VatTuService.Delete(vt.MaVatTu);
+
+            if (result)
+                DanhSachVatTu.Remove(vt);
+
+            return result;
         }
     }
 }

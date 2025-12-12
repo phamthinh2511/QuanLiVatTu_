@@ -9,7 +9,7 @@ public partial class VatTuM
 
     public string TenVatTu { get; set; } = null!;
 
-    public int? MaLoai { get; set; }
+    public int MaLoai { get; set; }
 
     public string? NhaCungCap { get; set; }
 
@@ -24,4 +24,5 @@ public partial class VatTuM
     public virtual ICollection<CT_PhieuNhapVatTuM> CT_PhieuNhapVatTu { get; set; } = new List<CT_PhieuNhapVatTuM>();
 
     public virtual LoaiVatTuM? MaLoaiNavigation { get; set; }
+    public string TenLoai => MaLoaiNavigation?.TenLoai ?? "(Không có)";
 }
