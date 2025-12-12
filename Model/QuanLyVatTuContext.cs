@@ -40,8 +40,10 @@ public partial class QuanLyVatTuContext : DbContext
     public virtual DbSet<VatTuM> VatTu { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
 
-        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

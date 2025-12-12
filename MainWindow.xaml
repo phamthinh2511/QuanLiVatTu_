@@ -96,7 +96,7 @@
             <Grid Background="Black">
                 <Border CornerRadius="20"
                         Background="#212529">
-                
+
                 </Border>
                 <Grid Margin="65, 0, 0, 0" 
                       x:Name="contentuser">
@@ -119,11 +119,10 @@
                     <Button Name="closebutton"
                             Style="{StaticResource ExitApp}"
                             Grid.Column="1"
-                            Grid.Row="1"
                             Height="40"
                             Width="NaN"
                             BorderThickness="0"
-                            Click="closebutton_Click" HorizontalAlignment="Stretch" Margin="20,5,0,0">
+                            Click="closebutton_Click" HorizontalAlignment="Stretch" Margin="30,20,20,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/shutdown_mo.png"/>
                         </Button.Background>
@@ -211,12 +210,14 @@
                         <!--ListViewMenu-->
 
                         <ListView x:Name="listview"
+                                  x:FieldModifier="public"
                                   SelectionMode="Single"
                                   Background="Transparent"
                                   BorderThickness="0"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                  SelectionChanged="listview_SelectionChanged">
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding CurrentTag}">
 
                             <ListViewItem Tag="Home"
                                           IsSelected="True">

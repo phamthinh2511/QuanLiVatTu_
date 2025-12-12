@@ -14,6 +14,18 @@
     <Compile Update="View\Home.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\BaoCaoDetail\TonKho.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\BaoCaoDetail\PopupChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\BaoCaoDetail\DoanhThu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HomeUserControl\DashBoardButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KhachHang.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +57,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\TraCuu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TraCuuUserControl\SearchBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\VatTu.xaml.cs">

@@ -1,4 +1,5 @@
-﻿using PageNavigation.View.BaoCaoDetail;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PageNavigation.View
+namespace PageNavigation.View.BaoCaoDetail
 {
     /// <summary>
-    /// Interaction logic for BaoCao.xaml
+    /// Interaction logic for ChiTiet.xaml
     /// </summary>
-    public partial class BaoCao : UserControl
+    public partial class TonKho : UserControl
     {
-        public BaoCao()
+        public TonKho()
         {
             InitializeComponent();
-            this.DataContext = new BaoCaoNavigation();
+           
         }
     }
 }

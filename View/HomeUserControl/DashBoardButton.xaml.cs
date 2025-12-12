@@ -1,5 +1,4 @@
-﻿using PageNavigation.View.BaoCaoDetail;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PageNavigation.View
+namespace PageNavigation.View.HomeUserControl
 {
     /// <summary>
-    /// Interaction logic for BaoCao.xaml
+    /// Interaction logic for DashBoardButton.xaml
     /// </summary>
-    public partial class BaoCao : UserControl
+    public partial class DashBoardButton : UserControl
     {
-        public BaoCao()
+        public DashBoardButton()
         {
             InitializeComponent();
-            this.DataContext = new BaoCaoNavigation();
         }
     }
 }

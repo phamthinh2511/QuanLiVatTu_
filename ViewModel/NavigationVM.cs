@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PageNavigation.Utilities;
+using PageNavigation.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PageNavigation.Utilities;
 using System.Windows.Input;
 using PageNavigation.Model;
 
@@ -19,6 +20,30 @@ namespace PageNavigation.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
+        private string _currentTag;
+
+        public string CurrentTag
+        {
+            get { return _currentTag; }
+            set { _currentTag = value; OnPropertyChanged(); SwitchViewByTag(value); }
+        }
+
+        private void SwitchViewByTag(string tag)
+        {
+            switch (tag)
+            {
+                case "Home": CurrentView = _homeVM; break;
+                case "NhanVien": CurrentView = _nhanVienVM; break;
+                case "LoaiVatTu": CurrentView = _loaiVatTuVM; break;
+                case "KhachHang": CurrentView = _danhSachKhachHangVM; break;
+                case "VatTu": CurrentView = _vatTuVM; break;
+                case "HoaDon": CurrentView = _hoaDonVM; break;
+                case "PhieuThuTien": CurrentView = _phieuThuTienVM; break;
+                case "TraCuu": CurrentView = _traCuuVM; break;
+                case "BaoCao": CurrentView = _baoCaoVM; break;
+                default: break;
+            }
+        }
         private HomeVM _homeVM;
         private NhanVienVM _nhanVienVM;
         private LoaiVatTuVM _loaiVatTuVM;
@@ -41,18 +66,25 @@ namespace PageNavigation.ViewModel
         public ICommand PhieuThuTienCommand { get; set; }
         public ICommand BaoCaoCommand { get; set; }
 
-        private void Home(object obj) => CurrentView = _homeVM;
-        private void NhanVien(object obj) => CurrentView = _nhanVienVM;
-        private void LoaiVatTu(object obj) => CurrentView = _loaiVatTuVM;
+        private void Home(object obj)
+        { CurrentView = _homeVM; CurrentTag = "Home"; }
+        private void NhanVien(object obj)
+        { CurrentView = _nhanVienVM; CurrentTag = "NhanVien"; }
+        private void LoaiVatTu(object obj)
+        { CurrentView = _loaiVatTuVM; CurrentTag = "LoaiVatTu"; }
+        private void KhachHang(object obj)
+        { CurrentView = _danhSachKhachHangVM; CurrentTag = "KhachHang"; }
 
-        private void KhachHang(object obj) => CurrentView = _danhSachKhachHangVM;
-
-        private void VatTu(object obj) => CurrentView = _vatTuVM;
-        private void HoaDon(object obj) => CurrentView = _hoaDonVM;
-        private void PhieuNhapVatTu(object obj) => CurrentView = _phieuNhapVatTuVM;
-        private void PhieuThuTien(object obj) => CurrentView = _phieuThuTienVM;
-        private void TraCuu(object obj) => CurrentView = _traCuuVM;
-        private void BaoCao(object obj) => CurrentView = _baoCaoVM;
+        private void VatTu(object obj)
+        { CurrentView = _vatTuVM; CurrentTag = "VatTu"; }
+        private void HoaDon(object obj)
+        { CurrentView = _hoaDonVM; CurrentTag = "HoaDon"; }
+        private void PhieuThuTien(object obj)
+        { CurrentView = _phieuThuTienVM; CurrentTag = "PhieuThuTien"; }
+        private void TraCuu(object obj)
+        { CurrentView = _traCuuVM; CurrentTag = "TraCuu"; }
+        private void BaoCao(object obj)
+        { CurrentView = _baoCaoVM; CurrentTag = "BaoCao"; }
 
         public NavigationVM()
         {
@@ -79,7 +111,7 @@ namespace PageNavigation.ViewModel
             _traCuuVM = new TraCuuVM();
             _baoCaoVM = new BaoCaoVM();
 
-            CurrentView = _homeVM;
+            CurrentTag = "Home";
         }
 
     }

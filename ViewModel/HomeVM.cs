@@ -8,5 +8,6 @@ namespace PageNavigation.ViewModel
 {
     public class HomeVM
     {
+
     }
 }
