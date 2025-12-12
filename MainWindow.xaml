@@ -210,6 +210,7 @@
                         <!--ListViewMenu-->
 
                         <ListView x:Name="listview"
+                                  x:FieldModifier="public"
                                   SelectionMode="Single"
                                   Background="Transparent"
                                   BorderThickness="0"
@@ -279,6 +280,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
+                            
                             <ListViewItem Tag="PhieuThuTien">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_transaction.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>

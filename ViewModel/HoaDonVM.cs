@@ -12,7 +12,16 @@ namespace PageNavigation.ViewModel
 {
     public class HoaDonVM : Utilities.ViewModelBase
     {
-		private ObservableCollection<HoaDonM> _billList;
+        private string _tongDoanhThu;
+
+        public string TongDoanhThu
+        {
+            get { return _tongDoanhThu; }
+            set { _tongDoanhThu = value; OnPropertyChanged(); }
+        }
+
+
+        private ObservableCollection<HoaDonM> _billList;
 
 		public ObservableCollection<HoaDonM> BillList
 		{
@@ -31,18 +40,19 @@ namespace PageNavigation.ViewModel
             try
             {
                 IsLoading = true;
-
                 using (var context = new QuanLyVatTuContext())
                 {
                     var data = await context.HoaDon.OrderByDescending(x => x.MaHoaDon).ToListAsync();
                     BillList = new ObservableCollection<HoaDonM>(data);
+                    decimal total = data.Sum(x => x.TongTien ?? 0);
+                    if (total >= 1000000000)
+                        TongDoanhThu = $"{total / 1000000000:0.0} (tỷ)";
+                    else
+                        TongDoanhThu = $"{total:N0} (vnđ)";
                 }
             }
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
-            finally
-            {
-                IsLoading = false;
-            }
+            finally { IsLoading = false; }
         }
         public HoaDonVM()
         {

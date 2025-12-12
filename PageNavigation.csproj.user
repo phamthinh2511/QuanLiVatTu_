@@ -44,6 +44,9 @@
     <Compile Update="View\TraCuu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\TraCuuUserControl\SearchBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\VatTu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

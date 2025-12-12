@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="250">
     <Grid>
         <Border CornerRadius="20" 
-            Background="#FFFFFF" 
+            Background="#1E1E1E" 
             BorderBrush="Transparent" 
             BorderThickness="0">
             <Grid>
@@ -33,7 +33,7 @@
                                        FontSize="40"
                                        FontFamily="/Fonts/#Fz Rubik Med"
                                        Margin="20, 10, 0, 0"
-                                       Foreground="Black"
+                                       Foreground="White"
                                        FontWeight="Bold"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"/>
@@ -70,8 +70,8 @@
                                 <Setter Property="Foreground" Value="DarkGray"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#F5F5F5"/>
-                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="Background" Value="#121212"/>
+                                        <Setter Property="Foreground" Value="#F5F5F5"/>
                                         <Setter Property="Cursor" Value="Hand"/>
                                     </Trigger>
                                 </Style.Triggers>
