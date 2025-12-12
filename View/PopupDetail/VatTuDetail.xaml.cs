@@ -64,24 +64,8 @@ namespace PageNavigation.View.PopupDetail
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            // 1. Xóa trắng các ô nhập liệu trên giao diện
-            if (txtTenVatTu != null) txtTenVatTu.Text = string.Empty;
-            if (txtMoTa != null) txtMoTa.Text = string.Empty;
-            if (cbLoaiVatTu != null)
-            {
-                cbLoaiVatTu.SelectedIndex = -1;
-            }
-            // 2. Reset dữ liệu của đối tượng về mặc định (Chế độ thêm mới)
-            VatTu = new VatTuM();
-
-            // 3. Reset ComboBox (Nếu Binding chưa tự cập nhật)
-            // Lưu ý: Nếu ComboBox chưa có x:Name, bạn nên vào XAML đặt tên cho nó (ví dụ: x:Name="cbLoaiVatTu")
-            // Nếu Binding Mode=TwoWay tốt thì dòng dưới tự động reset theo VatTu, 
-            // nhưng để chắc chắn ta có thể gán thủ công nếu cần.
-            // cbLoaiVatTu.SelectedIndex = -1; 
-
-            // 4. Đưa con trỏ chuột về ô nhập Tên để tiện nhập tiếp
-            if (txtTenVatTu != null) txtTenVatTu.Focus();
+            this.DialogResult = false;
+            this.Close();
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)
