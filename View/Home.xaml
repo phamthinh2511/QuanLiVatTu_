@@ -18,7 +18,7 @@
                                          x:Name="DoanhThuButton"
                                          Width="300"
                                          Height="150"
-                                         Margin="55, 70" Loaded="DoanhThuButton_Loaded"/>
+                                         Margin="55, 70"/>
         </StackPanel>
         <Grid Width="330" Height="500" Margin="30"
               HorizontalAlignment="Left"
@@ -166,8 +166,31 @@
             <Border BorderThickness="0"
                     CornerRadius="20"
                     Background="Black">
-                <lvc:CartesianChart>
-
+                <lvc:CartesianChart x:Name="chart"
+                                    LegendLocation="None"
+                                    Margin="10">
+                    <lvc:CartesianChart.Series>
+                        <lvc:RowSeries Title="Doanh Thu" 
+                                       Values="{Binding DoanhThuValues}" 
+                                       DataLabels="True"
+               
+                                       Configuration="{Binding ColorMapper}">
+                        </lvc:RowSeries>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Labels="{Binding Labels}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" IsEnabled="False"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis>
+                            <lvc:Axis.Separator>
+                                <lvc:Separator IsEnabled="True" StrokeThickness="0.5" Stroke="Gray"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
             </Border>
 

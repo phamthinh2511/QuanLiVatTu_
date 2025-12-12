@@ -1,27 +1,12 @@
 ﻿using LiveCharts;
-using LiveCharts.Wpf;
-using PageNavigation.View.BaoCaoDetail;
-using PageNavigation.View.HomeUserControl;
+using LiveCharts.Configurations;
 using PageNavigation.ViewModel;
-using PageNavigation.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PageNavigation;
 
 namespace PageNavigation.View
 {
@@ -30,34 +15,38 @@ namespace PageNavigation.View
     /// </summary>
     public partial class Home : UserControl
     {
+        public ChartValues<double> DoanhThuValues { get; set; }
+        public ObservableCollection<string> Labels { get; set; }
+        public object ColorMapper { get; set; }
         public Home()
         {
             InitializeComponent();
+            var dangerBrush = new SolidColorBrush(Color.FromRgb(238, 83, 83));
+            var blueBrush = new SolidColorBrush(Color.FromRgb(74, 144, 226)); 
+            var yellowBrush = new SolidColorBrush(Color.FromRgb(255, 206, 84));
+            var purpleBrush = new SolidColorBrush(Color.FromRgb(148, 0, 211)); 
+
+            var colors = new List<Brush> { dangerBrush, blueBrush, yellowBrush, purpleBrush };
+            ColorMapper = Mappers.Xy<double>()
+                .X(value => value)
+                .Y((value, index) => index)
+                .Fill((value, index) => colors[index % colors.Count])
+                .Stroke((value, index) => colors[index % colors.Count]);
+            DoanhThuValues = new ChartValues<double> { 10, 50, 39, 50 };
+            Labels = new ObservableCollection<string> { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4" };
             var vatTuVM = new VatTuVM();
             var hoaDonVM = new HoaDonVM();
             Binding myBinding = new Binding("TongDoanhThu");
             DoanhThuButton.number.SetBinding(TextBlock.TextProperty, myBinding);
             DoanhThuButton.DataContext = hoaDonVM;
+            chart.DataContext = this;
             lvSanPham.DataContext = vatTuVM;
             DoanhThuButton.title.Text = "Doanh Thu";
             DoanhThuButton.title.Foreground = Brushes.Violet;
             DoanhThuButton.picture.Source = new BitmapImage(new Uri("/Images/cashhome.png", UriKind.Relative));
         }
 
-        private void DoanhThuButton_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DonHangButton_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DonHangChuaXuLiButton_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

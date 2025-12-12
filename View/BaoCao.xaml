@@ -120,7 +120,6 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
-                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -139,33 +138,33 @@
                 <StackPanel Orientation="Horizontal">
                     <RadioButton Style="{StaticResource UnderlineButtonStyle}"
                                  
-                                 Content="Tổng Quan"
+                                 Content="Tồn Kho"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
-                                 Command="{Binding TongQuanCommand}" 
+                                 Command="{Binding TonKhoCommand}" 
                                  IsChecked="True"
                                  Height="40"
                                  Margin="20, 0, 0, 0"/>
                     <RadioButton Style="{StaticResource UnderlineButtonStyle}"
-                                 Content="Chi Tiết"
+                                 Content="Doanh Thu"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
-                                 Command="{Binding ChiTietCommand}"
+                                 Command="{Binding DoanhThuCommand}"
                                  Height="40"
                                  Margin="20, 0, 0, 0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <ContentControl x:Name="Pages"
-                                Content="{Binding CurrentChart}"
+                                Content="{Binding CurrentView}"
                                 Margin="20">
                     <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type bcd:TongQuanVM}">
-                            <bcd:TongQuan/>
+                        <DataTemplate DataType="{x:Type bcd:TonKhoVM}">
+                            <bcd:TonKho/>
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type bcd:ChiTietVM}">
-                            <bcd:ChiTiet/>
+                        <DataTemplate DataType="{x:Type bcd:DoanhThuVM}">
+                            <bcd:DoanhThu/>
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>

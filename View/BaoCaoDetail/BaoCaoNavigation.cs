@@ -12,32 +12,48 @@ namespace PageNavigation.View.BaoCaoDetail
 {
     public class BaoCaoNavigation : ViewModelBase
     {
-        private object? _currentChart;
+        private object? _currentView;
 
-        public object? CurrentChart
+        public object? CurrentView
         {
-            get { return _currentChart; }
-            set { _currentChart = value; OnPropertyChanged(); }
+            get { return _currentView; }
+            set { _currentView = value; OnPropertyChanged(); }
         }
+        private string _currentTag;
 
-        private ChiTietVM _chiTietVM;
-        private TongQuanVM _tongQuanVM;
+        public string CurrentTag
+        {
+            get { return _currentTag; }
+            set { _currentTag = value; OnPropertyChanged(); SwitchViewByTag(value); }
+        }
+        private DoanhThuVM _doanhThuVM;
+        private TonKhoVM _tonKhoVM;
+        private void SwitchViewByTag(string tag)
+        {
+            switch (tag)
+            {
+                case "TonKho": CurrentView = _tonKhoVM; break;
+                case "DoanhThu": CurrentView = _doanhThuVM; break;            
+                default: break;
+            }
+        }
+        public ICommand DoanhThuCommand { get; set; }
+        public ICommand TonKhoCommand { get; set; }
 
-        public ICommand ChiTietCommand { get; set; }
-        public ICommand TongQuanCommand { get; set; }
-
-        private void ChiTiet(object obj) => CurrentChart = _chiTietVM;
-        private void TongQuan(object obj) => CurrentChart = _tongQuanVM;
+        private void DoanhThu(object obj)
+        { CurrentView = _doanhThuVM; CurrentTag = "DoanhThu"; }
+        private void TonKho(object obj)
+        { CurrentView = _tonKhoVM; CurrentTag = "TonKho"; }
 
         public BaoCaoNavigation()
         {
-            _chiTietVM = new ChiTietVM();
-            _tongQuanVM = new TongQuanVM();
+            _doanhThuVM = new DoanhThuVM();
+            _tonKhoVM = new TonKhoVM();
 
-            ChiTietCommand = new RelayCommand(ChiTiet);
-            TongQuanCommand = new RelayCommand(TongQuan);
+            TonKhoCommand = new RelayCommand(TonKho);
+            DoanhThuCommand = new RelayCommand(DoanhThu);
 
-            CurrentChart = _tongQuanVM;
+            CurrentTag = "DoanhThu";
         }
     }
 }

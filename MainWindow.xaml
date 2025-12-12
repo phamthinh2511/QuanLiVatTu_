@@ -216,7 +216,8 @@
                                   BorderThickness="0"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                  SelectionChanged="listview_SelectionChanged">
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding CurrentTag}">
 
                             <ListViewItem Tag="Home"
                                           IsSelected="True">
