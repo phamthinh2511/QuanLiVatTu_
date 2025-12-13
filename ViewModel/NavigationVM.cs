@@ -79,6 +79,8 @@ namespace PageNavigation.ViewModel
         { CurrentView = _vatTuVM; CurrentTag = "VatTu"; }
         private void HoaDon(object obj)
         { CurrentView = _hoaDonVM; CurrentTag = "HoaDon"; }
+        private void PhieuNhapVatTu(object obj)
+        { CurrentView = _phieuNhapVatTuVM; CurrentTag = "PhieuNhapVatTu"; }
         private void PhieuThuTien(object obj)
         { CurrentView = _phieuThuTienVM; CurrentTag = "PhieuThuTien"; }
         private void TraCuu(object obj)
