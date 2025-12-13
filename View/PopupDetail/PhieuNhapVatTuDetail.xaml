@@ -172,8 +172,8 @@
                                 </Button.Resources>
                             </Button>
 
-                            <Button Content="Thêm" Click="ButtonThem_Click"
-                                    Width="90" Height="45"
+                            <Button Content="Thêm/Cập Nhật" Click="ButtonThem_Click"
+                                    Width="130" Height="45"
                                     Background="#CED565" Foreground="#212529" FontWeight="Bold" FontSize="16">
                                 <Button.Resources>
                                     <Style TargetType="Border">
