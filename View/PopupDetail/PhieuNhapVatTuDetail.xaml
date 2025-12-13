@@ -196,14 +196,15 @@
                 <TextBlock Text="Chi tiết vật tư:" FontSize="22" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
 
                 <ListView x:Name="lvChiTiet"
+                          SelectionChanged="lvChiTiet_SelectionChanged"
                           Grid.Row="1" 
                           ItemsSource="{Binding ListChiTietHienThi}"
                           Background="Transparent" BorderThickness="0" Foreground="#CED565" FontSize="16">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
                             <GridViewColumn Header="Tên vật tư" Width="200" DisplayMemberBinding="{Binding TenVatTu}"/>
-                            <GridViewColumn Header="SL" Width="80" DisplayMemberBinding="{Binding SoLuong}"/>
-                            <GridViewColumn Header="ĐVT" Width="80" DisplayMemberBinding="{Binding TenDonViTinh}"/>
+                            <GridViewColumn Header="SL" Width="70" DisplayMemberBinding="{Binding SoLuong}"/>
+                            <GridViewColumn Header="ĐVT" Width="82" DisplayMemberBinding="{Binding TenDonViTinh}"/>
                             <GridViewColumn Header="Đơn giá nhập" Width="200" DisplayMemberBinding="{Binding DonGiaNhap, StringFormat=N0}"/>
                             <GridViewColumn Header="Đơn giá bán" Width="200" DisplayMemberBinding="{Binding DonGiaBan, StringFormat=N0}"/>
                             <GridViewColumn Header="Thành tiền" Width="200" DisplayMemberBinding="{Binding ThanhTien, StringFormat=N0}"/>

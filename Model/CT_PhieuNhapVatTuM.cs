@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PageNavigation.Model;
 
@@ -28,4 +29,10 @@ public partial class CT_PhieuNhapVatTuM
     public virtual PhieuNhapVatTuM MaPhieuNhapNavigation { get; set; } = null!;
 
     public virtual VatTuM MaVatTuNavigation { get; set; } = null!;
+
+    [NotMapped] // <--- "Bùa hộ mệnh" để không bị lỗi Database
+    public string TenVatTu { get; set; }
+
+    [NotMapped] // <--- "Bùa hộ mệnh"
+    public string TenDonViTinh { get; set; }
 }

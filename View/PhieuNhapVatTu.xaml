@@ -51,7 +51,13 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-
+                        <GridViewColumn Header="Nhân Viên" Width="303">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TenNhanVien}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
                         <GridViewColumn Header="Tổng Tiền" Width="470">
                             <GridViewColumn.CellTemplate>
