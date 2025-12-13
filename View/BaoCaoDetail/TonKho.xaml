@@ -8,6 +8,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="1000">
     <Grid>
-        <TextBlock Text="Tồn Kho"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0"
+                    Background="#212529">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tháng Năm"
+                               Foreground="White"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="300, 0, 0, 0"
+                               FontFamily="/Fonts/#Fz Rubik Med">
+                        
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            
+        </Grid>
     </Grid>
 </UserControl>
