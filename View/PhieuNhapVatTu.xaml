@@ -10,96 +10,21 @@
     <Grid Background="#212529">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="590"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="110"/>
         </Grid.RowDefinitions>
 
-        <!-- ======================= TIÊU ĐỀ ======================= -->
         <Grid>
             <TextBlock Style="{StaticResource Font_Style}"
                        FontSize="50"
                        Text="Phiếu Nhập Vật Tư"
+                       VerticalAlignment="Center"
                        Margin="20, 0, 0, 0"/>
         </Grid>
 
-        <!-- ======================= FORM + TABLE ======================= -->
         <Grid Grid.Row="1" Margin="20,0,20,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="440"/>
-            </Grid.RowDefinitions>
-
-            <!-- =========== FORM THÔNG TIN =========== -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Margin="0,0,50,0">
-
-                    <TextBlock Text="Ngày nhập:" 
-           Style="{StaticResource Text_Style}"
-           Foreground="#0bcdff" FontSize="20"/>
-
-                    <Grid Height="50">
-                        <Border Background="#2d3135" CornerRadius="10"/>
-                        <TextBox Text="{Binding NgayNhap, StringFormat='dd/MM/yyyy'}"
-             FontSize="20"
-             Foreground="#CED565"
-             Background="Transparent"
-             BorderThickness="0"
-             IsReadOnly="True"
-             VerticalContentAlignment="Center"
-             Padding="10,0,0,0"
-             FontFamily="/Fonts/#Fz Rubik Med" />
-                    </Grid>
-                    <TextBlock Text="Họ và tên nhân viên:"
-                   Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
-                   />
-
-                    <Grid Height="50">
-                        <Border Background="#2d3135" CornerRadius="10"/>
-                        <TextBox Text="{Binding TenNhanVien}"
-                     Style="{StaticResource TextBoxStyle}"
-                     FontSize="20" 
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     VerticalContentAlignment="Center"
-                     Padding="10,0,0,0"
-                     FontFamily="/Fonts/#Fz Rubik Med" Margin="0,-10,0,10"/>
-                    </Grid>
-
-                </StackPanel>
-
-                <StackPanel Grid.Column="1">
-
-                    <TextBlock Text="Họ và tên nhà cung cấp:"
-                   Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
-                   Margin="0,0,0,5"/>
-
-                    <Grid Height="50">
-                        <Border Background="#2d3135" CornerRadius="10"/>
-                        <TextBox Text="{Binding NhaCungCap}"
-                     Style="{StaticResource TextBoxStyle}"
-                     FontSize="20" 
-                     Foreground="#CED565"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     VerticalContentAlignment="Center"
-                     Padding="10,0,0,0"
-                     FontFamily="/Fonts/#Fz Rubik Med"/>
-                    </Grid>
-
-                </StackPanel>
-            </Grid>
-
-            <!-- =========== DANH SÁCH VẬT TƯ =========== -->
-            <ListView Grid.Row="1"
-                      ItemsSource="{Binding ListVatTu}"
+            <ListView x:Name="lvPhieuNhap"
+                      ItemsSource="{Binding ListPhieuNhap}"
                       FontFamily="/Fonts/#Fz Rubik Med"
                       FontSize="20"
                       Foreground="#CED565"
@@ -109,65 +34,35 @@
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
-                        <GridViewColumn Header="Mã " Width="70">
+
+                        <GridViewColumn Header="Mã Phiếu" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaPhieuNhap}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Tên vật tư" Width="160">
+
+                        <GridViewColumn Header="Ngày Nhập" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding TenVatTu}"/>
+                                    <TextBlock Text="{Binding NgayNhapPhieu, StringFormat='dd/MM/yyyy'}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Số Lượng" Width="140">
+                        <GridViewColumn Header="Nhân Viên" Width="303">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SoLuong}"/>
+                                    <TextBlock Text="{Binding TenNhanVien}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Đơn Vị Tính" Width="150">
+                        <GridViewColumn Header="Tổng Tiền" Width="470">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding DonVi}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Đơn giá nhập" Width="170">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DonGiaNhap}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Thành tiền" Width="160">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding ThanhTien}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Tỉ lệ đơn giá bán" Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding TyLeLai}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Giá bán" Width="170">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DonGiaBan}"/>
+                                    <TextBlock Text="{Binding TongTien, StringFormat='#,##0 đ'}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -175,18 +70,18 @@
                     </GridView>
                 </ListView.View>
 
-                <!-- Style ListViewItem giống Khách Hàng -->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="5"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="FontSize" Value="18"/>
-                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}">
+                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                                         <GridViewRowPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                 </ControlTemplate>
@@ -202,24 +97,20 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#50555b"/>
                                 <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#CED565"/>
+                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
-
             </ListView>
-
         </Grid>
 
         <Grid Grid.Row="2">
-
-            <TextBlock Text="{Binding TongTien, StringFormat='Tổng tiền: {0}'}"
-                       Foreground="White"
-                       FontSize="35"
-                       HorizontalAlignment="Left"
-                       Margin="20,0,0,0"/>
-
-            <!-- NÚT LƯU -->
             <Button Click="ButtonCreate_Click">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -237,16 +128,12 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-								CornerRadius="20">
-                                        <ContentPresenter HorizontalAlignment="Center"
-											  VerticalAlignment="Center"/>
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-
-                        <!-- Hover -->
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#50555b"/>
@@ -254,13 +141,10 @@
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                         </Style.Triggers>
-
                     </Style>
                 </Button.Style>
             </Button>
 
-
-            <!-- NÚT XEM/SỬA -->
             <Button Click="ButtonEdit_Click">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -270,13 +154,15 @@
                         <Setter Property="Margin" Value="0,0,300,0"/>
                         <Setter Property="Background" Value="#17191a"/>
                         <Setter Property="Content" Value="Xem/Sửa"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
                         <Setter Property="FontSize" Value="40"/>
                         <Setter Property="Foreground" Value="#CED565"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="0">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
@@ -286,31 +172,39 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#50555b"/>
                                 <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
 
-            <!-- NÚT XÓA -->
             <Button Click="ButtonDelete_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Width" Value="250"/>
                         <Setter Property="Height" Value="70"/>
                         <Setter Property="HorizontalAlignment" Value="Right"/>
-                        <Setter Property="Margin" Value="0,0,580,0"/>
+                        <Setter Property="Margin" Value="0, 0, 580, 0"/>
                         <Setter Property="Background" Value="#17191a"/>
                         <Setter Property="Content" Value="Xóa"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
                         <Setter Property="FontSize" Value="40"/>
                         <Setter Property="Foreground" Value="#CED565"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                    <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="20"
+                                BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
                                     </Border>
+
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -318,13 +212,12 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#50555b"/>
                                 <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-
         </Grid>
-
     </Grid>
 </UserControl>
