@@ -59,7 +59,10 @@
     <Compile Update="View\TraCuu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\TraCuuUserControl\SearchBar.xaml.cs">
+    <Compile Update="View\TraCuuDetail\KhachHangSearch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TraCuuDetail\VatTuSearch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\VatTu.xaml.cs">

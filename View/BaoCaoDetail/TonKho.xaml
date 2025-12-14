@@ -6,8 +6,228 @@
              xmlns:local="clr-namespace:PageNavigation.View.BaoCaoDetail"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="680" d:DesignWidth="1000">
+             d:DesignHeight="680" d:DesignWidth="1215">
     <Grid>
-        <TextBlock Text="Tồn Kho"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0"
+                    Background="#212529">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Tháng"
+                               Foreground="White"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="20, 0, 0, 0"
+                               FontFamily="/Fonts/#Fz Rubik Med">
+
+                    </TextBlock>
+                    <Grid Height="60" Width="180" Margin="20, 0, 0, 0">
+                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+
+                        <ComboBox x:Name="cbThang"
+                          Style="{StaticResource ComboBoxStyle}"
+                          SelectedValue="{Binding ThangBaoCao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="Content"
+                          Foreground="#CED565" Background="Transparent"
+                          Width="180" Height="60" FontSize="30"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          FontFamily="/Fonts/#Fz Rubik Med">
+
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="4"/>
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="6"/>
+                            <ComboBoxItem Content="7"/>
+                            <ComboBoxItem Content="8"/>
+                            <ComboBoxItem Content="9"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="11"/>
+                            <ComboBoxItem Content="12"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <TextBlock Text="Năm"
+                               Foreground="White"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               FontFamily="/Fonts/#Fz Rubik Med"
+                               Margin="20, 0, 0, 0">
+
+                    </TextBlock>
+
+                    <Grid Height="60" Width="180" Margin="20, 0, 0, 0">
+                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+                        <ComboBox x:Name="cbNam"
+                                  Style="{StaticResource ComboBoxStyle}"
+                                  SelectedValue="{Binding NamBaoCao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Content"
+                                  Foreground="#CED565" Background="Transparent"
+                                  Width="180" Height="60" FontSize="30"
+                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  FontFamily="/Fonts/#Fz Rubik Med"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden">    
+
+                            <ComboBoxItem Content="2000"/>
+                            <ComboBoxItem Content="2001"/>
+                            <ComboBoxItem Content="2002"/>
+                            <ComboBoxItem Content="2003"/>
+                            <ComboBoxItem Content="2004"/>
+                            <ComboBoxItem Content="2005"/>
+                            <ComboBoxItem Content="2006"/>
+                            <ComboBoxItem Content="2007"/>
+                            <ComboBoxItem Content="2008"/>
+                            <ComboBoxItem Content="2009"/>
+                            <ComboBoxItem Content="2010"/>
+                            <ComboBoxItem Content="2011"/>
+                            <ComboBoxItem Content="2012"/>
+                            <ComboBoxItem Content="2013"/>
+                            <ComboBoxItem Content="2014"/>
+                            <ComboBoxItem Content="2015"/>
+                            <ComboBoxItem Content="2016"/>
+                            <ComboBoxItem Content="2017"/>
+                            <ComboBoxItem Content="2018"/>
+                            <ComboBoxItem Content="2019"/>
+                            <ComboBoxItem Content="2020"/>
+                            <ComboBoxItem Content="2021"/>
+                            <ComboBoxItem Content="2022"/>
+                            <ComboBoxItem Content="2023"/>
+                            <ComboBoxItem Content="2024"/>
+                            <ComboBoxItem Content="2025"/>
+                            <ComboBoxItem Content="2026"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView x:Name="CustomerListView" 
+                      ItemsSource="{Binding ListBaoCao}"
+                      FontFamily="/Fonts/#Fz Rubik Med"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      Width="1215"
+                      FontSize="25"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      AlternationCount="2">
+
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}"  >
+
+                        <GridViewColumn Header="ID" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MaVatTu}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tên Vật Tư" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MaVatTuNavigation.TenVatTu}"
+                               TextTrimming="CharacterEllipsis" 
+                               ToolTip="{Binding MaVatTuNavigation.TenVatTu}"
+                               VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tồn Đầu" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TonDau}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tồn Cuối" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TonCuoi}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Phát Sinh Nhập" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PhatSinhNhap}" 
+                                               TextTrimming="CharacterEllipsis" 
+                                               ToolTip="{Binding PhatSinhNhap}"
+                                               VerticalAlignment="Center" Margin="10,0,0,0"/>   
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Phát Sinh Xuất" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PhatSinhXuat}" 
+                                               ToolTip="{Binding PhatSinhNhap}"
+                                               VerticalAlignment="Center" 
+                                               Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="0,2,0,2"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                        <GridViewRowPresenter Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#17191a"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#3E444A"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#CED565"/>
+                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
     </Grid>
 </UserControl>

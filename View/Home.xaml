@@ -52,7 +52,7 @@
                         <Border BorderBrush="LightGray"
                                 BorderThickness="0, 0, 0 ,1">
                             <ListView x:Name="lvSanPham" 
-                                      ItemsSource="{Binding ListProducts}"
+                                      ItemsSource="{Binding DanhSachVatTu}"
                                       Background="Transparent"
                                       AlternationCount="2">
                                 <ListView.ItemContainerStyle>

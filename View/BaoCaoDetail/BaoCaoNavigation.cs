@@ -41,9 +41,9 @@ namespace PageNavigation.View.BaoCaoDetail
         public ICommand TonKhoCommand { get; set; }
 
         private void DoanhThu(object obj)
-        { CurrentView = _doanhThuVM; CurrentTag = "DoanhThu"; }
+        { CurrentTag = "DoanhThu"; }
         private void TonKho(object obj)
-        { CurrentView = _tonKhoVM; CurrentTag = "TonKho"; }
+        { CurrentTag = "TonKho"; }
 
         public BaoCaoNavigation()
         {
@@ -53,7 +53,7 @@ namespace PageNavigation.View.BaoCaoDetail
             TonKhoCommand = new RelayCommand(TonKho);
             DoanhThuCommand = new RelayCommand(DoanhThu);
 
-            CurrentTag = "DoanhThu";
+            CurrentTag = "TonKho";
         }
     }
 }

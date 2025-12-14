@@ -4,9 +4,167 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View"
+             xmlns:tcd="clr-namespace:PageNavigation.View.TraCuuDetail"
+             xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1215">
+    <UserControl.Resources>
+        <Style x:Key="UnderlineButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                      HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center" 
+                                      Margin="0,0,0,4"/>
+                            <Border x:Name="Underline" 
+                                    Height="2" 
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Stretch"
+                                    RenderTransformOrigin="0,0.5">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White"/>
+                                </Border.Background>
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="underlineScale" ScaleX="0" ScaleY="1"/>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border x:Name="Indicator" 
+                                    Height="2" 
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Stretch"
+                                    Visibility="Collapsed">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White"/>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Trigger khi được chọn -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Indicator"
+                                        Property="Visibility"
+                                        Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="Indicator"
+                                        Property="Visibility"
+                                        Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="underlineScale" 
+                                                             Storyboard.TargetProperty="ScaleX" 
+                                                             To="1" 
+                                                             Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="underlineScale" 
+                                                             Storyboard.TargetProperty="ScaleX" 
+                                                             To="0" 
+                                                             Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseIn"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="15,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        
+        <Border Background="#212529"
+                BorderThickness="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Tra Cứu"
+                               FontSize="60"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="20, 0, 0, 0"
+                               FontFamily="/Fonts/#Fz Rubik Med"
+                               Foreground="White">
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Style="{StaticResource UnderlineButtonStyle}"
+                                     Content="Khách Hàng"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     Command="{Binding KhachHangCommand}" 
+                                     IsChecked="True"
+                                     Height="40"
+                                     Margin="20, 0, 0, 0"/>
+                        <RadioButton Style="{StaticResource UnderlineButtonStyle}"
+                                     Content="Vật Tư"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     Command="{Binding VatTuCommand}"
+                                     Height="40"
+                                     Margin="20, 0, 0, 0"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}"
+                                Margin="20">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type vm:DanhSachKhachHangVM}">
+                                <tcd:KhachHangSearch/>
+                            </DataTemplate>
+
+                            <DataTemplate DataType="{x:Type vm:VatTuVM}">
+                                <tcd:VatTuSearch/>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
