@@ -33,7 +33,7 @@
         </Grid>
 
         <!-- Mã vật tư (nếu có) -->
-        <TextBlock Text="{Binding MaVatTu}"
+        <TextBlock Text="{Binding VatTu.MaVatTu}"
                    Foreground="#CED565" FontSize="40"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,30,0,0"

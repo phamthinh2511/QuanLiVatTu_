@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PageNavigation.View.TraCuuDetail;
 
 namespace PageNavigation.View
 {
@@ -23,6 +24,7 @@ namespace PageNavigation.View
         public TraCuu()
         {
             InitializeComponent();
+            this.DataContext = new TraCuuNavigation();
         }
     }
 }

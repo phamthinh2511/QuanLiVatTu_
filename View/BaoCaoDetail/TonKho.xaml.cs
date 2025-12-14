@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PageNavigation.ViewModel;
 
 namespace PageNavigation.View.BaoCaoDetail
 {
@@ -25,7 +26,7 @@ namespace PageNavigation.View.BaoCaoDetail
         public TonKho()
         {
             InitializeComponent();
-           
+            this.DataContext = new BaoCaoVM();
         }
     }
 }
