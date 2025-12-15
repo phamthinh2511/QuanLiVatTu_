@@ -41,6 +41,9 @@
     <Compile Update="View\PhieuThuTien.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\PopupDetail\HoaDonDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\PopupDetail\KhachHangDetail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

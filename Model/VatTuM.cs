@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PageNavigation.Model;
 
@@ -25,4 +26,8 @@ public partial class VatTuM
 
     public virtual LoaiVatTuM? MaLoaiNavigation { get; set; }
     public string TenLoai => MaLoaiNavigation?.TenLoai ?? "(Không có)";
+
+    [NotMapped]
+    public string TenDonViTinh { get; set; }
+
 }

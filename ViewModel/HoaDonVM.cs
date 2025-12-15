@@ -12,8 +12,8 @@ namespace PageNavigation.ViewModel
 {
     public class HoaDonVM : Utilities.ViewModelBase
     {
-        private string _tongDoanhThu;
 
+        private string _tongDoanhThu;
         public string TongDoanhThu
         {
             get { return _tongDoanhThu; }
@@ -22,12 +22,14 @@ namespace PageNavigation.ViewModel
 
 
         private ObservableCollection<HoaDonM> _billList;
+        private ObservableCollection<HoaDonM> _listHoaDon;
+        public ObservableCollection<HoaDonM> ListHoaDon
+        {
+            get { return _listHoaDon; }
+            set { _listHoaDon = value; OnPropertyChanged(); }
+        }
 
-		public ObservableCollection<HoaDonM> BillList
-		{
-			get { return _billList; }
-			set { _billList = value; OnPropertyChanged(); }
-		}
+
         private bool _isLoading;
         public bool IsLoading
         {
@@ -35,73 +37,55 @@ namespace PageNavigation.ViewModel
             set { _isLoading = value; OnPropertyChanged(); }
         }
 
-        public async void LoadDataAsync()
+        // Constructor
+        public HoaDonVM()
+        {
+
+            LoadData();
+        }
+
+
+        public async void LoadData()
         {
             try
             {
                 IsLoading = true;
                 using (var context = new QuanLyVatTuContext())
                 {
-                    var data = await context.HoaDon.OrderByDescending(x => x.MaHoaDon).ToListAsync();
-                    BillList = new ObservableCollection<HoaDonM>(data);
+
+                    var data = await context.HoaDon
+                                            .Include(h => h.MaNhanVienNavigation)
+                                            .Include(h => h.MaKhachHangNavigation)
+                                            .OrderByDescending(x => x.NgayLapHoaDon)
+                                            .ToListAsync();
+
+                    foreach (var item in data)
+                    {
+                        item.TenNhanVien = item.MaNhanVienNavigation?.HoTen ?? "---";
+                        item.TenKhachHang = item.MaKhachHangNavigation?.HoVaTen ?? "---";
+                    }
+
+
+                    ListHoaDon = new ObservableCollection<HoaDonM>(data);
+
+
                     decimal total = data.Sum(x => x.TongTien ?? 0);
                     if (total >= 1000000000)
                         TongDoanhThu = $"{total / 1000000000:0.0} (tỷ)";
                     else
-                        TongDoanhThu = $"{total:N0} (vnđ)";
+                        TongDoanhThu = $"{total:N0} đ";
                 }
-            }
-            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
-            finally { IsLoading = false; }
-        }
-        public HoaDonVM()
-        {
-            LoadDataAsync();
-        }
-        public async void AddDetail(HoaDonM bill)
-        {
-            try
-            {
-                using (var context = new QuanLyVatTuContext())
-                {
-                    context.HoaDon.Add(bill);
-                    await context.SaveChangesAsync();
-                }
-                BillList.Insert(0, bill);
-                MessageBox.Show("Thêm thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi thêm: " + ex.Message);
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
-        public async void DeleteBill(HoaDonM bill)
-        {
-            try
-            {
-                using (var context = new QuanLyVatTuContext())
-                {
-                    var itemToDelete = await context.HoaDon
-                        .Include(h => h.CT_HoaDon)
-                        .SingleOrDefaultAsync(x => x.MaHoaDon == bill.MaHoaDon);
 
-                    if (itemToDelete != null)
-                    {
-                        if (itemToDelete.CT_HoaDon != null && itemToDelete.CT_HoaDon.Any())
-                        {
-                            context.CT_HoaDon.RemoveRange(itemToDelete.CT_HoaDon);
-                        }
-                        context.HoaDon.Remove(itemToDelete);
-                        await context.SaveChangesAsync();
-                    }
-                }
-                BillList.Remove(bill);
-                MessageBox.Show("Xóa thành công!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi xóa: " + ex.InnerException?.Message ?? ex.Message);
-            }
-        }
     }
 }
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PageNavigation.Model;
 
@@ -20,4 +21,7 @@ public partial class HoaDonM
     public virtual KhachHangM? MaKhachHangNavigation { get; set; }
 
     public virtual NhanVienM? MaNhanVienNavigation { get; set; }
+
+    [NotMapped] public string TenNhanVien { get; set; }
+    [NotMapped] public string TenKhachHang { get; set; }
 }

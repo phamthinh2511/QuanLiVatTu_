@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PageNavigation.Model;
 
@@ -22,4 +23,7 @@ public partial class CT_HoaDonM
     public virtual HoaDonM MaHoaDonNavigation { get; set; } = null!;
 
     public virtual VatTuM MaVatTuNavigation { get; set; } = null!;
+
+    [NotMapped] public string TenVatTu { get; set; }
+    [NotMapped] public string TenDonViTinh { get; set; }
 }
