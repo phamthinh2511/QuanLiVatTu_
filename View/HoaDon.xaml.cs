@@ -68,7 +68,7 @@ namespace PageNavigation.View
                 return;
             }
 
-            if (MessageBox.Show($"Bạn chắc chắn muốn xóa hóa đơn số {selectedItem.MaHoaDon}?",
+            if (MessageBox.Show($"Bạn chắc chắn muốn xóa hóa đơn số {selectedItem.MaHoaDon}?\n(Hàng sẽ được hoàn trả lại vào kho)",
                 "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
@@ -78,20 +78,34 @@ namespace PageNavigation.View
                         var hd = db.HoaDon.Find(selectedItem.MaHoaDon);
                         if (hd != null)
                         {
-                            // BƯỚC 1: Xóa sạch chi tiết hóa đơn (Con)
+                            // 1. Lấy danh sách chi tiết của hóa đơn này
                             var chiTiet = db.CT_HoaDon.Where(x => x.MaHoaDon == hd.MaHoaDon).ToList();
+
+                            // --- ĐOẠN MỚI THÊM: HOÀN TRẢ KHO ---
+                            foreach (var item in chiTiet)
+                            {
+                                var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
+                                if (vt != null)
+                                {
+                                    // Trả lại số lượng đã bán vào kho
+                                    vt.SoLuongTon = (vt.SoLuongTon ?? 0) + item.SoLuongBan;
+                                }
+                            }
+                            // ------------------------------------
+
+                            // 2. Xóa chi tiết (Sau khi đã cộng kho xong)
                             if (chiTiet.Count > 0)
                             {
                                 db.CT_HoaDon.RemoveRange(chiTiet);
                             }
 
-                            // BƯỚC 2: Xóa hóa đơn (Cha)
+                            // 3. Xóa Hóa đơn
                             db.HoaDon.Remove(hd);
 
-                            // BƯỚC 3: Lưu DB
+                            // 4. Lưu tất cả thay đổi
                             db.SaveChanges();
 
-                            MessageBox.Show("Đã xóa thành công!");
+                            MessageBox.Show("Đã xóa hóa đơn và hoàn trả hàng vào kho!");
                             RefreshData();
                         }
                     }

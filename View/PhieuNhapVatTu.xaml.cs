@@ -64,7 +64,7 @@ namespace PageNavigation.View
                 return;
             }
 
-            if (MessageBox.Show($"Bạn chắc chắn muốn xóa phiếu {selectedItem.MaPhieuNhap}?",
+            if (MessageBox.Show($"Bạn chắc chắn muốn xóa phiếu nhập {selectedItem.MaPhieuNhap}?\n(Kho sẽ bị trừ đi số lượng tương ứng)",
                 "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
@@ -75,26 +75,55 @@ namespace PageNavigation.View
 
                         if (phieu != null)
                         {
-                            // --- BƯỚC 1: XÓA CHI TIẾT TRƯỚC (BẮT BUỘC) ---
-                            // Lấy tất cả vật tư trong phiếu này ra
-                            var chiTiet = db.CT_PhieuNhapVatTu
-                                            .Where(x => x.MaPhieuNhap == phieu.MaPhieuNhap)
-                                            .ToList();
+                            // 1. Lấy danh sách chi tiết của phiếu này
+                            var chiTiet = db.CT_PhieuNhapVatTu.Where(x => x.MaPhieuNhap == phieu.MaPhieuNhap).ToList();
 
-                            // Nếu có chi tiết thì xóa hết đi
+                            // --- BƯỚC KIỂM TRA AN TOÀN (QUAN TRỌNG) ---
+                            // Kiểm tra xem có đủ hàng trong kho để trừ không?
+                            // (Tránh trường hợp: Nhập xong bán hết rồi giờ quay lại xóa phiếu nhập)
+                            foreach (var item in chiTiet)
+                            {
+                                var vtCheck = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
+                                if (vtCheck != null)
+                                {
+                                    if ((vtCheck.SoLuongTon ?? 0) < item.SoLuong)
+                                    {
+                                        MessageBox.Show($"Không thể xóa phiếu này!\n" +
+                                                        $"Vật tư '{vtCheck.TenVatTu}' trong phiếu là {item.SoLuong}, " +
+                                                        $"nhưng tồn kho hiện tại chỉ còn {vtCheck.SoLuongTon}.\n\n" +
+                                                        "Lý do: Hàng này có thể đã bị bán hoặc xuất đi rồi.",
+                                                        "Lỗi kho hàng", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        return; // Dừng lại ngay, không cho xóa
+                                    }
+                                }
+                            }
+                            // -------------------------------------------
+
+                            // --- NẾU ĐỦ ĐIỀU KIỆN THÌ MỚI TRỪ KHO ---
+                            foreach (var item in chiTiet)
+                            {
+                                var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
+                                if (vt != null)
+                                {
+                                    // Trừ kho (Đảo ngược quá trình nhập)
+                                    vt.SoLuongTon = (vt.SoLuongTon ?? 0) - item.SoLuong;
+                                }
+                            }
+
+                            // 2. Xóa chi tiết
                             if (chiTiet.Count > 0)
                             {
                                 db.CT_PhieuNhapVatTu.RemoveRange(chiTiet);
                             }
 
-                            // --- BƯỚC 2: XÓA PHIẾU SAU ---
+                            // 3. Xóa Phiếu cha
                             db.PhieuNhapVatTu.Remove(phieu);
 
-                            // --- BƯỚC 3: LƯU DB ---
+                            // 4. Lưu tất cả
                             db.SaveChanges();
 
-                            MessageBox.Show("Đã xóa thành công!");
-                            RefreshData(); // Tải lại danh sách
+                            MessageBox.Show("Đã xóa phiếu nhập và cập nhật lại kho!");
+                            RefreshData();
                         }
                     }
                 }
