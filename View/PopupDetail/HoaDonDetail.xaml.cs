@@ -118,52 +118,80 @@ namespace PageNavigation.View.PopupDetail
             if (CurrentChiTiet.MaVatTu == 0) { MessageBox.Show("Chưa chọn vật tư!"); return; }
             if (CurrentChiTiet.SoLuongBan <= 0) { MessageBox.Show("Số lượng phải > 0"); return; }
 
-            // 1. Lấy thông tin vật tư từ danh sách nguồn để kiểm tra tồn kho
-            var vtTrongKho = DanhSachVatTu.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
-            if (vtTrongKho == null) return;
+            // --- 👇 ĐOẠN LOGIC KIỂM TRA TỒN KHO THÔNG MINH 👇 ---
 
-            // 2. Tính tổng số lượng người dùng ĐANG MUỐN MUA
-            int soLuongMuonMua = CurrentChiTiet.SoLuongBan;
-
-            // Nếu đang thêm mới (không phải sửa), cần kiểm tra xem trong lưới đã có món này chưa để cộng dồn
-            if (_itemDangSua == null)
+            // 1. Lấy tồn kho hiện tại (đang là 5)
+            var vtKho = DanhSachVatTu.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
+            if (vtKho != null)
             {
-                var daCoTrongLuoi = ListChiTietHienThi.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
-                if (daCoTrongLuoi != null)
+                int tonKhoHienTai = vtKho.SoLuongTon ?? 0;
+                int soLuongDaMuaCu = 0;
+
+                // 2. Nếu đang sửa hóa đơn cũ, đi tìm xem "Hồi xưa mình đã mua bao nhiêu?"
+                if (CurrentHoaDon.MaHoaDon != 0)
                 {
-                    soLuongMuonMua += daCoTrongLuoi.SoLuongBan; // Cộng dồn số cũ + số mới
+                    using (var db = new QuanLyVatTuContext())
+                    {
+                        // Tìm dòng chi tiết cũ trong DB
+                        var itemCu = db.CT_HoaDon.FirstOrDefault(x =>
+                                        x.MaHoaDon == CurrentHoaDon.MaHoaDon &&
+                                        x.MaVatTu == CurrentChiTiet.MaVatTu);
+
+                        if (itemCu != null)
+                        {
+                            soLuongDaMuaCu = itemCu.SoLuongBan; // Ví dụ: 10
+                        }
+                    }
+                }
+
+                // 3. Tính tổng khả năng cung cấp
+                // (Kho 5 + Đang giữ 10 = Có thể bán tối đa 15)
+                int tongCoTheBan = tonKhoHienTai + soLuongDaMuaCu;
+
+                // 4. Tính tổng khách muốn mua
+                int khachMuonMua = CurrentChiTiet.SoLuongBan; // Ví dụ: 15
+
+                // Nếu đang thêm mới vào lưới (chưa phải sửa dòng), phải cộng dồn với số đã có trên lưới
+                if (_itemDangSua == null)
+                {
+                    var daCoTrenLuoi = ListChiTietHienThi.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
+                    if (daCoTrenLuoi != null) khachMuonMua += daCoTrenLuoi.SoLuongBan;
+                }
+
+                // 5. SO SÁNH
+                if (khachMuonMua > tongCoTheBan)
+                {
+                    MessageBox.Show($"Kho hiện tại: {tonKhoHienTai}\n" +
+                                    $"Hóa đơn đang giữ: {soLuongDaMuaCu}\n" +
+                                    $"-> Tối đa có thể bán: {tongCoTheBan}.\n\n" +
+                                    $"Bạn đang nhập quá số lượng ({khachMuonMua})!",
+                                    "Không đủ hàng", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
             }
-
-            // 3. SO SÁNH VỚI TỒN KHO (Logic quan trọng nhất)
-            // Lưu ý: VatTuM cần có thuộc tính SoLuongTon (kiểm tra Model của bạn)
-            if (soLuongMuonMua > (vtTrongKho.SoLuongTon ?? 0))
-            {
-                MessageBox.Show($"Kho chỉ còn {vtTrongKho.SoLuongTon} {vtTrongKho.TenDonViTinh}.\nBạn không thể bán quá số lượng tồn!",
-                                "Cảnh báo hết hàng", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; // Dừng ngay, không cho chạy tiếp xuống dưới
-            }
+            // --- 👆 HẾT PHẦN KIỂM TRA KHO 👆 ---
 
 
-            // 1. Lấy tên hiển thị
-            var vt = DanhSachVatTu.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
+            // ... (Phần logic thêm vào lưới bên dưới giữ nguyên như cũ) ...
+
+            // Map tên hiển thị
+            CurrentChiTiet.TenVatTu = vtKho?.TenVatTu;
             var dvt = DanhSachDonViTinh.FirstOrDefault(x => x.MaDonViTinh == CurrentChiTiet.MaDonViTinh);
-            CurrentChiTiet.TenVatTu = vt?.TenVatTu;
             CurrentChiTiet.TenDonViTinh = dvt?.TenDonViTinh;
 
-            // 2. Tính thành tiền
+            // Tính tiền
             CurrentChiTiet.ThanhTien = CurrentChiTiet.SoLuongBan * CurrentChiTiet.DonGiaBan;
 
             if (_itemDangSua == null)
             {
-                // THÊM MỚI (Cộng dồn nếu trùng vật tư)
+                // THÊM MỚI
                 var exist = ListChiTietHienThi.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
                 if (exist != null)
                 {
                     exist.SoLuongBan += CurrentChiTiet.SoLuongBan;
                     exist.ThanhTien = exist.SoLuongBan * exist.DonGiaBan;
                     var idx = ListChiTietHienThi.IndexOf(exist);
-                    ListChiTietHienThi[idx] = exist; // Cập nhật UI
+                    ListChiTietHienThi[idx] = exist;
                 }
                 else
                 {
@@ -172,7 +200,7 @@ namespace PageNavigation.View.PopupDetail
             }
             else
             {
-                // CẬP NHẬT (Sửa dòng đang chọn)
+                // CẬP NHẬT
                 var idx = ListChiTietHienThi.IndexOf(_itemDangSua);
                 if (idx != -1) ListChiTietHienThi[idx] = CurrentChiTiet;
             }
@@ -226,9 +254,6 @@ namespace PageNavigation.View.PopupDetail
             // 3. Tính thành tiền
             CurrentChiTiet.ThanhTien = CurrentChiTiet.SoLuongBan * CurrentChiTiet.DonGiaBan;
 
-            // --- QUAN TRỌNG NHẤT: ÉP GIAO DIỆN CẬP NHẬT ---
-            // Vì CT_HoaDonM không tự báo thay đổi, ta phải báo cho nó biết
-            // là "Toàn bộ object CurrentChiTiet đã thay đổi, hãy load lại textbox đi"
             OnPropertyChanged(nameof(CurrentChiTiet));
         }
 
@@ -264,11 +289,30 @@ namespace PageNavigation.View.PopupDetail
 
         private void ButtonXoaChon_Click(object sender, RoutedEventArgs e)
         {
-            if (lvChiTiet.SelectedItem is CT_HoaDonM item)
+            CT_HoaDonM itemCanXoa = _itemDangSua;
+
+            // Ưu tiên 2: Nếu _itemDangSua null, thử lấy từ dòng đang chọn trên ListView (Phòng hờ)
+            if (itemCanXoa == null)
             {
-                ListChiTietHienThi.Remove(item);
+                itemCanXoa = lvChiTiet.SelectedItem as CT_HoaDonM;
+            }
+
+            // THỰC HIỆN XÓA
+            if (itemCanXoa != null)
+            {
+                // Xóa khỏi danh sách hiển thị
+                // (Lệnh này sẽ tự động cập nhật UI vì là ObservableCollection)
+                ListChiTietHienThi.Remove(itemCanXoa);
+
+                // Cập nhật lại tổng tiền
                 UpdateTongTien();
+
+                // Xóa trắng form và hủy chế độ sửa
                 ResetInput();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn vật tư cần xóa!");
             }
         }
 
@@ -282,30 +326,35 @@ namespace PageNavigation.View.PopupDetail
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if (ListChiTietHienThi.Count == 0) return;
-            if (CurrentHoaDon.MaNhanVien == null) { MessageBox.Show("Chưa chọn nhân viên!"); return; }
             if (CurrentHoaDon.MaKhachHang == null) { MessageBox.Show("Chưa chọn khách hàng!"); return; }
+            if (CurrentHoaDon.MaNhanVien == null) { MessageBox.Show("Chưa chọn nhân viên!"); return; }
 
             try
             {
                 using (var db = new QuanLyVatTuContext())
                 {
-                    // --- 1. LOGIC CẬP NHẬT KHO (MỚI THÊM) ---
-
-                    // Nếu là SỬA hóa đơn cũ: Phải HOÀN TRẢ lại số lượng cũ vào kho trước
+                    // --- BƯỚC 1: XỬ LÝ KHO KHI SỬA HÓA ĐƠN CŨ ---
+                    // Nếu đang sửa hóa đơn, ta phải HOÀN TRẢ số lượng cũ về kho trước
                     if (CurrentHoaDon.MaHoaDon != 0)
                     {
                         var chiTietCu = db.CT_HoaDon.Where(x => x.MaHoaDon == CurrentHoaDon.MaHoaDon).ToList();
+
                         foreach (var itemCu in chiTietCu)
                         {
                             var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == itemCu.MaVatTu);
                             if (vt != null)
                             {
-                                vt.SoLuongTon += itemCu.SoLuongBan; // Trả lại kho
+                                // Logic Bán: Hồi xưa bán đi (Trừ), giờ sửa lại thì phải trả lại kho (Cộng)
+                                vt.SoLuongTon = (vt.SoLuongTon ?? 0) + itemCu.SoLuongBan;
                             }
                         }
+
+                        // Xóa chi tiết cũ trong DB
+                        db.CT_HoaDon.RemoveRange(chiTietCu);
                     }
 
-                    // --- 2. LƯU HEADER (Giữ nguyên) ---
+                    // --- BƯỚC 2: LƯU HEADER (HÓA ĐƠN) ---
+                    // Ngắt quan hệ object để tránh lỗi
                     CurrentHoaDon.CT_HoaDon = null;
                     CurrentHoaDon.MaNhanVienNavigation = null;
                     CurrentHoaDon.MaKhachHangNavigation = null;
@@ -314,30 +363,28 @@ namespace PageNavigation.View.PopupDetail
 
                     if (CurrentHoaDon.MaHoaDon == 0) db.HoaDon.Add(CurrentHoaDon);
                     else db.HoaDon.Update(CurrentHoaDon);
-                    db.SaveChanges();
 
-                    // --- 3. LƯU DETAIL & TRỪ KHO MỚI (SỬA ĐỔI) ---
+                    db.SaveChanges(); // Lưu để sinh ID hóa đơn
 
-                    // Xóa chi tiết cũ trong DB
-                    var oldDetails = db.CT_HoaDon.Where(x => x.MaHoaDon == CurrentHoaDon.MaHoaDon).ToList();
-                    db.CT_HoaDon.RemoveRange(oldDetails);
-
+                    // --- BƯỚC 3: LƯU CHI TIẾT MỚI & TRỪ KHO ---
                     foreach (var item in ListChiTietHienThi)
                     {
                         item.MaHoaDon = CurrentHoaDon.MaHoaDon;
 
-                        // Ngắt quan hệ
-                        item.MaHoaDonNavigation = null; item.MaVatTuNavigation = null; item.MaDonViTinhNavigation = null;
+                        // Ngắt quan hệ object
+                        item.MaHoaDonNavigation = null;
+                        item.MaVatTuNavigation = null;
+                        item.MaDonViTinhNavigation = null;
 
-                        // A. Thêm vào bảng chi tiết hóa đơn
+                        // A. Thêm vào bảng chi tiết
                         db.CT_HoaDon.Add(item);
 
-                        // B. TRỪ KHO (Logic quan trọng)
-                        var vatTuTrongKho = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
-                        if (vatTuTrongKho != null)
+                        // B. TRỪ KHO (Logic chính của Bán Hàng) 👇
+                        var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
+                        if (vt != null)
                         {
-                            // Trừ đi số lượng bán
-                            vatTuTrongKho.SoLuongTon -= item.SoLuongBan;
+                            // Logic Bán: Bán đi thì kho phải GIẢM
+                            vt.SoLuongTon = (vt.SoLuongTon ?? 0) - item.SoLuongBan;
                         }
                     }
 

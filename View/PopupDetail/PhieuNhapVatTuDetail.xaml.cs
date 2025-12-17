@@ -160,25 +160,37 @@ namespace PageNavigation.View.PopupDetail
             {
                 using (var db = new QuanLyVatTuContext())
                 {
-                    // 1. LƯU HEADER (Sẽ tự bỏ qua MaNhanVien vì NotMapped)
-                    // Reset list chi tiết để tránh lỗi insert nhầm
-                    CurrentPhieuNhap.CT_PhieuNhapVatTu = null;
+                    // --- 1. XỬ LÝ KHO: HOÀN TÁC SỐ LƯỢNG CŨ (Nếu là Sửa) ---
+                    // Logic: Nếu sửa phiếu, ta coi như chưa từng nhập phiếu cũ => Trừ ngược số lượng cũ ra khỏi kho
+                    if (CurrentPhieuNhap.MaPhieuNhap != 0)
+                    {
+                        var oldDetails = db.CT_PhieuNhapVatTu.Where(x => x.MaPhieuNhap == CurrentPhieuNhap.MaPhieuNhap).ToList();
 
+                        foreach (var oldItem in oldDetails)
+                        {
+                            var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == oldItem.MaVatTu);
+                            if (vt != null)
+                            {
+                                // TRỪ KHO (Hoàn tác lần nhập trước)
+                                vt.SoLuongTon = (vt.SoLuongTon ?? 0) - oldItem.SoLuong;
+                            }
+                        }
+
+                        // Sau khi trừ kho xong thì xóa chi tiết cũ
+                        db.CT_PhieuNhapVatTu.RemoveRange(oldDetails);
+                    }
+
+                    // --- 2. LƯU HEADER ---
+                    CurrentPhieuNhap.CT_PhieuNhapVatTu = null;
                     if (CurrentPhieuNhap.MaPhieuNhap == 0) db.PhieuNhapVatTu.Add(CurrentPhieuNhap);
                     else db.PhieuNhapVatTu.Update(CurrentPhieuNhap);
 
-                    db.SaveChanges(); // Lấy ID Phiếu mới
+                    db.SaveChanges(); // Lưu để chốt ID phiếu
 
-                    // 2. LƯU CHI TIẾT (Xóa cũ -> Thêm mới)
-                    var oldDetails = db.CT_PhieuNhapVatTu.Where(x => x.MaPhieuNhap == CurrentPhieuNhap.MaPhieuNhap).ToList();
-                    db.CT_PhieuNhapVatTu.RemoveRange(oldDetails);
-                    db.SaveChanges();
-
+                    // --- 3. LƯU CHI TIẾT MỚI & CỘNG KHO ---
                     foreach (var item in ListChiTietHienThi)
                     {
                         item.MaPhieuNhap = CurrentPhieuNhap.MaPhieuNhap;
-
-                        // ✅ QUAN TRỌNG: Copy nhân viên từ Header xuống Detail
                         item.MaNhanVien = CurrentPhieuNhap.MaNhanVien;
 
                         // Ngắt quan hệ Object
@@ -187,13 +199,22 @@ namespace PageNavigation.View.PopupDetail
                         item.MaVatTuNavigation = null;
                         item.MaDonViTinhNavigation = null;
 
+                        // A. Thêm vào bảng chi tiết
                         db.CT_PhieuNhapVatTu.Add(item);
+
+                        // B. CẬP NHẬT KHO (MỚI THÊM ĐOẠN NÀY) 👇
+                        var vt = db.VatTu.FirstOrDefault(x => x.MaVatTu == item.MaVatTu);
+                        if (vt != null)
+                        {
+                            // Logic Nhập hàng: TĂNG số lượng tồn
+                            vt.SoLuongTon = (vt.SoLuongTon ?? 0) + item.SoLuong;
+                        }
                     }
-                    db.SaveChanges();
+                    db.SaveChanges(); // Lưu tất cả (Chi tiết + Tồn kho)
                 }
 
                 PageNavigation.Service.PhieuNhapVatTuService.NotifyChanged();
-                MessageBox.Show("Lưu thành công!");
+                MessageBox.Show("Lưu và cập nhật kho thành công!");
                 this.DialogResult = true;
                 this.Close();
             }
