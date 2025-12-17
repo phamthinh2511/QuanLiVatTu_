@@ -1,53 +1,71 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PageNavigation.Model;
-using PageNavigation.Utilities;
-using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace PageNavigation.ViewModel
 {
-    public class PhieuNhapVatTuVM : ViewModelBase
+    public class PhieuNhapVatTuVM : INotifyPropertyChanged
     {
+        // Danh sách phiếu nhập để Binding lên ListView
         private ObservableCollection<PhieuNhapVatTuM> _listPhieuNhap;
         public ObservableCollection<PhieuNhapVatTuM> ListPhieuNhap
         {
             get => _listPhieuNhap;
-            set
-            {
-                _listPhieuNhap = value;
-                OnPropertyChanged();
-            }
+            set { _listPhieuNhap = value; OnPropertyChanged(); }
         }
 
         public PhieuNhapVatTuVM()
         {
-            ListPhieuNhap = new ObservableCollection<PhieuNhapVatTuM>();
-
-            // 1. Gọi hàm tải dữ liệu ban đầu
-            // Vì gọi trong Constructor không dùng được 'await', ta dùng '_ =' để bỏ qua cảnh báo
-            _ = LoadDataAsync();
-
-            // 2. Đăng ký sự kiện Reload
-            // Sửa lỗi gọi sai tên hàm LoadData -> LoadDataAsync
-            // Thêm 'async' và 'await' để gọi hàm bất đồng bộ đúng cách
-            PageNavigation.Service.PhieuNhapVatTuService.PhieuNhapVatTuChanged += async (s, e) =>
-            {
-                await LoadDataAsync();
-            };
+            // Tự động tải dữ liệu khi khởi tạo
+            LoadData();
         }
 
-        public async Task LoadDataAsync()
+        // --- HÀM LOAD DATA (Sửa lỗi vm.LoadData() của bạn) ---
+        public void LoadData()
         {
-            using (var db = new QuanLyVatTuContext())
+            try
             {
-                var data = await db.PhieuNhapVatTu
-                                   .OrderByDescending(p => p.MaPhieuNhap)
-                                   .ToListAsync();
+                using (var db = new QuanLyVatTuContext())
+                {
+                    // 1. Tải phiếu nhập + Kèm theo Chi tiết + Kèm theo Nhân viên trong chi tiết
+                    var data = db.PhieuNhapVatTu
+                                 .Include(p => p.CT_PhieuNhapVatTu)
+                                 .ThenInclude(ct => ct.MaNhanVienNavigation) // Load thông tin nhân viên
+                                 .OrderByDescending(x => x.NgayNhapPhieu)
+                                 .ToList();
 
-                ListPhieuNhap = new ObservableCollection<PhieuNhapVatTuM>(data);
+                    // 2. Điền tên nhân viên vào thuộc tính ảo
+                    foreach (var item in data)
+                    {
+                        // Lấy nhân viên từ dòng chi tiết đầu tiên (nếu có)
+                        var chiTietDauTien = item.CT_PhieuNhapVatTu.FirstOrDefault();
+                        if (chiTietDauTien != null && chiTietDauTien.MaNhanVienNavigation != null)
+                        {
+                            item.TenNhanVien = chiTietDauTien.MaNhanVienNavigation.HoTen;
+                        }
+                        else
+                        {
+                            item.TenNhanVien = "---";
+                        }
+                    }
+
+                    ListPhieuNhap = new ObservableCollection<PhieuNhapVatTuM>(data);
+                }
             }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

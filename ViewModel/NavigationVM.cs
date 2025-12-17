@@ -38,6 +38,7 @@ namespace PageNavigation.ViewModel
                 case "KhachHang": CurrentView = _danhSachKhachHangVM; break;
                 case "VatTu": CurrentView = _vatTuVM; break;
                 case "HoaDon": CurrentView = _hoaDonVM; break;
+                case "PhieuNhapVatTu": CurrentView = _phieuNhapVatTuVM; break;
                 case "PhieuThuTien": CurrentView = _phieuThuTienVM; break;
                 case "TraCuu": CurrentView = _traCuuVM; break;
                 case "BaoCao": CurrentView = _baoCaoVM; break;
@@ -66,27 +67,18 @@ namespace PageNavigation.ViewModel
         public ICommand PhieuThuTienCommand { get; set; }
         public ICommand BaoCaoCommand { get; set; }
 
-        private void Home(object obj)
-        { CurrentView = _homeVM; CurrentTag = "Home"; }
-        private void NhanVien(object obj)
-        { CurrentView = _nhanVienVM; CurrentTag = "NhanVien"; }
-        private void LoaiVatTu(object obj)
-        { CurrentView = _loaiVatTuVM; CurrentTag = "LoaiVatTu"; }
-        private void KhachHang(object obj)
-        { CurrentView = _danhSachKhachHangVM; CurrentTag = "KhachHang"; }
+        private void Home(object obj) => CurrentTag = "Home";
+        private void NhanVien(object obj) => CurrentTag = "NhanVien";
+        private void LoaiVatTu(object obj) => CurrentTag = "LoaiVatTu";
+        private void KhachHang(object obj) => CurrentTag = "KhachHang";
+        private void VatTu(object obj) => CurrentTag = "VatTu";
+        private void HoaDon(object obj) => CurrentTag = "HoaDon";
+        private void PhieuThuTien(object obj) => CurrentTag = "PhieuThuTien";
+        private void TraCuu(object obj) => CurrentTag = "TraCuu";
+        private void BaoCao(object obj) => CurrentTag = "BaoCao";
+        private void PhieuNhapVatTu(object obj) => CurrentTag = "PhieuNhapVatTu";
 
-        private void VatTu(object obj)
-        { CurrentView = _vatTuVM; CurrentTag = "VatTu"; }
-        private void HoaDon(object obj)
-        { CurrentView = _hoaDonVM; CurrentTag = "HoaDon"; }
-        private void PhieuNhapVatTu(object obj)
-        { CurrentView = _phieuNhapVatTuVM; CurrentTag = "PhieuNhapVatTu"; }
-        private void PhieuThuTien(object obj)
-        { CurrentView = _phieuThuTienVM; CurrentTag = "PhieuThuTien"; }
-        private void TraCuu(object obj)
-        { CurrentView = _traCuuVM; CurrentTag = "TraCuu"; }
-        private void BaoCao(object obj)
-        { CurrentView = _baoCaoVM; CurrentTag = "BaoCao"; }
+
 
         public NavigationVM()
         {

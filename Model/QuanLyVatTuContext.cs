@@ -42,7 +42,7 @@ public partial class QuanLyVatTuContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
-        optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=QuanLyVatTu;Integrated Security=True;TrustServerCertificate=True");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
