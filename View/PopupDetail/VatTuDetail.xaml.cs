@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PageNavigation.Utilities;
 
 namespace PageNavigation.View.PopupDetail
 {
@@ -133,6 +134,7 @@ namespace PageNavigation.View.PopupDetail
                         }
                     }
                     db.SaveChanges();
+                    GlobalEvents.RaiseVatTuChanged();
                 }
 
                 MessageBox.Show("Lưu thành công!");

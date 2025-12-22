@@ -54,14 +54,14 @@
                                     </TextBlock>
                                     <Grid Width="455" Height="60" Margin="20">
                                         <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
-                                        <TextBox Margin="20"
+                                        <TextBox Margin="3,0,0,0"
                                                  x:Name="txtHoTen"
                                                  Text="{Binding KHTen, UpdateSourceTrigger=PropertyChanged}"
                                                  Style="{StaticResource TextBoxStyle}"
                                                  Foreground="#CED565"
-                                                 Width="455" Height="60" FontSize="30"
+                                                 Width="455" Height="60" FontSize="20"
                                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                 HorizontalAlignment="Left" VerticalAlignment="Center"
                                                  FontFamily="/Fonts/#Fz Rubik Med"/>
                                     </Grid>
                                 </StackPanel>
@@ -82,7 +82,7 @@
                                              Text="{Binding KHSDT, UpdateSourceTrigger=PropertyChanged}"
                                              Style="{StaticResource TextBoxStyle}"
                                              Foreground="#CED565"
-                                             Width="400" Height="60" FontSize="30"
+                                             Width="400" Height="60" FontSize="20"
                                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                              HorizontalAlignment="Center" VerticalAlignment="Center"
                                              FontFamily="/Fonts/#Fz Rubik Med"/>
@@ -102,7 +102,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    
+
                 </Grid>
                 <Grid Grid.Row="1">
                     <ListView x:Name="CustomerListView" 

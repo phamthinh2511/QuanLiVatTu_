@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using PageNavigation.Model;
+using PageNavigation.Utilities;
 
 namespace PageNavigation.View.PopupDetail
 {
@@ -63,8 +64,9 @@ namespace PageNavigation.View.PopupDetail
                     }
 
                     context.SaveChanges();
+                    GlobalEvents.RaiseKhachHangChanged();
                 }
-
+                
                 MessageBox.Show("Lưu thành công!");
                 this.DialogResult = true;
                 this.Close();

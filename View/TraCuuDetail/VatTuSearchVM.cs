@@ -72,12 +72,15 @@ namespace PageNavigation.View.TraCuuDetail
             {
                 var query = context.VatTu.AsQueryable();
                 query = query.Include(x => x.MaLoaiNavigation);
-
                 if (!string.IsNullOrEmpty(tenvt))
                 {
                     query = query.Where(x => x.TenVatTu.Contains(tenvt));
                 }
+                if (!string.IsNullOrEmpty(loaivt))
+                {
+                    query = query.Where(x => x.MaLoaiNavigation.TenLoai.Contains(loaivt));
 
+                }
                 var data = query.ToList();
                 ListVatTu = new ObservableCollection<VatTuM>(data);
             }
