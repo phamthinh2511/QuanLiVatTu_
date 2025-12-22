@@ -1,4 +1,5 @@
 ﻿using PageNavigation.Model;
+using PageNavigation.Utilities;
 using PageNavigation.View.PopupDetail;
 using PageNavigation.ViewModel;
 using System;
@@ -26,6 +27,7 @@ namespace PageNavigation.View
         public KhachHang()
         {
             InitializeComponent();
+            
         }
 
 
@@ -44,8 +46,8 @@ namespace PageNavigation.View
                 }
             }
         }
-
-        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+   
+    private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
 
             var selectedCustomer = CustomerListView.SelectedItem as KhachHangM;

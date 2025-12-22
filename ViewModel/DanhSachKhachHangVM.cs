@@ -43,6 +43,10 @@ namespace PageNavigation.ViewModel
         public DanhSachKhachHangVM()
         {
             LoadDataAsync();
+            PageNavigation.Utilities.GlobalEvents.OnKhachHangChanged += () =>
+            {
+                LoadDataAsync();
+            };
         }
 
         public async void AddCustomer(KhachHangM kh)

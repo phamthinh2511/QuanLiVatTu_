@@ -14,5 +14,15 @@ namespace PageNavigation.Utilities
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        
+    }
+    public static class GlobalEvents
+    {
+        public static event Action OnVatTuChanged;
+
+        public static void RaiseVatTuChanged() => OnVatTuChanged?.Invoke();
+
+        public static event Action OnKhachHangChanged;
+        public static void RaiseKhachHangChanged() => OnKhachHangChanged?.Invoke();
     }
 }
