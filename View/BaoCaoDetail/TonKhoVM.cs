@@ -1,13 +1,15 @@
-﻿using System;
+﻿using PageNavigation.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PageNavigation.Utilities;
 
 namespace PageNavigation.View.BaoCaoDetail
 {
-    class TonKhoVM : ViewModelBase
+    public class TonKhoVM : ViewModelBase
     {
     }
 }
+

@@ -98,6 +98,10 @@ namespace PageNavigation.ViewModel
             LoadDataAsync();
 
             LoaiVatTuService.OnLoaiVatTuChanged += LoadLoaiVatTu;   // ComboBox auto update
+            PageNavigation.Utilities.GlobalEvents.OnVatTuChanged += () =>
+            {
+                LoadDataAsync();
+            };
         }
 
         // --------------------------------------------
