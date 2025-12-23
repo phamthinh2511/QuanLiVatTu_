@@ -68,9 +68,9 @@
                     <Grid Height="60" Width="180" Margin="20, 0, 0, 0">
                         <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
                         <ComboBox x:Name="cbNam"
+                                  ItemsSource="{Binding ListNam}"
                                   Style="{StaticResource ComboBoxStyle}"
                                   SelectedValue="{Binding NamBaoCao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedValuePath="Content"
                                   Foreground="#CED565" Background="Transparent"
                                   Width="180" Height="60" FontSize="30"
                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
@@ -78,34 +78,6 @@
                                   FontFamily="/Fonts/#Fz Rubik Med"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ScrollViewer.VerticalScrollBarVisibility="Hidden">    
-
-                            <ComboBoxItem Content="2000"/>
-                            <ComboBoxItem Content="2001"/>
-                            <ComboBoxItem Content="2002"/>
-                            <ComboBoxItem Content="2003"/>
-                            <ComboBoxItem Content="2004"/>
-                            <ComboBoxItem Content="2005"/>
-                            <ComboBoxItem Content="2006"/>
-                            <ComboBoxItem Content="2007"/>
-                            <ComboBoxItem Content="2008"/>
-                            <ComboBoxItem Content="2009"/>
-                            <ComboBoxItem Content="2010"/>
-                            <ComboBoxItem Content="2011"/>
-                            <ComboBoxItem Content="2012"/>
-                            <ComboBoxItem Content="2013"/>
-                            <ComboBoxItem Content="2014"/>
-                            <ComboBoxItem Content="2015"/>
-                            <ComboBoxItem Content="2016"/>
-                            <ComboBoxItem Content="2017"/>
-                            <ComboBoxItem Content="2018"/>
-                            <ComboBoxItem Content="2019"/>
-                            <ComboBoxItem Content="2020"/>
-                            <ComboBoxItem Content="2021"/>
-                            <ComboBoxItem Content="2022"/>
-                            <ComboBoxItem Content="2023"/>
-                            <ComboBoxItem Content="2024"/>
-                            <ComboBoxItem Content="2025"/>
-                            <ComboBoxItem Content="2026"/>
                         </ComboBox>
                     </Grid>
                 </StackPanel>

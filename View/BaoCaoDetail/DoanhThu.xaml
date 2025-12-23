@@ -7,7 +7,151 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="1215">
-    <Grid Background="Navy">
-        <TextBlock Text="Tồn Kho"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0"
+                    Background="#212529">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Năm"
+                               Foreground="White"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               FontFamily="/Fonts/#Fz Rubik Med"
+                               Margin="20, 0, 0, 0">
+
+                    </TextBlock>
+
+                    <Grid Height="60" Width="180" Margin="20, 0, 0, 0">
+                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+                        <ComboBox x:Name="cbNam"
+                                  ItemsSource="{Binding ListNam}"
+                                  Style="{StaticResource ComboBoxStyle}"
+                                  SelectedValue="{Binding NamBaoCao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Foreground="#CED565" Background="Transparent"
+                                  Width="180" Height="60" FontSize="30"
+                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  FontFamily="/Fonts/#Fz Rubik Med"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView x:Name="CustomerListView" 
+                      ItemsSource="{Binding ListDoanhThu}"
+                      FontFamily="/Fonts/#Fz Rubik Med"
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      Width="1215"
+                      FontSize="25"
+                      Foreground="#CED565"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      AlternationCount="2">
+
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
+
+                        <GridViewColumn Header="Tháng" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Thang}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tổng Doanh Thu" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TongDoanhThu, StringFormat={}{0:N0}}"
+                                   ToolTip="Tổng tiền bán hàng"
+                                   VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Tổng Vốn" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TongVon, StringFormat={}{0:N0}}" 
+                                   VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Lợi Nhuận" Width="250">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding LoiNhuan, StringFormat={}{0:N0}}" 
+                                   VerticalAlignment="Center" FontWeight="Bold"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Số Đơn Hàng" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SoDonHang}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="0,2,0,2"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                        <GridViewRowPresenter Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#17191a"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#3E444A"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0bcdff"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#CED565"/>
+                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
     </Grid>
 </UserControl>

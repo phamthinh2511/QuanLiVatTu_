@@ -25,7 +25,7 @@ namespace PageNavigation.View.BaoCaoDetail
         public DoanhThu()
         {
             InitializeComponent();
-           
+            this.DataContext = new PageNavigation.View.BaoCaoDetail.DoanhThuVM();
         }
     }
 }

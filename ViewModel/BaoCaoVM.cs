@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PageNavigation.Model;
+using PageNavigation.Service;
 using PageNavigation.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PageNavigation.ViewModel
@@ -24,7 +26,7 @@ namespace PageNavigation.ViewModel
                 {
                     _thangBaoCao = value;
                     OnPropertyChanged();
-                    LoadBaoCaoData();
+                    LoadData();
                 }
             }
 		}
@@ -39,9 +41,16 @@ namespace PageNavigation.ViewModel
                 {
                     _namBaoCao = value;
                     OnPropertyChanged();
-                    LoadBaoCaoData();
+                    LoadData();
                 }
             }
+        }
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { _isBusy = value; OnPropertyChanged();  }
         }
 
 
@@ -54,12 +63,36 @@ namespace PageNavigation.ViewModel
 		}
 
 
-
+        public ObservableCollection<int> ListNam { get; set; } = new ObservableCollection<int>();
         public BaoCaoVM()
         {
             ListBaoCao = new ObservableCollection<BaoCaoM>();
             ThangBaoCao = DateTime.Now.Month;
             NamBaoCao = DateTime.Now.Year;
+            for (int i = 2000; i <= DateTime.Now.Year + 1; i++)
+            {
+                ListNam.Add(i);
+            }
+        }
+        private async void LoadData()
+        {
+            IsBusy = true;
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    BaoCaoService.TinhVaLuuBaoCaoTonKho(ThangBaoCao, NamBaoCao);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+                }
+            });
+
+            LoadBaoCaoData();
+
+            IsBusy = false;
         }
         private void LoadBaoCaoData()
         {
