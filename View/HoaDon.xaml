@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="800" d:DesignWidth="1215"
+             d:DesignHeight="800" d:DesignWidth="1440"
              Style="{StaticResource Page_Style}">
 
     <Grid Background="#212529">
@@ -22,7 +22,7 @@
                        Margin="20, 0, 0, 0"/>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="20,0,20,0">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,0,20,0">
             <ListView x:Name="lvHoaDon"
                       ItemsSource="{Binding ListHoaDon}"
                       FontFamily="/Fonts/#Fz Rubik Med"
@@ -30,12 +30,16 @@
                       Foreground="#CED565"
                       Background="Transparent"
                       BorderThickness="0"
-                      AlternationCount="2">
+                      AlternationCount="2"
+                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                       ScrollViewer.VerticalScrollBarVisibility="Auto"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch">
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
 
-                        <GridViewColumn Header="Mã HĐ" Width="150">
+                        <GridViewColumn Header="Mã HĐ" Width="270">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaHoaDon}"/>
@@ -43,7 +47,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Khách Hàng" Width="300">
+                        <GridViewColumn Header="Khách Hàng" Width="370">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TenKhachHang}"/>
@@ -51,7 +55,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Ngày Lập" Width="250">
+                        <GridViewColumn Header="Ngày Lập" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding NgayLapHoaDon, StringFormat='dd/MM/yyyy'}"/>
@@ -59,7 +63,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tổng Tiền" Width="470">
+                        <GridViewColumn Header="Tổng Tiền" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TongTien, StringFormat='#,##0 đ'}"/>
@@ -69,7 +73,6 @@
 
                     </GridView>
                 </ListView.View>
-
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="5"/>
