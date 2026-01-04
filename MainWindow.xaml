@@ -10,8 +10,9 @@
         
         util:WindowHelper.EnableDrag="True"
         Title="Quản lý vật tư" 
-        Height="800"
-        Width="1280"
+        MinHeight="800"
+        MinWidth="1470"
+        WindowState="Maximized"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using PageNavigation.Service;
+using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Windows;
@@ -24,7 +25,7 @@ namespace PageNavigation
                 typeof(FrameworkElement),
                 new FrameworkPropertyMetadata(
                     System.Windows.Markup.XmlLanguage.GetLanguage(vCulture.IetfLanguageTag)));
-
+            KhoService.RebuildTonKho();
             base.OnStartup(e);
         }
 

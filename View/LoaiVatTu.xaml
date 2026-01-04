@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:PageNavigation.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1215"
+             d:DesignHeight="800" d:DesignWidth="1440"
              Style="{StaticResource Page_Style}">
 
     <UserControl.Resources>
@@ -15,7 +15,7 @@
     <Grid Background="#212529">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="590"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="110"/>
         </Grid.RowDefinitions>
 
@@ -28,25 +28,26 @@
         </Grid>
 
         <!--===== LISTVIEW =====-->
-        <Grid Grid.Row="1" Width="1215">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20, 0, 20, 0">
             <ListView x:Name="VatTuTypeListView" 
                       ItemsSource="{Binding DanhSachLoaiVatTu}"
                       FontFamily="/Fonts/#Fz Rubik Med"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
-                      Width="1215"
-                      FontSize="25"
+                 
+                      FontSize="20"
                       Foreground="#CED565"
                       Background="Transparent"
                       BorderThickness="0"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                       ScrollViewer.VerticalScrollBarVisibility="Auto"
+
                       AlternationCount="2">
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
 
-                        <GridViewColumn Header="Mã Loại" Width="110">
+                        <GridViewColumn Header="Mã Loại" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaLoai}" VerticalAlignment="Center"/>
@@ -54,7 +55,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tên loại vật tư" Width="300">
+                        <GridViewColumn Header="Tên loại vật tư" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TenLoai}" 
@@ -65,7 +66,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Mô tả" Width="860">
+                        <GridViewColumn Header="Mô tả" Width="790">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MoTa}" 
@@ -83,21 +84,20 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="5"/>
-                        <Setter Property="Margin" Value="0,2,0,2"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <Border x:Name="Bd" CornerRadius="10"
-                                            Background="{TemplateBinding Background}">
-                                        <GridViewRowPresenter Content="{TemplateBinding Content}"
-                                                              Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                    <Border x:Name="Bd" CornerRadius="10" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                        <GridViewRowPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-
                         <Style.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                                 <Setter Property="Background" Value="#17191a"/>
