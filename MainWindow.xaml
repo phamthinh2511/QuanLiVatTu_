@@ -15,8 +15,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="Transparent"
-        >
+        Background="Transparent">
     <Window.Resources>
         <Style x:Key="Font_Style" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
