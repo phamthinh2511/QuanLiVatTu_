@@ -245,6 +245,12 @@ public partial class QuanLyVatTuContext : DbContext
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.Vattus)
                 .HasForeignKey(d => d.MaLoai)
                 .HasConstraintName("FK__VATTU__MaLoai__45F365D3");
+
+            // ===== FK -> ĐƠN VỊ TÍNH (BẠN ĐANG THIẾU) =====
+            entity.HasOne(d => d.MaDonViTinhNavigation)
+                .WithMany(p => p.VatTu)
+                .HasForeignKey(d => d.MaDonViTinh)
+                .HasConstraintName("FK_VatTu_DonViTinh");
         });
 
         OnModelCreatingPartial(modelBuilder);
