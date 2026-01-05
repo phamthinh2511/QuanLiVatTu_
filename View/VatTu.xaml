@@ -52,7 +52,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tên vật tư" Width="300">
+                        <GridViewColumn Header="Tên vật tư" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TenVatTu}" 
@@ -63,13 +63,33 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Loại vật tư" Width="300">
+                        <GridViewColumn Header="Loại vật tư" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaLoaiNavigation.TenLoai}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Header="Số lượng tồn" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SoLuongTon}"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Đơn vị tính" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                Text="{Binding TenDonViTinh}"
+                VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
 
                         <GridViewColumn Header="Mô tả" Width="435">
                             <GridViewColumn.CellTemplate>
@@ -81,15 +101,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Số lượng tồn" Width="240">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding SoLuongTon}"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        
 
                     </GridView>
                 </ListView.View>

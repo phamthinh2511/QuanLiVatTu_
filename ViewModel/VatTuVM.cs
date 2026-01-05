@@ -132,6 +132,7 @@ namespace PageNavigation.ViewModel
                     // 2. Lấy dữ liệu mới nhất từ SQL (nhớ Include để lấy cả tên Loại)
                     var data = await db.VatTu
                                        .Include(x => x.MaLoaiNavigation) // Nếu bạn muốn hiện tên Loại
+                                       .Include(x => x.MaDonViTinhNavigation)
                                        .ToListAsync();
 
                     // 3. Cập nhật vào ObservableCollection

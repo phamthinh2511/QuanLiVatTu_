@@ -9,6 +9,8 @@ namespace PageNavigation.View.PopupDetail
     public partial class KhachHangDetail : Window
     {
         public KhachHangM CurrentCustomer { get; set; }
+        private KhachHangM _originalCustomer;
+
 
         public KhachHangDetail(KhachHangM customerToEdit = null)
         {
@@ -19,10 +21,20 @@ namespace PageNavigation.View.PopupDetail
 
                 CurrentCustomer = new KhachHangM();
                 CurrentCustomer.NgaySinh = DateOnly.FromDateTime(DateTime.Now);
+                _originalCustomer = null;
             }
             else
             {
                 CurrentCustomer = customerToEdit;
+                _originalCustomer = new KhachHangM
+                {
+                    MaKhachHang = customerToEdit.MaKhachHang,
+                    HoVaTen = customerToEdit.HoVaTen,
+                    SoDienThoai = customerToEdit.SoDienThoai,
+                    DiaChi = customerToEdit.DiaChi,
+                    GioiTinh = customerToEdit.GioiTinh,
+                    NgaySinh = customerToEdit.NgaySinh
+                };
                 if (btnSave != null) btnSave.IsEnabled = true;
             }
 
@@ -77,7 +89,77 @@ namespace PageNavigation.View.PopupDetail
             }
         }
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e) { this.DialogResult = false; this.Close(); }
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsDataChanged())
+            {
+                MessageBox.Show(
+                    "Chưa có dữ liệu nào để đặt lại",
+                    "Thông báo",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            var result = MessageBox.Show(
+                "Bạn có muốn đặt lại dữ liệu về trạng thái đã lưu gần nhất không?",
+                "Xác nhận",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.OK)
+            {
+                RestoreOriginalData();
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e) { this.Close(); }
+        private bool IsDataChanged()
+        {
+            if (_originalCustomer == null || _originalCustomer.MaKhachHang == 0)
+                return false;
+
+            if ((txtHoTen.Text ?? "").Trim() != (_originalCustomer.HoVaTen ?? "").Trim())
+                return true;
+
+            if ((txtSDT.Text ?? "").Trim() != (_originalCustomer.SoDienThoai ?? "").Trim())
+                return true;
+
+            if ((txtDiaChi.Text ?? "").Trim() != (_originalCustomer.DiaChi ?? "").Trim())
+                return true;
+
+            // SO SÁNH GIỚI TÍNH ĐÚNG CÁCH
+            string gioiTinhUI = null;
+            if (cbGioiTinh.SelectedItem is ComboBoxItem gtItem)
+                gioiTinhUI = gtItem.Content?.ToString();
+
+            if ((gioiTinhUI ?? "") != (_originalCustomer.GioiTinh ?? ""))
+                return true;
+
+            if (CurrentCustomer.NgaySinh != _originalCustomer.NgaySinh)
+                return true;
+
+            return false;
+        }
+
+        private void RestoreOriginalData()
+        {
+            if (_originalCustomer == null) return;
+
+            CurrentCustomer.HoVaTen = _originalCustomer.HoVaTen;
+            CurrentCustomer.SoDienThoai = _originalCustomer.SoDienThoai;
+            CurrentCustomer.DiaChi = _originalCustomer.DiaChi;
+            CurrentCustomer.GioiTinh = _originalCustomer.GioiTinh;
+            CurrentCustomer.NgaySinh = _originalCustomer.NgaySinh;
+
+            txtHoTen.Text = _originalCustomer.HoVaTen;
+            txtSDT.Text = _originalCustomer.SoDienThoai;
+            txtDiaChi.Text = _originalCustomer.DiaChi;
+            cbGioiTinh.Text = _originalCustomer.GioiTinh;
+
+            CheckValidate();
+        }
+
+
     }
 }

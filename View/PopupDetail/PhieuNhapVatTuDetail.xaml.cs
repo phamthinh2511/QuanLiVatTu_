@@ -26,6 +26,9 @@ namespace PageNavigation.View.PopupDetail
             get => _currentChiTiet;
             set { _currentChiTiet = value; OnPropertyChanged(); }
         }
+        private PhieuNhapVatTuM _phieuNhapBackup;
+        private List<CT_PhieuNhapVatTuM> _chiTietBackup;
+
 
         public ObservableCollection<CT_PhieuNhapVatTuM> ListChiTietHienThi { get; set; }
         public List<VatTuM> DanhSachVatTu { get; set; }
@@ -89,6 +92,9 @@ namespace PageNavigation.View.PopupDetail
             {
                 btnSave.IsEnabled = true;
             }
+
+            _phieuNhapBackup = ClonePhieuNhap(CurrentPhieuNhap);
+            _chiTietBackup = CloneChiTiet(ListChiTietHienThi);
         }
 
         private void ResetInput()
@@ -253,9 +259,101 @@ namespace PageNavigation.View.PopupDetail
             };
         }
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e) => Close();
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsChanged())
+            {
+                MessageBox.Show(
+                    "Chưa có thay đổi nào để hiển thị",
+                    "Thông báo",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+                return;
+            }
+
+            var result = MessageBox.Show(
+                "Dữ liệu đã thay đổi. Bạn có muốn hoàn tác về lần lưu gần nhất không?",
+                "Xác nhận",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question
+            );
+
+            if (result == MessageBoxResult.OK)
+            {
+                RestoreFromBackup();
+            }
+            // Cancel → không làm gì
+        }
+
         private void Button_Close(object sender, RoutedEventArgs e) => Close();
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private PhieuNhapVatTuM ClonePhieuNhap(PhieuNhapVatTuM src)
+        {
+            if (src == null) return null;
+
+            return new PhieuNhapVatTuM
+            {
+                MaPhieuNhap = src.MaPhieuNhap,
+                NgayNhapPhieu = src.NgayNhapPhieu,
+                MaNhanVien = src.MaNhanVien,
+                TongTien = src.TongTien
+            };
+        }
+
+        private List<CT_PhieuNhapVatTuM> CloneChiTiet(IEnumerable<CT_PhieuNhapVatTuM> src)
+        {
+            return src.Select(x => new CT_PhieuNhapVatTuM
+            {
+                MaVatTu = x.MaVatTu,
+                MaDonViTinh = x.MaDonViTinh,
+                MaNhanVien = x.MaNhanVien,
+                SoLuong = x.SoLuong,
+                DonGiaNhap = x.DonGiaNhap,
+                DonGiaBan = x.DonGiaBan,
+                ThanhTien = x.ThanhTien,
+                TenVatTu = x.TenVatTu,
+                TenDonViTinh = x.TenDonViTinh
+            }).ToList();
+        }
+        private bool IsChanged()
+        {
+            if (_phieuNhapBackup == null) return false;
+
+            if (_phieuNhapBackup.MaNhanVien != CurrentPhieuNhap.MaNhanVien) return true;
+            if (_phieuNhapBackup.NgayNhapPhieu != CurrentPhieuNhap.NgayNhapPhieu) return true;
+            if (_phieuNhapBackup.TongTien != CurrentPhieuNhap.TongTien) return true;
+
+            if (_chiTietBackup.Count != ListChiTietHienThi.Count) return true;
+
+            for (int i = 0; i < _chiTietBackup.Count; i++)
+            {
+                var oldItem = _chiTietBackup[i];
+                var newItem = ListChiTietHienThi[i];
+
+                if (oldItem.MaVatTu != newItem.MaVatTu) return true;
+                if (oldItem.SoLuong != newItem.SoLuong) return true;
+                if (oldItem.DonGiaNhap != newItem.DonGiaNhap) return true;
+                if (oldItem.DonGiaBan != newItem.DonGiaBan) return true;
+            }
+
+            return false;
+        }
+        private void RestoreFromBackup()
+        {
+            CurrentPhieuNhap = ClonePhieuNhap(_phieuNhapBackup);
+            ListChiTietHienThi = new ObservableCollection<CT_PhieuNhapVatTuM>(
+                CloneChiTiet(_chiTietBackup)
+            );
+
+            OnPropertyChanged(nameof(CurrentPhieuNhap));
+            OnPropertyChanged(nameof(ListChiTietHienThi));
+
+            ResetInput();
+        }
+
+
+
     }
 }

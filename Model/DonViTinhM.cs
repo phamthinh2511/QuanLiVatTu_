@@ -12,4 +12,6 @@ public partial class DonViTinhM
     public virtual ICollection<CT_HoaDonM>  CT_HoaDon { get; set; } = new List<CT_HoaDonM>();
 
     public virtual ICollection<CT_PhieuNhapVatTuM> CT_PhieuNhapVatTu { get; set; } = new List<CT_PhieuNhapVatTuM>();
+   
+    public virtual ICollection<VatTuM> VatTu { get; set; } = new List<VatTuM>();
 }

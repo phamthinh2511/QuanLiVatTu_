@@ -22,6 +22,8 @@ namespace PageNavigation.View.PopupDetail
     {
         // Biến lưu trữ đối tượng hiện tại
         public LoaiVatTuM CurrentLoaiVatTu { get; set; }
+        private LoaiVatTuM _originalLoaiVatTu;
+
 
         // Constructor nhận vào tham số (null = thêm mới, có giá trị = sửa)
         public LoaiVatTuDetail(LoaiVatTuM lvt = null)
@@ -32,11 +34,18 @@ namespace PageNavigation.View.PopupDetail
             {
                 // Trường hợp thêm mới -> Tạo object rỗng
                 CurrentLoaiVatTu = new LoaiVatTuM();
+                _originalLoaiVatTu = null; // thêm mới → không có dữ liệu gốc
             }
             else
             {
                 // Trường hợp sửa -> Gán object được truyền vào
                 CurrentLoaiVatTu = lvt;
+                _originalLoaiVatTu = new LoaiVatTuM
+                {
+                    MaLoai = lvt.MaLoai,
+                    TenLoai = lvt.TenLoai,
+                    MoTa = lvt.MoTa
+                };
 
                 // Đổ dữ liệu cũ lên giao diện (Nếu không dùng Binding TwoWay)
                 txtTenLoai.Text = lvt.TenLoai;
@@ -145,14 +154,61 @@ namespace PageNavigation.View.PopupDetail
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
-            this.Close();
+            if (!IsDataChanged())
+            {
+                MessageBox.Show(
+                    "Chưa có dữ liệu nào để đặt lại",
+                    "Thông báo",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            var result = MessageBox.Show(
+                "Bạn có muốn đặt lại dữ liệu về trạng thái đã lưu gần nhất không?",
+                "Xác nhận",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.OK)
+            {
+                RestoreOriginalData();
+            }
         }
+
 
         // Đóng form (nút X custom nếu có)
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        private bool IsDataChanged()
+        {
+            // Thêm mới → không coi là thay đổi
+            if (_originalLoaiVatTu == null || _originalLoaiVatTu.MaLoai == 0)
+                return false;
+
+            if ((txtTenLoai.Text ?? "").Trim() != (_originalLoaiVatTu.TenLoai ?? "").Trim())
+                return true;
+
+            if ((txtMoTa.Text ?? "").Trim() != (_originalLoaiVatTu.MoTa ?? "").Trim())
+                return true;
+
+            return false;
+        }
+        private void RestoreOriginalData()
+        {
+            if (_originalLoaiVatTu == null) return;
+
+            CurrentLoaiVatTu.TenLoai = _originalLoaiVatTu.TenLoai;
+            CurrentLoaiVatTu.MoTa = _originalLoaiVatTu.MoTa;
+
+            txtTenLoai.Text = _originalLoaiVatTu.TenLoai;
+            txtMoTa.Text = _originalLoaiVatTu.MoTa;
+
+            CheckValidate();
+        }
+
+
     }
 }

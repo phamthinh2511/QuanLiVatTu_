@@ -38,6 +38,9 @@ namespace PageNavigation.View.PopupDetail
             get => _currentChiTiet;
             set { _currentChiTiet = value; OnPropertyChanged(); }
         }
+        // ===== BACKUP DỮ LIỆU LẦN LƯU GẦN NHẤT =====
+        private HoaDonM _hoaDonBackup;
+        private ObservableCollection<CT_HoaDonM> _chiTietBackup;
 
         // Biến nhớ dòng đang sửa trên lưới
         private CT_HoaDonM _itemDangSua = null;
@@ -103,6 +106,8 @@ namespace PageNavigation.View.PopupDetail
 
             // Nếu đang sửa thì bật nút Lưu luôn
             if (ListChiTietHienThi.Count > 0 && btnSave != null) btnSave.IsEnabled = true;
+            _hoaDonBackup = CloneHoaDon(CurrentHoaDon);
+            _chiTietBackup = CloneChiTiet(ListChiTietHienThi);
         }
 
         private void ResetInput()
@@ -402,13 +407,103 @@ namespace PageNavigation.View.PopupDetail
             }
         }
 
-        
+
 
 
         // Boilerplate code
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e) => Close();
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            // 1. Không có thay đổi
+            if (!IsChanged())
+            {
+                MessageBox.Show("Chưa có thay đổi nào để hiển thị",
+                                "Thông báo",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+                return;
+            }
+
+            // 2. Có thay đổi → Hỏi xác nhận
+            var result = MessageBox.Show(
+                "Bạn có muốn đặt lại dữ liệu về lần lưu gần nhất không?",
+                "Xác nhận",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question);
+
+            // 3. OK → Restore
+            if (result == MessageBoxResult.OK)
+            {
+                CurrentHoaDon = CloneHoaDon(_hoaDonBackup);
+                ListChiTietHienThi = CloneChiTiet(_chiTietBackup);
+
+                OnPropertyChanged(nameof(CurrentHoaDon));
+                OnPropertyChanged(nameof(ListChiTietHienThi));
+
+                ResetInput();
+            }
+            // Cancel → Không làm gì
+        }
+
         private void Button_Close(object sender, RoutedEventArgs e) => Close();
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private HoaDonM CloneHoaDon(HoaDonM source)
+        {
+            if (source == null) return null;
+
+            return new HoaDonM
+            {
+                MaHoaDon = source.MaHoaDon,
+                NgayLapHoaDon = source.NgayLapHoaDon,
+                MaNhanVien = source.MaNhanVien,
+                MaKhachHang = source.MaKhachHang,
+                TongTien = source.TongTien
+            };
+        }
+
+        private ObservableCollection<CT_HoaDonM> CloneChiTiet(IEnumerable<CT_HoaDonM> source)
+        {
+            return new ObservableCollection<CT_HoaDonM>(
+                source.Select(x => new CT_HoaDonM
+                {
+                    MaHoaDon = x.MaHoaDon,
+                    MaVatTu = x.MaVatTu,
+                    MaDonViTinh = x.MaDonViTinh,
+                    SoLuongBan = x.SoLuongBan,
+                    DonGiaBan = x.DonGiaBan,
+                    ThanhTien = x.ThanhTien,
+                    TenVatTu = x.TenVatTu,
+                    TenDonViTinh = x.TenDonViTinh
+                })
+            );
+        }
+        private bool IsChanged()
+        {
+            if (_hoaDonBackup == null) return false;
+
+            // So sánh Header
+            if (CurrentHoaDon.MaNhanVien != _hoaDonBackup.MaNhanVien) return true;
+            if (CurrentHoaDon.MaKhachHang != _hoaDonBackup.MaKhachHang) return true;
+            if (CurrentHoaDon.NgayLapHoaDon != _hoaDonBackup.NgayLapHoaDon) return true;
+
+            // So sánh chi tiết
+            if (ListChiTietHienThi.Count != _chiTietBackup.Count) return true;
+
+            for (int i = 0; i < ListChiTietHienThi.Count; i++)
+            {
+                var cur = ListChiTietHienThi[i];
+                var old = _chiTietBackup[i];
+
+                if (cur.MaVatTu != old.MaVatTu) return true;
+                if (cur.SoLuongBan != old.SoLuongBan) return true;
+                if (cur.DonGiaBan != old.DonGiaBan) return true;
+            }
+
+            return false;
+        }
+
+
+
+
     }
 }
