@@ -292,7 +292,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="PhieuThuTien">
+                           <!--  <ListViewItem Tag="PhieuThuTien">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_transaction.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Phiếu Thu Tiền" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -300,7 +300,7 @@
                                 <ListViewItem.ToolTip>
                                     <ToolTip Content="Phiếu Thu Tiền" Style="{StaticResource tt_Style}"/>
                                 </ListViewItem.ToolTip>
-                            </ListViewItem>
+                            </ListViewItem> -->
 
                             <ListViewItem Tag="TraCuu">
                                 <StackPanel Orientation="Horizontal" Width="230">

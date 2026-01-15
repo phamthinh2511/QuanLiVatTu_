@@ -133,19 +133,20 @@
         <Grid Height="140" Width="570" Margin="20,230,0,0"
               HorizontalAlignment="Left" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="262*"/>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="199*"/>
+                <ColumnDefinition Width="325*"/>
             </Grid.ColumnDefinitions>
-            <Border Background="#2d3135" CornerRadius="10" Margin="0,54,0,0" Grid.ColumnSpan="2"/>
+            <Border Background="#2d3135" CornerRadius="10" Margin="0,54,0,0" Grid.ColumnSpan="3"/>
             <TextBox x:Name="txtMoTa"
                      Text="{Binding VatTu.MoTa, UpdateSourceTrigger=PropertyChanged}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
                      Style="{StaticResource TextBoxStyle}"
                      Foreground="#CED565" Background="Transparent"
-                     Width="560" Height="110" FontSize="22"
+                     Width="560" FontSize="22"
                      VerticalScrollBarVisibility="Auto"
-                     FontFamily="/Fonts/#Fz Rubik Med" Grid.ColumnSpan="2" Margin="5,15,5,15"/>
+                     FontFamily="/Fonts/#Fz Rubik Med" Grid.ColumnSpan="3" Margin="5,54,5,15"/>
         </Grid>
 
         <!-- Nút lưu -->
