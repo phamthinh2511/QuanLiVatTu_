@@ -20,6 +20,8 @@ public partial class NhanVienM
     public string? Password { get; set; }
 
     public DateOnly? NgayNhanViec { get; set; }
+    public int? RoleID { get; set; }
+    public virtual RoleM? Role { get; set; } 
 
     public virtual ICollection<CT_PhieuNhapVatTuM> CT_PhieuNhapVatTu { get; set; } = new List<CT_PhieuNhapVatTuM>();
 

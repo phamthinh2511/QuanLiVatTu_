@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using PageNavigation.Session;
 
 namespace PageNavigation
 {
@@ -10,6 +11,7 @@ namespace PageNavigation
         public MainWindow()
         {
             InitializeComponent();
+            PhanQuyenMenu();
         }
 
         private void listview_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -103,5 +105,49 @@ namespace PageNavigation
         {
             Application.Current.Shutdown();
         }
+        private void PhanQuyenMenu()
+        {
+            string role = UserSession.RoleName;
+
+            // Ẩn tất cả (trừ Home)
+            menuNhanVien.Visibility = Visibility.Collapsed;
+            menuLoaiVatTu.Visibility = Visibility.Collapsed;
+            menuVatTu.Visibility = Visibility.Collapsed;
+            menuPhieuNhap.Visibility = Visibility.Collapsed;
+            menuKhachHang.Visibility = Visibility.Collapsed;
+            menuHoaDon.Visibility = Visibility.Collapsed;
+            menuTraCuu.Visibility = Visibility.Collapsed;
+            menuBaoCao.Visibility = Visibility.Collapsed;
+
+            if (role == "QuanLy")
+            {
+                // Quản lý thấy hết
+                menuNhanVien.Visibility = Visibility.Visible;
+                menuLoaiVatTu.Visibility = Visibility.Visible;
+                menuVatTu.Visibility = Visibility.Visible;
+                menuPhieuNhap.Visibility = Visibility.Visible;
+                menuKhachHang.Visibility = Visibility.Visible;
+                menuHoaDon.Visibility = Visibility.Visible;
+                menuTraCuu.Visibility = Visibility.Visible;
+                menuBaoCao.Visibility = Visibility.Visible;
+            }
+            else if (role == "ThuKho")
+            {
+                menuLoaiVatTu.Visibility = Visibility.Visible;
+                menuVatTu.Visibility = Visibility.Visible;
+                menuPhieuNhap.Visibility = Visibility.Visible;
+            }
+            else if (role == "NVBanHang")
+            {
+                menuLoaiVatTu.Visibility = Visibility.Visible;
+                menuVatTu.Visibility = Visibility.Visible;
+                menuPhieuNhap.Visibility = Visibility.Visible;
+                menuKhachHang.Visibility = Visibility.Visible;
+                menuHoaDon.Visibility = Visibility.Visible;
+                menuTraCuu.Visibility = Visibility.Visible;
+                menuBaoCao.Visibility = Visibility.Visible;
+            }
+        }
+
     }
 }
