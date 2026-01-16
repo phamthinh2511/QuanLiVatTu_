@@ -50,20 +50,23 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <Button BorderBrush="Transparent"
-                            HorizontalContentAlignment="Left">
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="BaoCao">
+
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}" 
-                                        BorderBrush="{TemplateBinding BorderBrush}" 
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="0, 0, 20, 20">
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="0, 0, 20, 20">
                                     <ContentPresenter HorizontalAlignment="Left" 
-                                                      VerticalAlignment="Center" 
-                                                      Margin="20,0,0,0"
-                                                      />
+                                  VerticalAlignment="Center" 
+                                  Margin="20,0,0,0"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
+
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -77,11 +80,12 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+
                         <Button.Content>
                             <TextBlock x:Name="xem"
-                                       Text="Xem >"
-                                       FontSize="20"
-                                       FontFamily="/Fonts/#Fz Rubik Med"/>
+                   Text="Xem >"
+                   FontSize="20"
+                   FontFamily="/Fonts/#Fz Rubik Med"/>
                         </Button.Content>
                     </Button>
                 </Grid>

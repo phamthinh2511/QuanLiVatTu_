@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View.TraCuuDetail"
              mc:Ignorable="d" 
-             d:DesignHeight="680" d:DesignWidth="1215">
+             d:DesignHeight="800" d:DesignWidth="1440" 
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
     <UserControl.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Template">
@@ -110,7 +112,6 @@
                               FontFamily="/Fonts/#Fz Rubik Med"
                               HorizontalAlignment="Stretch" 
                               VerticalAlignment="Stretch"
-                              Width="1215"
                               FontSize="25"
                               Foreground="#CED565"
                               Background="Transparent"
@@ -141,7 +142,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn Header="Ngày Sinh" Width="200">
+                                <GridViewColumn Header="Ngày Sinh" Width="144">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -149,7 +150,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn Header="Giới tính" Width="145">
+                                <GridViewColumn Header="Giới tính" Width="144">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding GioiTinh}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -157,7 +158,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn Header="Địa Chỉ" Width="300">
+                                <GridViewColumn Header="Địa Chỉ" Width="494">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding DiaChi}" 
@@ -168,7 +169,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn Header="SĐT" Width="200">
+                                <GridViewColumn Header="SĐT" Width="288">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding SoDienThoai}" VerticalAlignment="Center" Margin="0,0,0,0"/>

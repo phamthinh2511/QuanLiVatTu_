@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:PageNavigation.View.BaoCaoDetail"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="680" d:DesignWidth="1215">
+             d:DesignHeight="800" d:DesignWidth="1440" 
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -52,7 +54,6 @@
                       FontFamily="/Fonts/#Fz Rubik Med"
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
-                      Width="1215"
                       FontSize="25"
                       Foreground="#CED565"
                       Background="Transparent"
@@ -64,7 +65,7 @@
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}">
 
-                        <GridViewColumn Header="Tháng" Width="100">
+                        <GridViewColumn Header="Tháng" Width="144">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Thang}" 
@@ -73,7 +74,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tổng Doanh Thu" Width="250">
+                        <GridViewColumn Header="Tổng Doanh Thu" Width="432">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TongDoanhThu, StringFormat={}{0:N0}}"
@@ -83,7 +84,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tổng Vốn" Width="250">
+                        <GridViewColumn Header="Tổng Vốn" Width="288">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TongVon, StringFormat={}{0:N0}}" 
@@ -92,7 +93,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Lợi Nhuận" Width="250">
+                        <GridViewColumn Header="Lợi Nhuận" Width="288">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding LoiNhuan, StringFormat={}{0:N0}}" 
@@ -101,7 +102,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Số Đơn Hàng" Width="200">
+                        <GridViewColumn Header="Số Đơn Hàng" Width="288">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding SoDonHang}" 

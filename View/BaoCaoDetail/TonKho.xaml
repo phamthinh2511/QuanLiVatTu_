@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:PageNavigation.View.BaoCaoDetail"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="680" d:DesignWidth="1215">
+             d:DesignHeight="800" d:DesignWidth="1440" 
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -89,7 +91,6 @@
                       FontFamily="/Fonts/#Fz Rubik Med"
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
-                      Width="1215"
                       FontSize="25"
                       Foreground="#CED565"
                       Background="Transparent"
@@ -101,7 +102,7 @@
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}"  >
 
-                        <GridViewColumn Header="ID" Width="70">
+                        <GridViewColumn Header="ID" Width="144">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaVatTu}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -109,7 +110,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tên Vật Tư" Width="200">
+                        <GridViewColumn Header="Tên Vật Tư" Width="432">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaVatTuNavigation.TenVatTu}"
@@ -120,7 +121,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tồn Đầu" Width="120">
+                        <GridViewColumn Header="Tồn Đầu" Width="144">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TonDau}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -128,7 +129,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tồn Cuối" Width="120">
+                        <GridViewColumn Header="Tồn Cuối" Width="144">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TonCuoi}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -136,7 +137,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Phát Sinh Nhập" Width="200">
+                        <GridViewColumn Header="Phát Sinh Nhập" Width="288">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding PhatSinhNhap}" 
@@ -147,7 +148,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Phát Sinh Xuất" Width="200">
+                        <GridViewColumn Header="Phát Sinh Xuất" Width="288">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding PhatSinhXuat}" 
