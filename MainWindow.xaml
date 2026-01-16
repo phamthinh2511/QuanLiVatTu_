@@ -220,7 +220,7 @@
                                   SelectedValuePath="Tag"
                                   SelectedValue="{Binding CurrentTag}">
 
-                            <ListViewItem Tag="Home"
+                            <ListViewItem x:Name="menuHome" Tag="Home"
                                           IsSelected="True">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_home.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
@@ -231,7 +231,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="NhanVien">
+                            <ListViewItem x:Name="menuNhanVien" Tag="NhanVien">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/icons8-staff-96.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Nhân Viên" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -242,7 +242,7 @@
                             </ListViewItem>
 
 
-                            <ListViewItem Tag="LoaiVatTu">
+                            <ListViewItem x:Name="menuLoaiVatTu" Tag="LoaiVatTu">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/icons8-material-ui-48.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Loại Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -252,7 +252,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="VatTu">
+                            <ListViewItem x:Name="menuVatTu" Tag="VatTu">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_product.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -262,7 +262,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="KhachHang">
+                            <ListViewItem x:Name="menuKhachHang" Tag="KhachHang">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_customer.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Khách Hàng" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -272,7 +272,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="HoaDon">
+                            <ListViewItem x:Name="menuHoaDon" Tag="HoaDon">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/img_order.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Hóa Đơn" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -282,7 +282,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="PhieuNhapVatTu">
+                            <ListViewItem x:Name="menuPhieuNhap" Tag="PhieuNhapVatTu">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/icons8-to-do-list-96.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Phiếu Nhập Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -302,7 +302,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem> -->
 
-                            <ListViewItem Tag="TraCuu">
+                            <ListViewItem x:Name="menuTraCuu" Tag="TraCuu">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/icons8-search-100 (1).png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Tra Cứu" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
@@ -312,7 +312,7 @@
                                 </ListViewItem.ToolTip>
                             </ListViewItem>
 
-                            <ListViewItem Tag="BaoCao">
+                            <ListViewItem x:Name="menuBaoCao" Tag="BaoCao">
                                 <StackPanel Orientation="Horizontal" Width="230">
                                     <Image Source="/Images/icons8-report-100.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
                                     <TextBlock Text="Báo Cáo" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>

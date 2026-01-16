@@ -1,4 +1,7 @@
-﻿using PageNavigation.Utilities;
+﻿using Microsoft.EntityFrameworkCore;
+using PageNavigation.Model;
+using PageNavigation.Session;
+using PageNavigation.Utilities;
 using PageNavigation.ViewModel;
 using System;
 using System.Linq;
@@ -60,66 +63,47 @@ namespace PageNavigation
             string inputUser = viewModel.Username;
             string inputPass = viewModel.Password;
 
-            // A. HIỆN LOADING
-            if (LoadingOverlay != null) LoadingOverlay.Visibility = Visibility.Visible;
+            LoadingOverlay.Visibility = Visibility.Visible;
             closebutton.IsEnabled = false;
             btnLogin.IsEnabled = false;
 
             NavigationVM? mainVM = null;
             string errorMessage = "";
 
-            // B. CHẠY NGẦM
             await Task.Run(() =>
             {
                 try
                 {
-
-
-                    using (var context = new PageNavigation.Model.QuanLyVatTuContext())
+                    using (var context = new QuanLyVatTuContext())
                     {
-                        var user = context.NhanVien.FirstOrDefault(x => x.Username == inputUser);
+                        var user = context.NhanVien
+                            .Include(x => x.Role)
+                            .FirstOrDefault(x =>
+                                x.Username == inputUser &&
+                                x.Password == inputPass);
 
-                        if (user != null)
-                        {
+                        if (user == null)
+                            throw new Exception("Sai tên đăng nhập hoặc mật khẩu!");
 
-                            bool dungPass = (user.Password == inputPass);
+                        // ✅ LƯU SESSION
+                        UserSession.MaNhanVien = user.MaNhanVien;
+                        UserSession.HoTen = user.HoTen;
+                        UserSession.RoleName = user.Role!.RoleName; // QUAN TRỌNG
 
-                            bool dungTen = user.Username.Equals(inputUser, StringComparison.Ordinal);
-
-                            if (dungPass && dungTen)
-                            {
-                                mainVM = new NavigationVM(); // Đúng hết -> Vào Main
-                            }
-                            else
-                            {
-                                throw new Exception("Sai tên đăng nhập hoặc mật khẩu !");
-                            }
-
-
-
-                        }
-                        else
-                        {
-                            throw new Exception("Sai tên đăng nhập hoặc mật khẩu !");
-                        }
-
-
+                        mainVM = new NavigationVM();
                     }
-                    
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(800);
                 }
                 catch (Exception ex)
                 {
-                    mainVM = null;
                     errorMessage = ex.Message;
+                    mainVM = null;
                 }
             });
 
-            // D. XỬ LÝ KẾT QUẢ
             if (mainVM != null)
             {
-                // Thành công -> Mở Main
                 MainWindow main = new MainWindow();
                 main.DataContext = mainVM;
                 main.Show();
@@ -127,13 +111,10 @@ namespace PageNavigation
             }
             else
             {
-                // Thất bại -> Tắt Loading, Báo lỗi
-                if (LoadingOverlay != null) LoadingOverlay.Visibility = Visibility.Collapsed;
+                LoadingOverlay.Visibility = Visibility.Collapsed;
                 closebutton.IsEnabled = true;
                 btnLogin.IsEnabled = true;
-
                 viewModel.ErrorMessage = errorMessage;
-
             }
         }
     }

@@ -38,6 +38,7 @@ public partial class QuanLyVatTuContext : DbContext
     public virtual DbSet<Thamso> ThamSo { get; set; }
 
     public virtual DbSet<VatTuM> VatTu { get; set; }
+    public virtual DbSet<RoleM> Role { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -186,6 +187,11 @@ public partial class QuanLyVatTuContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.HasOne(d => d.Role)
+      .WithMany(p => p.NhanVien)
+      .HasForeignKey(d => d.RoleID)
+      .HasConstraintName("FK_NHANVIEN_ROLE");
+
         });
 
         modelBuilder.Entity<PhieuNhapVatTuM>(entity =>
