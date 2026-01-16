@@ -65,7 +65,7 @@
                                 </Border>
 
                                 <Border x:Name="Indicator" 
-                                Height="30" Width="4" 
+                                Height="30" Width="10" 
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Center" 
                                 Background="White" 
