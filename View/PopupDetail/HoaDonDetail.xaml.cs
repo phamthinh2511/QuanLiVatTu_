@@ -217,21 +217,32 @@ namespace PageNavigation.View.PopupDetail
 
         private void CboVatTu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Chặn lỗi khi form chưa load xong
+            // Chặn lỗi null
             if (CurrentChiTiet == null || DanhSachVatTu == null) return;
-
-            // Nếu chưa chọn gì thì thoát
             if (CurrentChiTiet.MaVatTu == 0) return;
 
-            // 1. Gán Tên hiển thị
+            // 1. Reset dữ liệu về rỗng trước (QUAN TRỌNG ĐỂ KHÔNG DÍNH DỮ LIỆU CŨ)
+            CurrentChiTiet.TenDonViTinh = "";
+            CurrentChiTiet.MaDonViTinh = null;
+            CurrentChiTiet.DonGiaBan = 0;
+
+            // 2. Gán Tên hiển thị
             var vt = DanhSachVatTu.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
             if (vt != null)
             {
                 CurrentChiTiet.TenVatTu = vt.TenVatTu;
-                CurrentChiTiet.TenDonViTinh = vt.TenDonViTinh; // (Nếu bạn đã thêm NotMapped vào VatTuM)
+
+                // Nếu bạn đã cấu hình MaDonViTinh trong bảng VatTu (như đã làm ở phần PhieuNhap), 
+                // thì ưu tiên lấy từ đây trước:
+                if (vt.MaDonViTinh != null)
+                {
+                    CurrentChiTiet.MaDonViTinh = vt.MaDonViTinh;
+                    var dvt = DanhSachDonViTinh.FirstOrDefault(d => d.MaDonViTinh == vt.MaDonViTinh);
+                    if (dvt != null) CurrentChiTiet.TenDonViTinh = dvt.TenDonViTinh;
+                }
             }
 
-            // 2. TÌM GIÁ & ĐVT TRONG LỊCH SỬ NHẬP
+            // 3. TÌM GIÁ & ĐVT TRONG LỊCH SỬ NHẬP (Nếu chưa có ĐVT từ bước trên hoặc để lấy giá bán)
             using (var db = new QuanLyVatTuContext())
             {
                 var lanNhapGanNhat = db.CT_PhieuNhapVatTu
@@ -244,21 +255,23 @@ namespace PageNavigation.View.PopupDetail
                     // Lấy giá bán
                     CurrentChiTiet.DonGiaBan = lanNhapGanNhat.DonGiaBan ?? 0;
 
-                    // Lấy Đơn vị tính
-                    if (lanNhapGanNhat.MaDonViTinh != null)
+                    // Nếu chưa có đơn vị tính (từ bảng VatTu), thì lấy từ lịch sử nhập
+                    if (CurrentChiTiet.MaDonViTinh == null && lanNhapGanNhat.MaDonViTinh != null)
                     {
                         CurrentChiTiet.MaDonViTinh = lanNhapGanNhat.MaDonViTinh;
+                        var dvt = DanhSachDonViTinh.FirstOrDefault(d => d.MaDonViTinh == lanNhapGanNhat.MaDonViTinh);
+                        if (dvt != null)
+                        {
+                            CurrentChiTiet.TenDonViTinh = dvt.TenDonViTinh;
+                        }
                     }
-                }
-                else
-                {
-                    CurrentChiTiet.DonGiaBan = 0;
                 }
             }
 
-            // 3. Tính thành tiền
+            // 4. Tính thành tiền
             CurrentChiTiet.ThanhTien = CurrentChiTiet.SoLuongBan * CurrentChiTiet.DonGiaBan;
 
+            // 5. Cập nhật giao diện
             OnPropertyChanged(nameof(CurrentChiTiet));
         }
 

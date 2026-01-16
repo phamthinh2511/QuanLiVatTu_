@@ -118,6 +118,7 @@
                                           SelectedValue="{Binding CurrentChiTiet.MaVatTu}"
                                           SelectedValuePath="MaVatTu"
                                           DisplayMemberPath="TenVatTu"
+                                          SelectionChanged="CboVatTu_SelectionChanged"
                                           Foreground="#CED565" FontSize="16" Background="Transparent" Style="{StaticResource ComboBoxStyle}"/>
                             </Border>
                         </StackPanel>
@@ -129,6 +130,7 @@
                                           SelectedValue="{Binding CurrentChiTiet.MaDonViTinh}"
                                           SelectedValuePath="MaDonViTinh"
                                           DisplayMemberPath="TenDonViTinh"
+                                          IsEnabled="False"
                                           Foreground="#CED565" FontSize="16" Background="Transparent" Style="{StaticResource ComboBoxStyle}"/>
                             </Border>
                         </StackPanel>

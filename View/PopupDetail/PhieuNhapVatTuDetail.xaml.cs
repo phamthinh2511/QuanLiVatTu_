@@ -340,6 +340,53 @@ namespace PageNavigation.View.PopupDetail
 
             return false;
         }
+
+
+        private void CboVatTu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // 1. Kiểm tra an toàn
+            if (CurrentChiTiet == null || DanhSachVatTu == null || CurrentChiTiet.MaVatTu == 0) return;
+
+            // 2. Tìm vật tư vừa chọn trong danh sách
+            var vt = DanhSachVatTu.FirstOrDefault(x => x.MaVatTu == CurrentChiTiet.MaVatTu);
+
+            // 3. TẠO BIẾN TẠM (Để kích hoạt Binding cập nhật giao diện)
+            var tempItem = new CT_PhieuNhapVatTuM
+            {
+                MaPhieuNhap = CurrentChiTiet.MaPhieuNhap,
+                MaVatTu = CurrentChiTiet.MaVatTu,
+                SoLuong = CurrentChiTiet.SoLuong, // Giữ số lượng đang nhập
+                DonGiaNhap = CurrentChiTiet.DonGiaNhap,
+                DonGiaBan = CurrentChiTiet.DonGiaBan,
+                ThanhTien = 0,
+
+                // Mặc định giữ ĐVT cũ (đề phòng vật tư chưa set ĐVT chuẩn)
+                MaDonViTinh = CurrentChiTiet.MaDonViTinh
+            };
+
+            if (vt != null)
+            {
+                tempItem.TenVatTu = vt.TenVatTu;
+
+                // ✅ LOGIC TỰ ĐỘNG CHỌN ĐƠN VỊ TÍNH
+                // Lấy trực tiếp từ cài đặt của Vật tư này
+                if (vt.MaDonViTinh != null)
+                {
+                    tempItem.MaDonViTinh = vt.MaDonViTinh;
+
+                    // Lấy tên ĐVT để hiện lên lưới
+                    var dvt = DanhSachDonViTinh.FirstOrDefault(d => d.MaDonViTinh == vt.MaDonViTinh);
+                    if (dvt != null) tempItem.TenDonViTinh = dvt.TenDonViTinh;
+                }
+            }
+
+            // 4. (Tùy chọn) Vẫn gợi ý giá nhập từ lần cuối (nếu muốn)
+            // Bạn có thể giữ lại đoạn code query lịch sử giá nhập ở đây nếu cần...
+
+            // 5. Gán ngược lại vào biến chính -> Giao diện tự nhảy ĐVT
+            CurrentChiTiet = tempItem;
+        }
+
         private void RestoreFromBackup()
         {
             CurrentPhieuNhap = ClonePhieuNhap(_phieuNhapBackup);
