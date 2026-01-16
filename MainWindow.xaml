@@ -43,44 +43,176 @@
             <Setter Property="Margin" Value="0,0,0,15"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
                         <Border x:Name="border" 
-                            Height="50" 
-                            Background="{TemplateBinding Background}" 
-                            BorderThickness="0" 
-                            SnapsToDevicePixels="True">
+                        Height="50" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        SnapsToDevicePixels="True"
+                        CornerRadius="8">
+
                             <Grid>
+                                <Border x:Name="HoverBg" 
+                                Background="#2E333A" 
+                                CornerRadius="8"
+                                RenderTransformOrigin="0, 0.5">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform ScaleX="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+
                                 <Border x:Name="Indicator" 
-                                    Height="35" Width="4" 
-                                    HorizontalAlignment="Left" 
-                                    VerticalAlignment="Center" 
-                                    Background="White" 
-                                    CornerRadius="2"
-                                    Visibility="Collapsed"/>
-                                <Border x:Name="IndicatorT" 
-                                    Height="35" Width="4" 
-                                    HorizontalAlignment="Left" 
-                                    VerticalAlignment="Center" 
-                                    Background="White" 
-                                    CornerRadius="2"
-                                    Visibility="Collapsed"/>
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                                                  VerticalAlignment="{TemplateBinding VerticalAlignment}" 
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                Height="30" Width="4" 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Center" 
+                                Background="White" 
+                                CornerRadius="2"
+                                RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform ScaleY="0"/>
+                                    </Border.RenderTransform>
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="White" BlurRadius="0" ShadowDepth="0" Opacity="0"/>
+                                    </Border.Effect>
+                                </Border>
+
+                                <ContentPresenter x:Name="contentPresenter"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          RenderTransformOrigin="0.5,0.5">
+                                    <ContentPresenter.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            <TranslateTransform X="0"/>
+                                        </TransformGroup>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
                             </Grid>
                         </Border>
 
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="#404D5B"/>
-                                <Setter Property="Visibility" TargetName="Indicator" Value="Visible"/>
-                            </Trigger>
+
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="#404D5B"/>
-                                <Setter Property="Cursor" Value="Hand"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="HoverBg"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                     To="1" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)"
+                                                     To="10" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="HoverBg"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                     To="0" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)"
+                                                     To="0" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
+
+                            <Trigger Property="IsSelected" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="HoverBg"
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="#404D5B" Duration="0:0:0.2"/>
+
+                                            <DoubleAnimation Storyboard.TargetName="Indicator"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                     To="1" Duration="0:0:0.4">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <DoubleAnimation Storyboard.TargetName="Indicator"
+                                                     Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                     To="15" Duration="0:0:0.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="Indicator"
+                                                     Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                     To="0.8" Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="HoverBg"
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="#2E333A" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="Indicator"
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                     To="0" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="Indicator"
+                                                     Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                     To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="0.95" Duration="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="0.95" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1" Duration="0:0:0.4">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ElasticEase EasingMode="EaseOut" Oscillations="1" Springiness="5"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="contentPresenter"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1" Duration="0:0:0.4">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ElasticEase EasingMode="EaseOut" Oscillations="1" Springiness="5"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -208,119 +340,29 @@
 
                         </Grid>
 
-                        <!--ListViewMenu-->
-
                         <ListView x:Name="listview"
-                                  x:FieldModifier="public"
+                                  ItemsSource="{Binding MenuItems}" 
+                                  SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
                                   SelectionMode="Single"
                                   Background="Transparent"
                                   BorderThickness="0"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                  SelectedValuePath="Tag"
-                                  SelectedValue="{Binding CurrentTag}">
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
 
-                            <ListViewItem x:Name="menuHome" Tag="Home"
-                                          IsSelected="True">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/img_home.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Home" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Home" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Width="230" ToolTip="{Binding Title}">
+                                        <Image Source="{Binding IconPath}" 
+                                               Stretch="Uniform" 
+                                               Width="30" 
+                                               Margin="16,0,0,0"/>
 
-                            <ListViewItem x:Name="menuNhanVien" Tag="NhanVien">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/icons8-staff-96.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Nhân Viên" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Nhân Viên" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-
-                            <ListViewItem x:Name="menuLoaiVatTu" Tag="LoaiVatTu">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/icons8-material-ui-48.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Loại Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Loại Vật Tư" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="menuVatTu" Tag="VatTu">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/img_product.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Vật Tư" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="menuKhachHang" Tag="KhachHang">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/img_customer.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Khách Hàng" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Khách Hàng" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="menuHoaDon" Tag="HoaDon">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/img_order.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Hóa Đơn" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Hóa Đơn" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="menuPhieuNhap" Tag="PhieuNhapVatTu">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/icons8-to-do-list-96.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Phiếu Nhập Vật Tư" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Phiếu Nhập Vật tư" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                           <!--  <ListViewItem Tag="PhieuThuTien">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/img_transaction.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Phiếu Thu Tiền" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Phiếu Thu Tiền" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem> -->
-
-                            <ListViewItem x:Name="menuTraCuu" Tag="TraCuu">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/icons8-search-100 (1).png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Tra Cứu" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Tra Cứu" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="menuBaoCao" Tag="BaoCao">
-                                <StackPanel Orientation="Horizontal" Width="230">
-                                    <Image Source="/Images/icons8-report-100.png" Stretch="Uniform" Width="30" Margin="16,0,0,0"/>
-                                    <TextBlock Text="Báo Cáo" Margin="25,0,0,0" Style="{StaticResource Font_Style}"/>
-                                </StackPanel>
-                                <ListViewItem.ToolTip>
-                                    <ToolTip Content="Báo Cáo" Style="{StaticResource tt_Style}"/>
-                                </ListViewItem.ToolTip>
-                            </ListViewItem>
+                                        <TextBlock Text="{Binding Title}" 
+                                                   Margin="25,0,0,0" 
+                                                   Style="{StaticResource Font_Style}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </StackPanel>
                 </Grid>

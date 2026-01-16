@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View.TraCuuDetail"
              mc:Ignorable="d" 
-             d:DesignHeight="680" d:DesignWidth="1215">
+             d:DesignHeight="800" d:DesignWidth="1440" 
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
     <UserControl.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Template">
@@ -110,7 +112,6 @@
                       FontFamily="/Fonts/#Fz Rubik Med"
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
-                      Width="1215"
                       FontSize="25"
                       Foreground="#CED565"
                       Background="Transparent"

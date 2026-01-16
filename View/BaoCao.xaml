@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              d:DesignHeight="800" d:DesignWidth="1215"
-             Background="White">
+             Background="White"
+             Style="{StaticResource Page_Style}">
     <UserControl.Resources>
         <Style x:Key="UnderlineButtonStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
@@ -143,7 +144,7 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
                                  Command="{Binding TonKhoCommand}" 
-                                 IsChecked="True"
+                                 
                                  Height="40"
                                  Margin="20, 0, 0, 0"/>
                     <RadioButton Style="{StaticResource UnderlineButtonStyle}"
@@ -151,6 +152,7 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
                                  Command="{Binding DoanhThuCommand}"
+                                 IsChecked="True"
                                  Height="40"
                                  Margin="20, 0, 0, 0"/>
                 </StackPanel>

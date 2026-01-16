@@ -53,7 +53,7 @@ namespace PageNavigation.View.BaoCaoDetail
             TonKhoCommand = new RelayCommand(TonKho);
             DoanhThuCommand = new RelayCommand(DoanhThu);
 
-            CurrentTag = "TonKho";
+            CurrentTag = "DoanhThu";
         }
     }
 }
