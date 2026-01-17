@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PageNavigation.View.BaoCaoDetail
+namespace PageNavigation.View.BaoCaoDetail.PopupChart
 {
     /// <summary>
-    /// Interaction logic for PopupChart.xaml
+    /// Interaction logic for DoanhThuChart.xaml
     /// </summary>
-    public partial class PopupChart : Window
+    public partial class DoanhThuChart : Window
     {
-        public PopupChart()
+        public DoanhThuChart()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

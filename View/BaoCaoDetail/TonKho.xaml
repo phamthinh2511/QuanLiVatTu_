@@ -5,10 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View.BaoCaoDetail"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:util="clr-namespace:PageNavigation.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1440" 
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ArrowUp">
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
+                <Path VerticalAlignment="Center" Margin="5,0,0,0" Fill="#CED565" Data="M 0 4 L 4 0 L 8 4 Z"/>
+            </DockPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ArrowDown">
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
+                <Path VerticalAlignment="Center" Margin="5,0,0,0" Fill="#CED565" Data="M 0 0 L 4 4 L 8 0 Z"/>
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -82,11 +98,28 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Hidden">    
                         </ComboBox>
                     </Grid>
+                    <Button Content="Xuất Excel"
+                            Command="{Binding ExportExcelCommand}"
+                            Width="150" 
+                            Height="40"
+                            Margin="20, 0, 0, 0"
+                            FontSize="16"
+                            FontFamily="/Fonts/#Fz Rubik Med"
+                            Background="#217346" 
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Cursor="Hand">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
             </Border>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView x:Name="CustomerListView" 
+            <ListView x:Name="BaoCaoListView" 
                       ItemsSource="{Binding ListBaoCao}"
                       FontFamily="/Fonts/#Fz Rubik Med"
                       HorizontalAlignment="Stretch" 
@@ -97,12 +130,12 @@
                       BorderThickness="0"
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      AlternationCount="2">
+                      AlternationCount="2" GridViewColumnHeader.Click="BaoCaoListView_Click">
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CustomHeader_Style}"  >
 
-                        <GridViewColumn Header="ID" Width="144">
+                        <GridViewColumn Header="ID" Width="144" util:GridViewSort.PropertyName="MaVatTu">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaVatTu}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -110,7 +143,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tên Vật Tư" Width="432">
+                        <GridViewColumn Header="Tên Vật Tư" Width="432" util:GridViewSort.PropertyName="MaVatTuNavigation.TenVatTu">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding MaVatTuNavigation.TenVatTu}"
@@ -121,7 +154,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tồn Đầu" Width="144">
+                        <GridViewColumn Header="Tồn Đầu" Width="144" util:GridViewSort.PropertyName="TonDau">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TonDau}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -129,7 +162,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tồn Cuối" Width="144">
+                        <GridViewColumn Header="Tồn Cuối" Width="144" util:GridViewSort.PropertyName="TonCuoi">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TonCuoi}" VerticalAlignment="Center" Margin="0,0,0,0"/>
@@ -137,7 +170,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Phát Sinh Nhập" Width="288">
+                        <GridViewColumn Header="Phát Sinh Nhập" Width="288" util:GridViewSort.PropertyName="PhatSinhNhap">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding PhatSinhNhap}" 
@@ -148,7 +181,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Phát Sinh Xuất" Width="288">
+                        <GridViewColumn Header="Phát Sinh Xuất" Width="288" util:GridViewSort.PropertyName="PhatSinhXuat">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding PhatSinhXuat}" 
