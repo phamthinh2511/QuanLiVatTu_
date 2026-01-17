@@ -79,7 +79,6 @@
                         </Button.Resources>
                     </Button>
                     <Button Content="Xem Biểu Đồ"
-                            Command="{Binding ExportExcelCommand}"
                             Width="150" 
                             Height="40"
                             Margin="20, 0, 0, 0"

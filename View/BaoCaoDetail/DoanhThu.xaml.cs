@@ -74,10 +74,16 @@ namespace PageNavigation.View.BaoCaoDetail
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DoanhThuChart popup = new DoanhThuChart();
-            var result = popup.ShowDialog();
+            var vm = this.DataContext as DoanhThuVM;
+            if (vm == null || vm.ListDoanhThu == null || vm.ListDoanhThu.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để vẽ biểu đồ!", "Thông báo");
+                return;
+            }
+            int namDuocChon = vm.NamBaoCao;
 
-            
+            DoanhThuChart chartWindow = new DoanhThuChart(namDuocChon, vm.ListDoanhThu);
+            chartWindow.ShowDialog();
         }
     }
 }
