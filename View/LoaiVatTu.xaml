@@ -12,7 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
 
-    <Grid Background="#212529">
+    <Grid Background="#EFE6D8">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
@@ -36,8 +36,8 @@
                       HorizontalAlignment="Stretch"
                  
                       FontSize="20"
-                      Foreground="#CED565"
-                      Background="Transparent"
+                      Foreground="#2F2A25"
+                      Background="#FAF7F2"
                       BorderThickness="0"
                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
                        ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -100,19 +100,19 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="#17191a"/>
+                                <Setter Property="Background" Value="#FAF7F2"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                <Setter Property="Background" Value="#3E444A"/>
+                                <Setter Property="Background" Value="#E8DDCC"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Background" Value="#DCC9AA"/>
                                 <Setter Property="Foreground" Value="#0bcdff"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#CED565"/>
-                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="Background" Value="#CDB38B"/>
+                                <Setter Property="Foreground" Value="#2F2A25"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                         </Style.Triggers>
@@ -131,11 +131,11 @@
                         <Setter Property="Height" Value="70"/>
                         <Setter Property="HorizontalAlignment" Value="Right"/>
                         <Setter Property="Margin" Value="20"/>
-                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Background" Value="#CDB38B"/>
                         <Setter Property="Content" Value="Thêm Mới"/>
                         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
                         <Setter Property="FontSize" Value="40"/>
-                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Foreground" Value="#2F2A25"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -164,11 +164,11 @@
                         <Setter Property="Height" Value="70"/>
                         <Setter Property="HorizontalAlignment" Value="Right"/>
                         <Setter Property="Margin" Value="0,0,300,0"/>
-                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Background" Value="#CDB38B"/>
                         <Setter Property="Content" Value="Xem/Sửa"/>
                         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
                         <Setter Property="FontSize" Value="40"/>
-                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Foreground" Value="#2F2A25"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -197,11 +197,11 @@
                         <Setter Property="Height" Value="70"/>
                         <Setter Property="HorizontalAlignment" Value="Right"/>
                         <Setter Property="Margin" Value="0,0,580,0"/>
-                        <Setter Property="Background" Value="#17191a"/>
+                        <Setter Property="Background" Value="#CDB38B"/>
                         <Setter Property="Content" Value="Xóa"/>
                         <Setter Property="FontFamily" Value="/Fonts/#Fz Rubik Med"/>
                         <Setter Property="FontSize" Value="40"/>
-                        <Setter Property="Foreground" Value="#CED565"/>
+                        <Setter Property="Foreground" Value="#2F2A25"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">

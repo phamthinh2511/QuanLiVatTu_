@@ -10,7 +10,7 @@
         <Setter Property="HorizontalAlignment"
                 Value="Left"/>
         <Setter Property="Foreground"
-                Value="White"/>
+                Value="#A67C52"/>
         <Setter Property="FontSize"
                 Value="20"/>
     </Style>
