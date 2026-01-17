@@ -148,6 +148,7 @@
                             <Border Height="40" Background="#2d3135" CornerRadius="8" Margin="0,5,0,0">
                                 <TextBox Text="{Binding CurrentChiTiet.DonGiaBan, StringFormat=N0}"
                                          Style="{StaticResource TextBoxStyle}"
+                                         IsReadOnly="True"
                                          Foreground="#CED565" FontSize="16" VerticalContentAlignment="Center"/>
                             </Border>
                         </StackPanel>

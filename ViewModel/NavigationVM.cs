@@ -1,31 +1,108 @@
-﻿using PageNavigation.Utilities;
-using PageNavigation.ViewModel;
-using System;
-using System.Collections.Generic;
+﻿using PageNavigation.Model;
+using PageNavigation.Session; // Giả sử class UserSession nằm ở đây
+using PageNavigation.Utilities;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using PageNavigation.Model;
 
 namespace PageNavigation.ViewModel
 {
     class NavigationVM : ViewModelBase
     {
-        private object? _currentView;
+        public ObservableCollection<MenuItemModel> MenuItems { get; set; }
 
+        private object? _currentView;
         public object? CurrentView
         {
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        private string _currentTag;
-
-        public string CurrentTag
+        private MenuItemModel _selectedMenuItem;
+        public MenuItemModel SelectedMenuItem
         {
-            get { return _currentTag; }
-            set { _currentTag = value; OnPropertyChanged(); SwitchViewByTag(value); }
+            get { return _selectedMenuItem; }
+            set
+            {
+                _selectedMenuItem = value;
+                OnPropertyChanged();
+
+                if (_selectedMenuItem != null)
+                {
+                    SwitchViewByTag(_selectedMenuItem.ViewTag);
+                }
+            }
+        }
+        public ICommand NavigateCommand { get; set; }
+        private HomeVM _homeVM;
+        private NhanVienVM _nhanVienVM;
+        private LoaiVatTuVM _loaiVatTuVM;
+        private DanhSachKhachHangVM _danhSachKhachHangVM;
+        private VatTuVM _vatTuVM;
+        private HoaDonVM _hoaDonVM;
+        private PhieuNhapVatTuVM _phieuNhapVatTuVM;
+        private PhieuThuTienVM _phieuThuTienVM;
+        private TraCuuVM _traCuuVM;
+        private BaoCaoVM _baoCaoVM;
+
+        public NavigationVM()
+        {
+            MenuItems = new ObservableCollection<MenuItemModel>();
+            _homeVM = new HomeVM();
+            _nhanVienVM = new NhanVienVM();
+            _loaiVatTuVM = new LoaiVatTuVM();
+            _danhSachKhachHangVM = new DanhSachKhachHangVM();
+            _vatTuVM = new VatTuVM();
+            _hoaDonVM = new HoaDonVM();
+            _phieuNhapVatTuVM = new PhieuNhapVatTuVM();
+            _phieuThuTienVM = new PhieuThuTienVM();
+            _traCuuVM = new TraCuuVM();
+            _baoCaoVM = new BaoCaoVM();
+
+            LoadMenuBasedOnRole();
+
+            SelectedMenuItem = MenuItems.FirstOrDefault(x => x.ViewTag == "Home");
+            NavigateCommand = new RelayCommand(NavigateToPage);
+        }
+        private void NavigateToPage(object parameter)
+        {
+            if (parameter is string tag)
+            {
+                var item = MenuItems.FirstOrDefault(x => x.ViewTag == tag);
+                if (item != null)
+                {
+                    SelectedMenuItem = item;
+                }
+            }
+        }
+        private void LoadMenuBasedOnRole()
+        {
+            string role = UserSession.RoleName;
+            MenuItems.Add(new MenuItemModel { Title = "Home", IconPath = "/Images/img_home.png", ViewTag = "Home" });
+            if (role == "QuanLy")
+            {
+                MenuItems.Add(new MenuItemModel { Title = "Nhân Viên", IconPath = "/Images/icons8-staff-96.png", ViewTag = "NhanVien" });
+                MenuItems.Add(new MenuItemModel { Title = "Loại Vật Tư", IconPath = "/Images/icons8-material-ui-48.png", ViewTag = "LoaiVatTu" });
+                MenuItems.Add(new MenuItemModel { Title = "Vật Tư", IconPath = "/Images/img_product.png", ViewTag = "VatTu" });
+                MenuItems.Add(new MenuItemModel { Title = "Khách Hàng", IconPath = "/Images/img_customer.png", ViewTag = "KhachHang" });
+                MenuItems.Add(new MenuItemModel { Title = "Hóa Đơn", IconPath = "/Images/img_order.png", ViewTag = "HoaDon" });
+                MenuItems.Add(new MenuItemModel { Title = "Phiếu Nhập", IconPath = "/Images/icons8-to-do-list-96.png", ViewTag = "PhieuNhapVatTu" });
+                MenuItems.Add(new MenuItemModel { Title = "Tra Cứu", IconPath = "/Images/icons8-search-100 (1).png", ViewTag = "TraCuu" });
+                MenuItems.Add(new MenuItemModel { Title = "Báo Cáo", IconPath = "/Images/icons8-report-100.png", ViewTag = "BaoCao" });
+            }
+            else if (role == "ThuKho")
+            {
+                MenuItems.Add(new MenuItemModel { Title = "Loại Vật Tư", IconPath = "/Images/icons8-material-ui-48.png", ViewTag = "LoaiVatTu" });
+                MenuItems.Add(new MenuItemModel { Title = "Vật Tư", IconPath = "/Images/img_product.png", ViewTag = "VatTu" });
+                MenuItems.Add(new MenuItemModel { Title = "Phiếu Nhập", IconPath = "/Images/icons8-to-do-list-96.png", ViewTag = "PhieuNhapVatTu" });
+            }
+            else if (role == "NVBanHang")
+            {
+                MenuItems.Add(new MenuItemModel { Title = "Khách Hàng", IconPath = "/Images/img_customer.png", ViewTag = "KhachHang" });
+                MenuItems.Add(new MenuItemModel { Title = "Hóa Đơn", IconPath = "/Images/img_order.png", ViewTag = "HoaDon" });
+                MenuItems.Add(new MenuItemModel { Title = "Tra Cứu", IconPath = "/Images/icons8-search-100 (1).png", ViewTag = "TraCuu" });
+                MenuItems.Add(new MenuItemModel { Title = "Báo Cáo", IconPath = "/Images/icons8-report-100.png", ViewTag = "BaoCao" });
+            }
         }
 
         private void SwitchViewByTag(string tag)
@@ -45,68 +122,5 @@ namespace PageNavigation.ViewModel
                 default: break;
             }
         }
-        private HomeVM _homeVM;
-        private NhanVienVM _nhanVienVM;
-        private LoaiVatTuVM _loaiVatTuVM;
-        private DanhSachKhachHangVM _danhSachKhachHangVM;
-        private VatTuVM _vatTuVM;
-        private HoaDonVM _hoaDonVM;
-        private PhieuNhapVatTuVM _phieuNhapVatTuVM;
-        private PhieuThuTienVM _phieuThuTienVM;
-        private TraCuuVM _traCuuVM;
-        private BaoCaoVM _baoCaoVM;
-
-        public ICommand HomeCommand { get; set; }
-        public ICommand NhanVienCommand { get; set; }
-        public ICommand LoaiVatTuCommand { get; set; }
-        public ICommand KhachHangCommand { get; set; }
-        public ICommand VatTuCommand { get; set; }
-        public ICommand TraCuuCommand { get; set; }
-        public ICommand HoaDonCommand { get; set; }
-        public ICommand PhieuNhapVatTuCommand { get; set; }
-        public ICommand PhieuThuTienCommand { get; set; }
-        public ICommand BaoCaoCommand { get; set; }
-
-        private void Home(object obj) => CurrentTag = "Home";
-        private void NhanVien(object obj) => CurrentTag = "NhanVien";
-        private void LoaiVatTu(object obj) => CurrentTag = "LoaiVatTu";
-        private void KhachHang(object obj) => CurrentTag = "KhachHang";
-        private void VatTu(object obj) => CurrentTag = "VatTu";
-        private void HoaDon(object obj) => CurrentTag = "HoaDon";
-        private void PhieuThuTien(object obj) => CurrentTag = "PhieuThuTien";
-        private void TraCuu(object obj) => CurrentTag = "TraCuu";
-        private void BaoCao(object obj) => CurrentTag = "BaoCao";
-        private void PhieuNhapVatTu(object obj) => CurrentTag = "PhieuNhapVatTu";
-
-
-
-        public NavigationVM()
-        {
-            HomeCommand = new RelayCommand(Home);
-            NhanVienCommand = new RelayCommand(NhanVien);
-            LoaiVatTuCommand = new RelayCommand(LoaiVatTu);
-            KhachHangCommand = new RelayCommand(KhachHang);
-            VatTuCommand = new RelayCommand(VatTu);
-            HoaDonCommand = new RelayCommand(HoaDon);
-            PhieuNhapVatTuCommand = new RelayCommand(PhieuNhapVatTu);
-            PhieuThuTienCommand = new RelayCommand(PhieuThuTien);
-            BaoCaoCommand = new RelayCommand(BaoCao);
-            TraCuuCommand = new RelayCommand(TraCuu);
-
-
-            _homeVM = new HomeVM();
-            _nhanVienVM = new NhanVienVM();
-            _loaiVatTuVM = new LoaiVatTuVM();
-            _danhSachKhachHangVM = new DanhSachKhachHangVM();
-            _vatTuVM = new VatTuVM();
-            _hoaDonVM = new HoaDonVM();
-            _phieuNhapVatTuVM = new PhieuNhapVatTuVM();
-            _phieuThuTienVM = new PhieuThuTienVM();
-            _traCuuVM = new TraCuuVM();
-            _baoCaoVM = new BaoCaoVM();
-
-            CurrentTag = "Home";
-        }
-
     }
 }
