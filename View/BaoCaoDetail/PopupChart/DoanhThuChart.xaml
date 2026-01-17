@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PageNavigation.View.BaoCaoDetail.PopupChart"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Chi Tiết Hóa Đơn" d:Height="750" d:Width="1000"
+        Title="Chi Tiết Hóa Đơn" Height="750" Width="1000"
         AllowsTransparency="True" WindowStyle="None" 
         WindowStartupLocation="CenterScreen" Background="Transparent">
 
@@ -47,18 +47,14 @@
             </Grid>
         </Grid>
         <Grid Width="Auto" Margin="0,80,0,20" Grid.RowSpan="2">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#F9FAFB" Offset="0.0"/>
-                    <GradientStop Color="#F3F4F6" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+            
 
             <Border Background="White" 
                 CornerRadius="20" 
                 Padding="30"
                 Width="1000" Height="600"
-                VerticalAlignment="Center" HorizontalAlignment="Center">
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+                Margin="20">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="5" Opacity="0.1"/>
