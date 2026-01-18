@@ -9,9 +9,15 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1440"
-             Background="#212529"
+             Background="White"
              Style="{StaticResource Page_Style}">
-
+    <UserControl.Resources>
+        <Style TargetType="DatePicker">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
             <UserControl:DashBoardButton 
@@ -22,13 +28,13 @@
                 Height="150"
                 Margin="55, 70"
     
-                Title="Doanh thu tháng này"
+                Title="Doanh Thu Tháng"
 
                 Icon="/Images/cashhome.png"
 
                 Number="{Binding DoanhThuThangNay, StringFormat={}{0:N0} VNĐ}"/>
         </StackPanel>
-        <Grid Width="500" Height="800" Margin="55, 0, 0, 20"
+        <Grid Width="500" Height="500" Margin="55, 0, 0, 20"
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
             <Border CornerRadius="20" 
@@ -60,6 +66,7 @@
                         <Border BorderBrush="LightGray"
                                 BorderThickness="0, 0, 0 ,1">
                             <ListView x:Name="lvSanPham" 
+                                      DataContext="{Binding SanPhamVM}" 
                                       ItemsSource="{Binding DanhSachVatTu}"
                                       Background="Transparent"
                                       AlternationCount="2">
@@ -169,6 +176,109 @@
                     </Grid>
                 </Grid>
             </Border>
+        </Grid>
+        <Grid Margin="55" Height="690" Width="750"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Background="White"
+              DataContext="{Binding ChartVM}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Từ ngày:" VerticalAlignment="Center" Foreground="Gray"/>
+                    <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock Text="Đến ngày:" VerticalAlignment="Center" Foreground="Gray" Margin="10,0,0,0"/>
+                    <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+
+                <TextBlock Text="Doanh Thu Theo Kỳ" FontSize="24" 
+                           Foreground="DarkViolet" 
+                           HorizontalAlignment="Left"
+                           FontFamily="/Fonts/#Fz Rubik Med"/>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="0,0,0,30">
+                <TextBlock Text="TỔNG DOANH THU" 
+                           FontFamily="/Fonts/#Fz Rubik Med"
+                           FontSize="14" Foreground="Green" Opacity="0.8"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="{Binding TotalRevenue, StringFormat={}{0:N0} VNĐ}" 
+                           FontSize="28" FontWeight="Bold" Foreground="#2196F3"/>
+
+                    <Border Margin="15,0,0,0" VerticalAlignment="Bottom" Padding="0,0,0,5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsGrowth}" Value="True">
+                                                <Setter Property="Foreground" Value="#10B981"/>
+                                                <Setter Property="Text" Value="▲ "/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsGrowth}" Value="False">
+                                                <Setter Property="Foreground" Value="#EF4444"/>
+                                                <Setter Property="Text" Value="▼ "/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBlock Text="{Binding PercentChange, StringFormat={}{0:N2}%}" 
+                                   FontSize="16" FontWeight="Bold" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsGrowth}" Value="True">
+                                                <Setter Property="Foreground" Value="#10B981"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsGrowth}" Value="False">
+                                                <Setter Property="Foreground" Value="#EF4444"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBlock FontFamily="/Fonts/#Fz Rubik Med"
+                                Text=" So với cùng kỳ" Foreground="Red" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <lvc:CartesianChart Grid.Row="2" 
+                                x:Name="chart"
+                                Series="{Binding ChartSeries}" 
+                                LegendLocation="Top">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Labels="{Binding ChartLabels}">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator IsEnabled="False"/>
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis LabelFormatter="{Binding YFormatter}" MinValue="0">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator StrokeThickness="1" Stroke="#E5E7EB" Step="500000"/>
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+
+                <lvc:CartesianChart.DataTooltip>
+                    <lvc:DefaultTooltip SelectionMode="SharedXValues" Background="White" Foreground="Black" BulletSize="10"/>
+                </lvc:CartesianChart.DataTooltip>
+            </lvc:CartesianChart>
+
         </Grid>
     </Grid>
 

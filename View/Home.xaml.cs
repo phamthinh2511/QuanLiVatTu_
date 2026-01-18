@@ -16,15 +16,10 @@ namespace PageNavigation.View
     /// </summary>
     public partial class Home : UserControl
     {
-        
         public Home()
         {
             InitializeComponent();
             this.DataContext = new HomeVM();
-            var vatTuVM = new VatTuVM();
-            var hoaDonVM = new HoaDonVM();
-            lvSanPham.DataContext = vatTuVM;
-          
         }
 
         
