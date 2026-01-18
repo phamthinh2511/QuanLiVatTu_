@@ -16,12 +16,15 @@
 
         <!-- MAIN WRAPPER -->
         <Border CornerRadius="20"
-                BorderThickness="0"
-                Background="#010c1f"/>
+        BorderThickness="3"
+        BorderBrush="#8B5A2B"
+        Background="#EFE6D8"/>
+
 
         <!-- EXIT BUTTON -->
         <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="560,20,0,0">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#D2B48C"
+CornerRadius="10"/>
             <Button Style="{StaticResource ExitApp}"
                     Width="60" Height="60"
                     Click="Button_Close"/>
@@ -29,15 +32,18 @@
 
         <!-- HEADER -->
         <Grid Height="60" Width="520" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0">
-            <Border Background="#2d3135" CornerRadius="10"/>
-            <TextBlock Text="Loại Vật Tư :" Foreground="#fff"
+            <Border Background="#D2B48C"
+ CornerRadius="10"/>
+            <TextBlock Text="Loại Vật Tư :" Foreground="#2F2A25"
+
                        Style="{StaticResource Text_Style}"/>
         </Grid>
 
         <!-- MÃ LOẠI VẬT TƯ – Tựa đề chính -->
         <TextBlock x:Name="txtMaLoai"
                    Text="{Binding CurrentLoaiVatTu.MaLoai}"
-                   Foreground="#CED565"
+                   Foreground="#8B5A2B"
+
                    FontSize="40"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
@@ -46,18 +52,21 @@
 
         <!-- TÊN LOẠI -->
         <TextBlock Text="Tên Loại:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="30,120,0,0" VerticalAlignment="Top"/>
 
         <Grid Height="60" Width="580"
               Margin="30,145,40,0"
               VerticalAlignment="Top">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2"
+ CornerRadius="10"/>
             <TextBox x:Name="txtTenLoai"
                     TextChanged="Form_Changed"
                     Text="{Binding CurrentLoaiVatTu.TenLoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource TextBoxStyle}"
-                    Foreground="#CED565"
+                    Foreground="#2F2A25"
+
                     Background="Transparent"
                     FontSize="26"
                     VerticalContentAlignment="Center"
@@ -67,18 +76,21 @@
 
         <!-- MÔ TẢ -->
         <TextBlock Text="Mô tả:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="30,230,0,0"
                    VerticalAlignment="Top"/>
 
         <Grid Height="150" Width="580"
               Margin="20,260,30,0"
               VerticalAlignment="Top">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2"
+ CornerRadius="10"/>
             <TextBox x:Name="txtMoTa"
                     Text="{Binding CurrentLoaiVatTu.MoTa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource TextBoxStyle}"
-                    Foreground="#CED565"
+                    Foreground="#2F2A25"
+
                     Background="Transparent"
                     FontSize="26"
                     VerticalContentAlignment="Top"
