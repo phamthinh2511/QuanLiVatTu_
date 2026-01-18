@@ -66,8 +66,9 @@ namespace PageNavigation
             LoadingOverlay.Visibility = Visibility.Visible;
             closebutton.IsEnabled = false;
             btnLogin.IsEnabled = false;
+            viewModel.ErrorMessage = "";
 
-            NavigationVM? mainVM = null;
+            bool loginSuccess = false;
             string errorMessage = "";
 
             await Task.Run(() =>
@@ -84,26 +85,24 @@ namespace PageNavigation
 
                         if (user == null)
                             throw new Exception("Sai tên đăng nhập hoặc mật khẩu!");
-
-                        // ✅ LƯU SESSION
                         UserSession.MaNhanVien = user.MaNhanVien;
                         UserSession.HoTen = user.HoTen;
-                        UserSession.RoleName = user.Role!.RoleName; // QUAN TRỌNG
+                        UserSession.RoleName = user.Role!.RoleName;
 
-                        mainVM = new NavigationVM();
+                        loginSuccess = true;
                     }
-
                     Thread.Sleep(800);
                 }
                 catch (Exception ex)
                 {
+                    loginSuccess = false;
                     errorMessage = ex.Message;
-                    mainVM = null;
                 }
             });
 
-            if (mainVM != null)
+            if (loginSuccess)
             {
+                var mainVM = new NavigationVM();
                 MainWindow main = new MainWindow();
                 main.DataContext = mainVM;
                 main.Show();

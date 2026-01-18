@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PageNavigation.View.TraCuuDetail
 {
-    internal class KhachHangSearchVM : ViewModelBase
+    public class KhachHangSearchVM : ViewModelBase
     {
         private string _khTen;
 

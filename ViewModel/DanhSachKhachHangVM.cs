@@ -1,11 +1,12 @@
-﻿using PageNavigation.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using PageNavigation.Model;
 using PageNavigation.Utilities;
+using PageNavigation.View.TraCuuDetail;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PageNavigation.ViewModel
 {
@@ -42,6 +43,7 @@ namespace PageNavigation.ViewModel
 
         public DanhSachKhachHangVM()
         {
+            SearchVM = new KhachHangSearchVM();
             LoadDataAsync();
             PageNavigation.Utilities.GlobalEvents.OnKhachHangChanged += () =>
             {
@@ -108,5 +110,6 @@ namespace PageNavigation.ViewModel
                 }
             }
         }
+        public KhachHangSearchVM SearchVM { get; set; }
     }
 }

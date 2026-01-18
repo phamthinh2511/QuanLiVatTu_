@@ -24,8 +24,10 @@
                             <StackPanel>
                                 <TextBlock x:Name="title"
                                            Text="{Binding Title, ElementName=MyControl}"
+                                           Foreground="Violet"
                                        x:FieldModifier="public"
                                        FontSize="20"
+                                       FontWeight="Bold"
                                        FontFamily="/Fonts/#Fz Rubik Med"
                                        Margin="20, 20, 0, 0"
                                        HorizontalAlignment="Left"
