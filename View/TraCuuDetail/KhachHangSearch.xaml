@@ -10,23 +10,49 @@
              VerticalAlignment="Stretch">
     <UserControl.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#CDB38B"/>
+            <Setter Property="Foreground" Value="#2F2A25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                Padding="15,8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="Bd"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="10"
+                        Padding="15,8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
                         </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- HOVER -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0BCDFF"/>
+                            </Trigger>
+
+                            <!-- CLICK -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#50555b"/>
+                                <Setter Property="Foreground" Value="#0BCDFF"/>
+                            </Trigger>
+
+                            <!-- DISABLED -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="Background" Value="#BDBDBD"/>
+                                <Setter Property="Foreground" Value="#757575"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Border Background="#212529">
+        <Border Background="#EFE6D8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
@@ -34,12 +60,12 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Border BorderThickness="0, 0, 0, 2"
-                            Background="#010c1f"
+                            Background="#8B5A2B"
                             BorderBrush="LightGray">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
-                                <ColumnDefinition Width="315"/>
+                                <ColumnDefinition Width="600"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Left"
@@ -47,20 +73,20 @@
                                         Grid.Column="0">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Họ và Tên"
-                                               Foreground="White"
+                                               Foreground="#2F2A25"
                                                FontSize="30"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
                                                Margin="20, 0, 0, 0"
                                                FontFamily="/Fonts/#Fz Rubik Med">
                                     </TextBlock>
-                                    <Grid Width="455" Height="60" Margin="20">
-                                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+                                    <Grid Width="455" Height="60" Margin="15">
+                                        <Border Background="#FAF7F2" CornerRadius="10" BorderThickness="0"/>
                                         <TextBox Margin="3,0,0,0"
                                                  x:Name="txtHoTen"
                                                  Text="{Binding KHTen, UpdateSourceTrigger=PropertyChanged}"
                                                  Style="{StaticResource TextBoxStyle}"
-                                                 Foreground="#CED565"
+                                                 Foreground="#2F2A25"
                                                  Width="455" Height="60" FontSize="20"
                                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                                  HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -69,7 +95,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Số Điện Thoại"
-                                               Foreground="White"
+                                               Foreground="#2F2A25"
                                                FontSize="30"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
@@ -77,13 +103,13 @@
                                                FontFamily="/Fonts/#Fz Rubik Med">
                                     </TextBlock>
 
-                                    <Grid Width="400" Height="60" Margin="20">
-                                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+                                    <Grid Width="400" Height="60" Margin="15">
+                                        <Border Background="#FAF7F2" CornerRadius="10" BorderThickness="0"/>
                                         <TextBox Margin="20"
                                              x:Name="txtSoDienThoai"
                                              Text="{Binding KHSDT, UpdateSourceTrigger=PropertyChanged}"
                                              Style="{StaticResource TextBoxStyle}"
-                                             Foreground="#CED565"
+                                             Foreground="#2F2A25"
                                              Width="400" Height="60" FontSize="20"
                                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                              HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -91,17 +117,71 @@
                                     </Grid>
                                 </StackPanel>
                             </StackPanel>
-                            <Grid Grid.Column="1">
-                                <Button Style="{StaticResource RoundedButtonStyle}"
-                                        Height="100"
-                                        Width="200"
-                                        Background="#17191a"
-                                        Content="Xem/Sửa"
-                                        Foreground="#CED565"
-                                        FontSize="30"
-                                        FontWeight="Bold"
-                                        FontFamily="/Fonts/#Fz Rubik Med" Click="Button_Click"/>
+                            <Grid Grid.Column="1"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Stretch"
+      Margin="20"
+      Width="500">
+
+                                <!-- CHIA 2 CỘT -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- BÊN TRÁI: TÌM KIẾM + LÀM MỚI -->
+                                <StackPanel Grid.Column="0"
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,0,20,0">
+
+                                    <!-- TÌM KIẾM -->
+                                    <Button Style="{StaticResource RoundedButtonStyle}"
+                Height="70"
+                Width="200"
+                Background="#CDB38B"
+                Content="Tìm kiếm"
+             
+                FontSize="24"
+                FontWeight="Bold"
+                FontFamily="/Fonts/#Fz Rubik Med"
+                Click="BtnTimKiem_Click"
+                Margin="0,0,0,15"/>
+
+                                    <!-- LÀM MỚI -->
+                                    <Button Style="{StaticResource RoundedButtonStyle}"
+                Height="70"
+                Width="200"
+                Background="#CDB38B"
+                Content="Làm mới"
+                
+                FontSize="24"
+                FontWeight="Bold"
+                FontFamily="/Fonts/#Fz Rubik Med"
+                Click="BtnLamMoi_Click"/>
+                                </StackPanel>
+
+                                <!-- BÊN PHẢI: XEM / SỬA -->
+                                <StackPanel Grid.Column="1"
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                                    <Button Style="{StaticResource RoundedButtonStyle}"
+                Height="100"
+                Width="200"
+                Background="#CDB38B"
+                Content="Xem / Sửa"
+           
+                FontSize="30"
+                FontWeight="Bold"
+                FontFamily="/Fonts/#Fz Rubik Med"
+                Click="Button_Click"/>
+                                </StackPanel>
+
                             </Grid>
+
                         </Grid>
                     </Border>
 
@@ -113,7 +193,8 @@
                               HorizontalAlignment="Stretch" 
                               VerticalAlignment="Stretch"
                               FontSize="25"
-                              Foreground="#CED565"
+                              
+                              Foreground="#2F2A25"
                               Background="Transparent"
                               BorderThickness="0"
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
@@ -188,7 +269,7 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                 <Setter Property="FontSize" Value="18" />
-                                <Setter Property="Height" Value="40" />
+                                <Setter Property="Height" Value="50" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListViewItem">
@@ -200,19 +281,19 @@
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                        <Setter Property="Background" Value="#17191a"/>
+                                        <Setter Property="Background" Value="#FAF7F2"/>
                                     </Trigger>
                                     <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                        <Setter Property="Background" Value="#3E444A"/>
+                                        <Setter Property="Background" Value="#E8DDCC"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#50555b"/>
+                                        <Setter Property="Background" Value="#DCC9AA"/>
                                         <Setter Property="Foreground" Value="#0bcdff"/>
                                         <Setter Property="Cursor" Value="Hand"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#CED565"/>
-                                        <Setter Property="Foreground" Value="#2d3135"/>
+                                        <Setter Property="Background" Value="#CDB38B"/>
+                                        <Setter Property="Foreground" Value="#2F2A25"/>
                                         <Setter Property="FontWeight" Value="Bold"/>
                                     </Trigger>
                                 </Style.Triggers>

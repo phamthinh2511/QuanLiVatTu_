@@ -23,11 +23,22 @@ namespace PageNavigation.View.TraCuuDetail
     /// </summary>
     public partial class KhachHangSearch : UserControl
     {
+        private List<KhachHangM> _allKhachHang;
         public KhachHangSearch()
         {
             InitializeComponent();
-            this.DataContext = new KhachHangSearchVM();
+            LoadData();
         }
+        // ================== LOAD DATA ==================
+        private void LoadData()
+        {
+            using (var db = new QuanLyVatTuContext())
+            {
+                _allKhachHang = db.KhachHang.ToList();
+                CustomerListView.ItemsSource = _allKhachHang;
+            }
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -46,6 +57,30 @@ namespace PageNavigation.View.TraCuuDetail
             {
                 viewModel.LoadDataAsync();
             }
+        }
+
+        private void BtnTimKiem_Click(object sender, RoutedEventArgs e)
+        {
+            string hoTen = txtHoTen.Text?.Trim().ToLower();
+            string soDienThoai = txtSoDienThoai.Text?.Trim().ToLower();
+
+            var ketQua = _allKhachHang.Where(kh =>
+                (string.IsNullOrEmpty(hoTen) ||
+                 kh.HoVaTen.ToLower().Contains(hoTen)) &&
+
+                (string.IsNullOrEmpty(soDienThoai) ||
+                 kh.SoDienThoai.ToLower().Contains(soDienThoai))
+            ).ToList();
+
+            CustomerListView.ItemsSource = ketQua;
+        }
+
+        private void BtnLamMoi_Click(object sender, RoutedEventArgs e)
+        {
+            txtHoTen.Text = string.Empty;
+            txtSoDienThoai.Text = string.Empty;
+
+            CustomerListView.ItemsSource = _allKhachHang;
         }
     }
 }
