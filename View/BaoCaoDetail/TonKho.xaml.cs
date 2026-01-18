@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PageNavigation.View.BaoCaoDetail.PopupChart;
 
 namespace PageNavigation.View.BaoCaoDetail
 {
@@ -82,6 +83,13 @@ namespace PageNavigation.View.BaoCaoDetail
                 dataView.SortDescriptions.Add(sd);
                 dataView.Refresh();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as BaoCaoVM;
+            TonKhoChart chart = new TonKhoChart(vm.ListBaoCao, vm.NamBaoCao);
+            chart.ShowDialog();
         }
     }
 }

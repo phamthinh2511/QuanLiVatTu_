@@ -115,6 +115,22 @@
                             </Style>
                         </Button.Resources>
                     </Button>
+                    <Button Content="Biểu Đồ Tồn Kho"
+                            Width="150" 
+                            Height="40"
+                            Margin="20, 0, 0, 0"
+                            FontSize="16"
+                            FontFamily="/Fonts/#Fz Rubik Med"
+                            Background="#217346" 
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Cursor="Hand" Click="Button_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
             </Border>
         </Grid>
@@ -162,13 +178,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tồn Cuối" Width="144" util:GridViewSort.PropertyName="TonCuoi">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding TonCuoi}" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        
 
                         <GridViewColumn Header="Phát Sinh Nhập" Width="288" util:GridViewSort.PropertyName="PhatSinhNhap">
                             <GridViewColumn.CellTemplate>
@@ -192,6 +202,13 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
+                        <GridViewColumn Header="Tồn Cuối" Width="144" util:GridViewSort.PropertyName="TonCuoi">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TonCuoi}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
 

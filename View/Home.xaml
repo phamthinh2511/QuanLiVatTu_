@@ -14,14 +14,21 @@
 
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <UserControl:DashBoardButton HorizontalAlignment="Left"
-                                         VerticalAlignment="Top"
-                                         x:Name="DoanhThuButton"
-                                         Width="500"
-                                         Height="150"
-                                         Margin="55, 70"/>
+            <UserControl:DashBoardButton 
+                x:Name="DoanhThuButton"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="500"
+                Height="150"
+                Margin="55, 70"
+    
+                Title="Doanh thu tháng này"
+
+                Icon="/Images/cashhome.png"
+
+                Number="{Binding DoanhThuThangNay, StringFormat={}{0:N0} VNĐ}"/>
         </StackPanel>
-        <Grid Width="500" Height="800" Margin="30"
+        <Grid Width="500" Height="800" Margin="55, 0, 0, 20"
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
             <Border CornerRadius="20" 
@@ -162,43 +169,6 @@
                     </Grid>
                 </Grid>
             </Border>
-        </Grid>
-        <Grid HorizontalAlignment="Right"
-              VerticalAlignment="Bottom"
-              Height="700"
-              Width="770"
-              Margin="0,0,30,30">
-            <Border BorderThickness="0"
-                    CornerRadius="20"
-                    Background="Black">
-                <lvc:CartesianChart x:Name="chart"
-                                    LegendLocation="None"
-                                    Margin="10">
-                    <lvc:CartesianChart.Series>
-                        <lvc:RowSeries Title="Doanh Thu" 
-                                       Values="{Binding DoanhThuValues}" 
-                                       DataLabels="True"
-               
-                                       Configuration="{Binding ColorMapper}">
-                        </lvc:RowSeries>
-                    </lvc:CartesianChart.Series>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Labels="{Binding Labels}">
-                            <lvc:Axis.Separator>
-                                <lvc:Separator Step="1" IsEnabled="False"/>
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis>
-                            <lvc:Axis.Separator>
-                                <lvc:Separator IsEnabled="True" StrokeThickness="0.5" Stroke="Gray"/>
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisX>
-                </lvc:CartesianChart>
-            </Border>
-
         </Grid>
     </Grid>
 

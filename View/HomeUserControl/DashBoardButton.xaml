@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PageNavigation.View.HomeUserControl"
+             x:Name="MyControl"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="250">
     <Grid>
@@ -22,6 +23,7 @@
                         <Grid>
                             <StackPanel>
                                 <TextBlock x:Name="title"
+                                           Text="{Binding Title, ElementName=MyControl}"
                                        x:FieldModifier="public"
                                        FontSize="20"
                                        FontFamily="/Fonts/#Fz Rubik Med"
@@ -29,6 +31,7 @@
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"/>
                                 <TextBlock x:Name="number"
+                                           Text="{Binding Number, ElementName=MyControl}"
                                        x:FieldModifier="public"
                                        FontSize="40"
                                        FontFamily="/Fonts/#Fz Rubik Med"
@@ -39,6 +42,7 @@
                                        VerticalAlignment="Top"/>
                             </StackPanel>
                             <Image x:Name="picture"
+                                   Source="{Binding Icon, ElementName=MyControl}"
                                    Height="30"
                                    Width="30"
                                    HorizontalAlignment="Right"
