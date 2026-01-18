@@ -115,7 +115,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Border Background="#212529"
+        <Border Background="#EFE6D8"
                 BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -130,7 +130,7 @@
                                HorizontalAlignment="Left"
                                Margin="20, 0, 0, 0"
                                FontFamily="/Fonts/#Fz Rubik Med"
-                               Foreground="White">
+                               Foreground="#A67C52">
                     </TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -139,6 +139,7 @@
                                      Content="Khách Hàng"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Left"
+                                     Foreground="#A67C52"
                                      Command="{Binding KhachHangCommand}" 
                                      IsChecked="True"
                                      Height="40"
@@ -147,6 +148,7 @@
                                      Content="Vật Tư"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Left"
+                                     Foreground="#A67C52"
                                      Command="{Binding VatTuCommand}"
                                      Height="40"
                                      Margin="20, 0, 0, 0"/>
