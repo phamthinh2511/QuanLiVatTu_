@@ -1,0 +1,141 @@
+﻿<Window x:Class="PageNavigation.View.BaoCaoDetail.PopupChart.TonKhoChart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Báo Cáo Tồn Kho" Height="750" Width="1000"
+        AllowsTransparency="True" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" Background="Transparent">
+
+    <Window.Resources>
+        <Style x:Key="Text_Style" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="Transparent">
+        <Grid.RenderTransform>
+            <TranslateTransform Y="-50"/>
+        </Grid.RenderTransform>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                         From="-50" To="0" Duration="0:0:0.5">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="20" BorderThickness="0" Background="#ffff" Grid.RowSpan="4"/>
+
+        <Grid Height="60" Width="Auto" 
+              VerticalAlignment="Top" HorizontalAlignment="Left" 
+              Background="Transparent" 
+              Margin="20, 10, 0, 0" 
+              Grid.Row="0">
+
+            <Border Background="White" CornerRadius="10" BorderThickness="0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <TextBlock Text="Báo Cáo Tồn Kho: " Foreground="Black" 
+                           Style="{StaticResource Text_Style}"
+                           FontFamily="/Fonts/#Fz Rubik Med"/>
+                <TextBlock Text="{Binding NamBaocao}" Foreground="#10b981" 
+                           Style="{StaticResource Text_Style}"
+                           FontFamily="/Fonts/#Fz Rubik Med"/>
+            </StackPanel>
+
+            <Grid Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" Margin="902,0,0,0">
+                <Border Background="White" CornerRadius="10" BorderThickness="0"/>
+                <Button Style="{StaticResource ExitApp}" Width="60" Height="60" Click="Button_Click" Cursor="Hand" ToolTip="Đóng"/>
+            </Grid>
+        </Grid>
+
+        <Grid Width="Auto" Margin="0,80,0,20" Grid.RowSpan="2">
+            <Border Background="White" 
+                    CornerRadius="20" 
+                    Padding="30"
+                    Width="1000" Height="640"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Margin="20">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="5" Opacity="0.1"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="1" 
+                                  VerticalScrollBarVisibility="Disabled" 
+                                  HorizontalScrollBarVisibility="Auto"
+                                  Padding="0,0,0,10">
+
+                        <lvc:CartesianChart Series="{Binding ChartSeries}" 
+                                            Width="{Binding ChartWidth}"
+                                            LegendLocation="Top"
+                                            AnimationsSpeed="0:0:0.5"
+                                            Zoom="None" 
+                                            Hoverable="True">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Labels="{Binding ProductLabels}" FontSize="12">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" IsEnabled="False"/>
+                                    </lvc:Axis.Separator>
+                                    <lvc:Axis.LabelsRotation>
+                                        -15
+                                    </lvc:Axis.LabelsRotation>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Số lượng" MinValue="0"/>
+                            </lvc:CartesianChart.AxisY>
+
+                        </lvc:CartesianChart>
+                    </ScrollViewer>
+
+                    <Grid Grid.Row="2" Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.ColumnSpan="2" BorderThickness="0,1,0,0" BorderBrush="#E5E7EB" VerticalAlignment="Top"/>
+
+                        <StackPanel Grid.Column="0" Margin="0,20,0,0">
+                            <TextBlock Text="Tổng số lượng tồn" FontSize="14" Foreground="#6B7280"/>
+                            <TextBlock Text="{Binding TotalQuantity, StringFormat={}{0:N0}}" FontSize="24" FontWeight="Bold" Foreground="#111827"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="0,20,0,0" HorizontalAlignment="Right">
+                            <TextBlock Text="Số mã hàng" FontSize="14" Foreground="#6B7280" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding TotalItems}" FontSize="24" FontWeight="Bold" Foreground="#111827" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

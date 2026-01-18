@@ -11,6 +11,9 @@
     <Compile Update="View\BaoCaoDetail\PopupChart\DoanhThuChart.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\BaoCaoDetail\PopupChart\TonKhoChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\HoaDon.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
