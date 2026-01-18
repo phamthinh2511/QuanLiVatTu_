@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Border BorderThickness="0"
-                    Background="#212529">
+                    Background="#8B5A2B">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
@@ -47,12 +47,12 @@
                     </TextBlock>
 
                     <Grid Height="60" Width="180" Margin="20, 0, 0, 0">
-                        <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+                        <Border Background="#EFE6D8" CornerRadius="10" BorderThickness="0"/>
                         <ComboBox x:Name="cbNam"
                                   ItemsSource="{Binding ListNam}"
                                   Style="{StaticResource ComboBoxStyle}"
                                   SelectedValue="{Binding NamBaoCao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Foreground="#CED565" Background="Transparent"
+                                  Foreground="#2F2A25" Background="Transparent"
                                   Width="180" Height="50" FontSize="30"
                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                   HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -64,9 +64,9 @@
                     <Button Content="Xuất Excel"
                             Command="{Binding ExportExcelCommand}"
                             Width="150" 
-                            Height="40"
+                            Height="60"
                             Margin="20, 0, 0, 0"
-                            FontSize="16"
+                            FontSize="18"
                             FontFamily="/Fonts/#Fz Rubik Med"
                             Background="#217346" 
                             Foreground="White"
@@ -80,9 +80,9 @@
                     </Button>
                     <Button Content="Xem Biểu Đồ"
                             Width="150" 
-                            Height="40"
+                            Height="60"
                             Margin="20, 0, 0, 0"
-                            FontSize="16"
+                            FontSize="18"
                             FontFamily="/Fonts/#Fz Rubik Med"
                             Background="#217346" 
                             Foreground="White"
@@ -105,8 +105,8 @@
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
                       FontSize="25"
-                      Foreground="#CED565"
-                      Background="Transparent"
+                      Foreground="#2F2A25"
+                      Background="#EFE6D8"
                       BorderThickness="0"
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -180,7 +180,7 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="FontSize" Value="18" />
-                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Height" Value="50" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
@@ -192,19 +192,19 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="#17191a"/>
+                                <Setter Property="Background" Value="#FAF7F2"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                <Setter Property="Background" Value="#3E444A"/>
+                                <Setter Property="Background" Value="#E8DDCC"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#50555b"/>
+                                <Setter Property="Background" Value="#DCC9AA"/>
                                 <Setter Property="Foreground" Value="#0bcdff"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#CED565"/>
-                                <Setter Property="Foreground" Value="#2d3135"/>
+                                <Setter Property="Background" Value="#CDB38B"/>
+                                <Setter Property="Foreground" Value="#2F2A25"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                         </Style.Triggers>
