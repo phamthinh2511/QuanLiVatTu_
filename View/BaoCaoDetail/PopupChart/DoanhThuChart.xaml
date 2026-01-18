@@ -35,14 +35,16 @@
               Margin="20, 10, 0, 0" 
               Grid.Row="0">
 
-            <Border Background="LightGray" CornerRadius="10" BorderThickness="0"/>
+            <Border Background="White" CornerRadius="10" BorderThickness="0"/>
 
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                <TextBlock Text="Báo Cáo Doanh Thu: " Foreground="#ffff" Style="{StaticResource Text_Style}"/>
-                <TextBlock Text="{Binding NamBaocao}" Foreground="#ffff" Style="{StaticResource Text_Style}"/>
+                <TextBlock Text="Báo Cáo Doanh Thu: " Foreground="Black" Style="{StaticResource Text_Style}"
+                           FontSize="30" FontFamily="/Fonts/#Fz Rubik Med"/>
+                <TextBlock Text="{Binding NamBaocao}" Foreground="Black" Style="{StaticResource Text_Style}"
+                           FontSize="30" FontFamily="/Fonts/#Fz Rubik Med"/>
             </StackPanel>
             <Grid Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" Margin="902,0,0,0">
-                <Border Background="LightGray" CornerRadius="10" BorderThickness="0"/>
+                <Border Background="White" CornerRadius="10" BorderThickness="0"/>
                 <Button Style="{StaticResource ExitApp}" Width="60" Height="60" Click="Button_Click"/>
             </Grid>
         </Grid>
@@ -52,7 +54,7 @@
             <Border Background="White" 
                 CornerRadius="20" 
                 Padding="30"
-                Width="1000" Height="600"
+                Width="1000" Height="640"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
                 Margin="20">
 
