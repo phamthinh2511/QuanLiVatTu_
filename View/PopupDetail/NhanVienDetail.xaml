@@ -18,32 +18,36 @@
 
         <!-- MAIN WRAPPER -->
         <Border CornerRadius="20"
-                BorderThickness="0"
-                Background="#010c1f"/>
+        BorderThickness="3"
+        BorderBrush="#8B5A2B"
+        Background="#EFE6D8"/>
+
 
         <!-- EXIT BUTTON -->
         <Grid Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="560,20,0,0">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#D2B48C" CornerRadius="10"/>
             <Button Style="{StaticResource ExitApp}" Width="60" Height="60" Click="Button_Click"/>
         </Grid>
 
         <!-- HEADER -->
         <Grid Height="60" Width="520" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0">
-            <Border Background="#2d3135" CornerRadius="10"/>
-            <TextBlock Text="Nhân Viên :" Foreground="#fff" Style="{StaticResource Text_Style}"/>
+            <Border Background="#D2B48C" CornerRadius="10"/>
+            <TextBlock Text="Nhân Viên :" Foreground="#2F2A25" Style="{StaticResource Text_Style}"/>
         </Grid>
 
         <!-- Mã nhân viên nếu có -->
         <TextBlock x:Name="txtMaNhanVien"
                    Text="{Binding CurrentEmployee.MaNhanVien}"
-                   Foreground="#CED565" FontSize="40"
+                   Foreground="#8B5A2B"
+ FontSize="40"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,30,0,0"
                    FontFamily="/Fonts/#Fz Rubik Med"/>
 
         <!-- NGÀY NHẬN VIỆC -->
         <TextBlock Text="Ngày Nhận Việc:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20" Margin="30,95,0,0"
+                   Foreground="#2F2A25"
+ FontSize="20" Margin="30,95,0,0"
                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         <Grid Height="60" Width="280" Margin="25, 70,360,330">
@@ -60,8 +64,9 @@
         SelectedDate="{Binding NgayNhanViecDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 
         BorderThickness="0"
-        Background="Transparent"
-        Foreground="#CED565"
+        Background="#FAF7F2"
+        Foreground="#2F2A25"
+
         Height="60"
         FontSize="26"
         VerticalContentAlignment="Center"
@@ -106,14 +111,16 @@
 
         <!-- HỌ TÊN -->
         <TextBlock Text="Họ Tên:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20" Margin="355,95,0,0" VerticalAlignment="Top"/>
+                   Foreground="#2F2A25"
+ FontSize="20" Margin="355,95,0,0" VerticalAlignment="Top"/>
 
         <Grid Height="60" Width="260" Margin="330,10,20,270">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2" CornerRadius="10"/>
             <TextBox x:Name="txtHoTen"
                     Text="{Binding CurrentEmployee.HoTen, Mode=TwoWay}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565"
+                     Foreground="#2F2A25"
+
                      Background="Transparent"
                      FontSize="26"
                      VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -122,15 +129,17 @@
 
         <!-- SỐ ĐIỆN THOẠI -->
         <TextBlock Text="Số Điện Thoại:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="30,190,0,0" VerticalAlignment="Top" Width="151"/>
 
         <Grid Height="60" Width="260" Margin="20,110,360,170">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2" CornerRadius="10"/>
             <TextBox x:Name="txtSDT"
                      Text="{Binding CurrentEmployee.SoDienThoai, Mode=TwoWay}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565" Background="Transparent"
+                     Foreground="#2F2A25"
+ Background="Transparent"
                      FontSize="26"
                      VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                      FontFamily="/Fonts/#Fz Rubik Med"/>
@@ -138,15 +147,17 @@
 
         <!-- TÊN ĐĂNG NHẬP -->
         <TextBlock Text="Tên Đăng Nhập:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="355,190,0,0" VerticalAlignment="Top"/>
 
         <Grid Height="60" Width="260" Margin="330,110,20,170">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2" CornerRadius="10"/>
             <TextBox x:Name="txtUsername"
                     Text="{Binding CurrentEmployee.Username, Mode=TwoWay}"
                      Style="{StaticResource TextBoxStyle}"
-                     Foreground="#CED565" Background="Transparent"
+                     Foreground="#2F2A25"
+ Background="Transparent"
                      FontSize="26"
                      VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                      FontFamily="/Fonts/#Fz Rubik Med" TextChanged="TextBox_TextChanged"/>
@@ -154,16 +165,18 @@
 
         <!-- MẬT KHẨU -->
         <TextBlock Text="Mật Khẩu:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="30,296,0,0" VerticalAlignment="Top"/>
 
         <Grid Height="60" Width="260" Margin="20,220,360,65">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2" CornerRadius="10"/>
             <PasswordBox x:Name="txtPassword"
                          helpers:PasswordBoxHelper.BoundPassword="{Binding CurrentEmployee.Password, Mode=TwoWay}"
                          helpers:PasswordBoxHelper.BoundSecurePassword="{Binding MatKhauSecure, Mode=TwoWay}"
                          Style="{StaticResource PasswordBoxStyle}"
-                         Foreground="#CED565"
+                         Foreground="#2F2A25"
+
                          Background="Transparent"
                          FontSize="26"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -172,15 +185,17 @@
 
         <!-- CHỨC VỤ -->
         <TextBlock Text="Chức Vụ:" Style="{StaticResource Text_Style}"
-                   Foreground="#0bcdff" FontSize="20"
+                   Foreground="#2F2A25"
+ FontSize="20"
                    Margin="355,296,0,0" VerticalAlignment="Top"/>
 
         <Grid Height="60" Width="260" Margin="330,220,20,65">
-            <Border Background="#2d3135" CornerRadius="10"/>
+            <Border Background="#FAF7F2" CornerRadius="10"/>
             <ComboBox x:Name="cbChucVu"
           SelectedValue="{Binding CurrentEmployee.ChucVu}"
           SelectedValuePath="Tag"
-          Foreground="#CED565"
+          Foreground="#2F2A25"
+
           Background="Transparent"
           FontSize="26"
           Style="{StaticResource ComboBoxStyle}"
@@ -196,7 +211,8 @@
 
         <!-- NGÀY SINH -->
         <TextBlock Text="Ngày Sinh:" Style="{StaticResource Text_Style}"
-           Foreground="#0bcdff" FontSize="20"
+           Foreground="#2F2A25"
+ FontSize="20"
            Margin="30,400,0,0"
            VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
@@ -206,14 +222,15 @@
                 <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Background="#2d3135" CornerRadius="10" BorderThickness="0"/>
+            <Border Background="#FAF7F2" CornerRadius="10" BorderThickness="0"/>
 
             <DatePicker x:Name="dpNgaySinh"
         xml:lang="vi-VN"
         SelectedDate="{Binding NgaySinhDateTime, Mode=TwoWay}"
         BorderThickness="0"
         Background="Transparent"
-        Foreground="#CED565"
+        Foreground="#2F2A25"
+
         Height="60"
         FontSize="26"
         VerticalContentAlignment="Center"
