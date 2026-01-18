@@ -115,7 +115,7 @@
     </UserControl.Resources>
     <Border BorderBrush="Transparent"
             BorderThickness="0"
-            Background="#212529">
+            Background="#EFE6D8">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -133,7 +133,7 @@
                          HorizontalAlignment="Left"
                          Margin="20, 0, 0, 0"
                          FontFamily="/Fonts/#Fz Rubik Med"
-                           Foreground="White">
+                           Foreground="#A67C52">
                 </TextBlock>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
@@ -143,6 +143,7 @@
                                  Content="Tồn Kho"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
+                                 Foreground="#A67C52"
                                  Command="{Binding TonKhoCommand}" 
                                  
                                  Height="40"
@@ -151,6 +152,7 @@
                                  Content="Doanh Thu"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Left"
+                                 Foreground="#A67C52"
                                  Command="{Binding DoanhThuCommand}"
                                  IsChecked="True"
                                  Height="40"
