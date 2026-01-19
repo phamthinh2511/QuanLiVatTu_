@@ -9,7 +9,7 @@
              d:DesignHeight="150" d:DesignWidth="250">
     <Grid>
         <Border CornerRadius="20" 
-            Background="#1E1E1E" 
+            Background="#cdb38b" 
             BorderBrush="Transparent" 
             BorderThickness="0">
             <Grid>
@@ -24,10 +24,10 @@
                             <StackPanel>
                                 <TextBlock x:Name="title"
                                            Text="{Binding Title, ElementName=MyControl}"
-                                           Foreground="Violet"
+                                           Foreground="DarkGreen"
+                                           FontWeight="Bold"
                                        x:FieldModifier="public"
                                        FontSize="20"
-                                       FontWeight="Bold"
                                        FontFamily="/Fonts/#Fz Rubik Med"
                                        Margin="20, 20, 0, 0"
                                        HorizontalAlignment="Left"
@@ -76,11 +76,11 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="DarkGray"/>
+                                <Setter Property="Foreground" Value="White"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#121212"/>
-                                        <Setter Property="Foreground" Value="#F5F5F5"/>
+                                        <Setter Property="Background" Value="#efe6d8"/>
+                                        <Setter Property="Foreground" Value="Black"/>
                                         <Setter Property="Cursor" Value="Hand"/>
                                     </Trigger>
                                 </Style.Triggers>
