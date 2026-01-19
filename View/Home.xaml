@@ -18,7 +18,7 @@
             <Setter Property="Margin" Value="5,0"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="#efe6d8">
         <StackPanel Orientation="Horizontal">
             <UserControl:DashBoardButton 
                 x:Name="DoanhThuButton"
@@ -80,7 +80,7 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ListViewItem">
                                                     <Border x:Name="bd" 
-                                                            Background="#2D2D2D"
+                                                            Background="White"
                                                             BorderThickness="0"
                                                             CornerRadius="0" >
                                                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -89,18 +89,18 @@
 
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                                            <Setter TargetName="bd" Property="Background" Value="#17191a"/>
+                                                            <Setter TargetName="bd" Property="Background" Value="#A88E63"/>
                                                         </Trigger>
                                                         <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                                            <Setter TargetName="bd" Property="Background" Value="#3E444A"/>
+                                                            <Setter TargetName="bd" Property="Background" Value="#8F764D"/>
                                                         </Trigger>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="bd" Property="Background" Value="#3D3D3D"/>
+                                                            <Setter TargetName="bd" Property="Background" Value="#B89D73"/>
                                                             <Setter Property="Cursor" Value="Hand"/>
                                                         </Trigger>
 
                                                         <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="bd" Property="Background" Value="Black"/>
+                                                            <Setter TargetName="bd" Property="Background" Value="#B89D73"/>
                                                             <Setter Property="Foreground" Value="White"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
@@ -155,11 +155,11 @@
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="Foreground" Value="DarkGray"/>
+                                    <Setter Property="Foreground" Value="White"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#121212"/>
-                                            <Setter Property="Foreground" Value="#F5F5F5"/>
+                                            <Setter Property="Background" Value="#efe6d8"/>
+                                            <Setter Property="Foreground" Value="Black"/>
                                             <Setter Property="Cursor" Value="Hand"/>
                                         </Trigger>
                                     </Style.Triggers>
@@ -180,7 +180,7 @@
         <Grid Margin="55" Height="690" Width="750"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
-              Background="White"
+              Background="#efe6d8"
               DataContext="{Binding ChartVM}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

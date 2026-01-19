@@ -73,7 +73,7 @@ namespace PageNavigation.ViewModel
             ThangBaoCao = DateTime.Now.Month;
             NamBaoCao = DateTime.Now.Year;
             ExportExcelCommand = new RelayCommand(ExportToExcel);
-            for (int i = 2000; i <= DateTime.Now.Year + 1; i++)
+            for (int i = 2000; i <= 2040; i++)
             {
                 ListNam.Add(i);
             }
