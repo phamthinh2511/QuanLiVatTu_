@@ -54,7 +54,7 @@ namespace PageNavigation.View.BaoCaoDetail
                 ListNam = new ObservableCollection<int>();
             ExportExcelCommand = new RelayCommand(ExportToExcel);
             int currentYear = DateTime.Now.Year;
-                for (int i = 2000; i <= currentYear + 1; i++)
+                for (int i = 2000; i <= 2040; i++)
                 {
                     ListNam.Add(i);
                 }
