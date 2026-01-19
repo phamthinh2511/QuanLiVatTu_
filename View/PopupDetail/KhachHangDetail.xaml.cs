@@ -63,11 +63,42 @@ namespace PageNavigation.View.PopupDetail
         {
             try
             {
+                string sdt = txtSDT.Text?.Trim();
+
+                // 1. Kiểm tra đủ 10 số
+                if (!IsValidPhoneNumber(sdt))
+                {
+                    MessageBox.Show(
+                        "Số điện thoại phải gồm đúng 10 chữ số và chỉ chứa số!",
+                        "Lỗi nhập liệu",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    txtSDT.Focus();
+                    return;
+                }
+
                 using (var context = new QuanLyVatTuContext())
                 {
+                    // 2. Kiểm tra trùng số điện thoại
+                    bool isDuplicatePhone = context.KhachHang.Any(kh =>
+                        kh.SoDienThoai == sdt &&
+                        kh.MaKhachHang != CurrentCustomer.MaKhachHang
+                    );
+
+                    if (isDuplicatePhone)
+                    {
+                        MessageBox.Show(
+                            "Số điện thoại này đã tồn tại. Vui lòng nhập số khác!",
+                            "Trùng dữ liệu",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        txtSDT.Focus();
+                        return;
+                    }
+
+                    // 3. Lưu dữ liệu
                     if (CurrentCustomer.MaKhachHang == 0)
                     {
-
                         context.KhachHang.Add(CurrentCustomer);
                     }
                     else
@@ -78,7 +109,7 @@ namespace PageNavigation.View.PopupDetail
                     context.SaveChanges();
                     GlobalEvents.RaiseKhachHangChanged();
                 }
-                
+
                 MessageBox.Show("Lưu thành công!");
                 this.DialogResult = true;
                 this.Close();
@@ -159,6 +190,17 @@ namespace PageNavigation.View.PopupDetail
 
             CheckValidate();
         }
+        private bool IsValidPhoneNumber(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return false;
+
+            phone = phone.Trim();
+
+            // Chỉ cho phép số và đủ 10 chữ số
+            return phone.Length == 10 && phone.All(char.IsDigit);
+        }
+
 
 
     }

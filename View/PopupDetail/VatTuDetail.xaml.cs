@@ -78,28 +78,28 @@ namespace PageNavigation.View.PopupDetail
         // }
         private bool IsDataChanged()
         {
-            // Nếu thêm mới → chưa có dữ liệu gốc → KHÔNG coi là thay đổi
-            if (_originalVatTu == null || _originalVatTu.MaVatTu == 0)
+            if (_originalVatTu == null)
                 return false;
 
-            // So sánh an toàn
-            string tenHienTai = VatTu?.TenVatTu?.Trim() ?? "";
-            string tenGoc = _originalVatTu?.TenVatTu?.Trim() ?? "";
-
-            string moTaHienTai = VatTu?.MoTa?.Trim() ?? "";
-            string moTaGoc = _originalVatTu?.MoTa?.Trim() ?? "";
-
-            if (tenHienTai != tenGoc)
+            // 1️⃣ Tên vật tư
+            if ((txtTenVatTu.Text ?? "").Trim() != (_originalVatTu.TenVatTu ?? "").Trim())
                 return true;
 
+            // 2️⃣ Loại vật tư
             if (VatTu.MaLoai != _originalVatTu.MaLoai)
                 return true;
 
-            if (moTaHienTai != moTaGoc)
+            // 3️⃣ Đơn vị tính (🔥 BẠN THIẾU CHỖ NÀY)
+            if (VatTu.MaDonViTinh != _originalVatTu.MaDonViTinh)
+                return true;
+
+            // 4️⃣ Mô tả
+            if ((txtMoTa.Text ?? "").Trim() != (_originalVatTu.MoTa ?? "").Trim())
                 return true;
 
             return false;
         }
+
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {

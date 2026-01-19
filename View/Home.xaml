@@ -9,7 +9,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1440"
-             Background="White"
+             Background="#EFE6D8"
              Style="{StaticResource Page_Style}">
     <UserControl.Resources>
         <Style TargetType="DatePicker">
@@ -38,7 +38,7 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom">
             <Border CornerRadius="20" 
-                    Background="#1E1E1E" 
+                    Background="#CDB38B" 
                     BorderBrush="Transparent" 
                     BorderThickness="0">
                 <Grid>
@@ -53,7 +53,7 @@
                             <TextBlock Text="Vật Tư"
                                        FontFamily="/Fonts/#Fz Rubik Mid"
                                        FontWeight="Bold"
-                                       Foreground="LightBlue"
+                                       Foreground="#2F2A25"
                                        FontSize="30"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
@@ -63,12 +63,12 @@
                         </Border>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <Border BorderBrush="LightGray"
+                        <Border BorderBrush="#2F2A25"
                                 BorderThickness="0, 0, 0 ,1">
                             <ListView x:Name="lvSanPham" 
                                       DataContext="{Binding SanPhamVM}" 
                                       ItemsSource="{Binding DanhSachVatTu}"
-                                      Background="Transparent"
+                                      Background="#FAF7F2"
                                       AlternationCount="2">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">

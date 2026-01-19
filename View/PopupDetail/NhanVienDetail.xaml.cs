@@ -133,9 +133,17 @@ namespace PageNavigation.View.PopupDetail
 
                 // Chức vụ
                 if (cbChucVu.SelectedItem is ComboBoxItem item)
+                {
                     CurrentEmployee.ChucVu = item.Content.ToString();
+
+                    // GÁN ROLEID THEO CHỨC VỤ
+                    CurrentEmployee.RoleID = GetRoleIdByChucVu(CurrentEmployee.ChucVu);
+                }
                 else
+                {
                     CurrentEmployee.ChucVu = null;
+                    CurrentEmployee.RoleID = null;
+                }
 
                 // -------------------------------
                 // 2) LƯU VÀO DATABASE
@@ -363,6 +371,18 @@ namespace PageNavigation.View.PopupDetail
                 }
             }
         }
+        private int GetRoleIdByChucVu(string chucVu)
+        {
+            return chucVu switch
+            {
+                "Quản lý" => 1,
+                "Thủ Kho" => 2,
+                "NV Bán hàng" => 3,
+                _ => 3
+            };
+        }
+
+
 
 
     }
