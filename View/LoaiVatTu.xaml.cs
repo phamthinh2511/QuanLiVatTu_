@@ -102,7 +102,6 @@ namespace PageNavigation.View
                 return;
             }
 
-            // Hộp thoại xác nhận
             var result = MessageBox.Show(
                 $"Bạn có chắc muốn xóa loại vật tư:\n\n{selected.TenLoai}?",
                 "Xác nhận xóa",
@@ -112,18 +111,50 @@ namespace PageNavigation.View
             if (result != MessageBoxResult.Yes)
                 return;
 
-            // Xóa khỏi DB
-            using (var context = new QuanLyVatTuContext())
+            try
             {
-                context.LoaiVatTu.Remove(selected);
-                context.SaveChanges();
+                using (var context = new QuanLyVatTuContext())
+                {
+                    // 🔴 1. KIỂM TRA ĐÃ CÓ VẬT TƯ SỬ DỤNG CHƯA
+                    bool daSuDung = context.VatTu
+                        .Any(vt => vt.MaLoai == selected.MaLoai);
+
+                    if (daSuDung)
+                    {
+                        MessageBox.Show(
+                            "Không thể xóa loại vật tư này vì đã có vật tư sử dụng!",
+                            "Không thể xóa",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // 🔴 2. LOAD LẠI ENTITY TRONG CONTEXT HIỆN TẠI
+                    var loaiVatTu = context.LoaiVatTu
+                        .FirstOrDefault(l => l.MaLoai == selected.MaLoai);
+
+                    if (loaiVatTu != null)
+                    {
+                        context.LoaiVatTu.Remove(loaiVatTu);
+                        context.SaveChanges();
+                    }
+                }
+
+                await vm.LoadDataAsync();
+
+                MessageBox.Show("Xóa thành công!",
+                    "Thông báo",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
-
-            // Reload lại danh sách
-            await vm.LoadDataAsync();
-
-            MessageBox.Show("Xóa thành công!", "Thông báo",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Không thể xóa dữ liệu.\n\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
 
         }
     }
